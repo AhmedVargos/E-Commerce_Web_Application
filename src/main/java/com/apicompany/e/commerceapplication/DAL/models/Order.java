@@ -5,6 +5,8 @@
  */
 package com.apicompany.e.commerceapplication.DAL.models;
 
+import java.util.Date;
+
 /**
  *
  * @author Vargos

@@ -5,6 +5,8 @@
  */
 package com.apicompany.e.commerceapplication.DAL.models;
 
+import java.util.Date;
+
 /**
  *
  * @author Vargos
@@ -66,7 +68,7 @@ public class User {
         return job;
     }
 
-    public int getCreaditLimit() {
+    public int getCreditLimit() {
         return creaditLimit;
     }
 
@@ -86,7 +88,7 @@ public class User {
         this.job = job;
     }
 
-    public void setCreaditLimit(int creaditLimit) {
+    public void setCreditLimit(int creaditLimit) {
         this.creaditLimit = creaditLimit;
     }
 
