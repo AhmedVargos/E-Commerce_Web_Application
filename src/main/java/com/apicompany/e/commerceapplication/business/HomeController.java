@@ -68,7 +68,7 @@ public class HomeController {
         //TODO use the PRODUCT DAO to get a list of all products in a specific category
 
         List<Product> productList = new ArrayList<>();
-/*        productList.add(new Product("Item 1",
+        productList.add(new Product("Item 1",
                 "The item description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus",
                 "",
                 101.00,
@@ -80,7 +80,7 @@ public class HomeController {
                 22.00,
                 10));
 
-        productList.add(new Product("Item 3",
+/*        productList.add(new Product("Item 3",
                 "The item description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus",
                 "",
                 17.00,

@@ -5,6 +5,8 @@
  */
 package com.apicompany.e.commerceapplication.view.servlet;
 
+import com.apicompany.e.commerceapplication.business.HomeController;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import static com.apicompany.e.commerceapplication.view.servlet.AccessServlet.PRODUCTS_LIST;
 
 /**
  *
@@ -58,7 +63,16 @@ public class CategoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        //Get the id for the category and open the shop page with the right products
+        int id = Integer.valueOf(request.getParameter("category"));
+        HttpSession session = request.getSession();
+        HomeController homeController = new HomeController();
+        //TODO MAKE A CONSTANT FOR CATEGORIES NAMES TRANSLATING FROM AND TO INT
+        session.setAttribute(AccessServlet.SHOP_TAG,"" + id);
+        session.setAttribute(AccessServlet.PRODUCTS_LIST,homeController.getListOfProductsWithCategory(id));
+        response.sendRedirect("shop-full-width.jsp");
+
     }
 
     /**
