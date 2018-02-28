@@ -3,4 +3,4 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.apicompany.e.commerceapplication.models;
+package com.apicompany.e.commerceapplication.DAL.models;
