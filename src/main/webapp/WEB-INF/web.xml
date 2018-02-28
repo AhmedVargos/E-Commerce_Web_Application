@@ -9,8 +9,8 @@
             30
         </session-timeout>
     </session-config>
-    
+
     <welcome-file-list>
-        <welcome-file>shop-full-width.jsp</welcome-file>
+        <welcome-file>shop-login.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
