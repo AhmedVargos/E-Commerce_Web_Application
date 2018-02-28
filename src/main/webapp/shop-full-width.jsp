@@ -121,24 +121,24 @@
                                                 </a>
                                                 <ul class="dropdown-menu">
                                                     <li>
-                                                        <a href="#">
+                                                        <a href="CategoryServlet?category=1">
                                                             Women Clothes
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="#">
+                                                        <a href="CategoryServlet?category=2">
                                                             Men Clothes
                                                         </a>
                                                     </li>
 
                                                     <li>
-                                                        <a href="#">
+                                                        <a href="CategoryServlet?category=3">
                                                             Casual Clothes
                                                         </a>
                                                     </li>
 
                                                     <li>
-                                                        <a href="#">
+                                                        <a href="CategoryServlet?category=4">
                                                             Sport Clothes
                                                         </a>
                                                     </li>
@@ -240,7 +240,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <h1 class="mb-none"><strong>Shop</strong></h1>
+                    <h1 class="mb-none"><strong>${sessionScope.SHOP_TAG}</strong></h1>
                     <p>Showing 1–12 of 25 results.</p>
                 </div>
             </div>
