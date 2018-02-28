@@ -229,7 +229,7 @@
 										<div class="featured-box featured-box-primary align-left mt-xlg">
 											<div class="box-content">
 												<h4 class="heading-primary text-uppercase mb-md">I'm a Returning Customer</h4>
-												<form action="/" id="frmSignIn" method="post">
+												<form action="AccessServlet" id="frmSignIn" method="post">
 													<div class="row">
 														<div class="form-group">
 															<div class="col-md-12">

@@ -19,6 +19,27 @@ public class Product {
     private int quantity;
     private int catagory_catogeryId;
 
+    public Product() {
+    }
+
+    public Product(int productId, String productName, String description, String image, Double productPrice, int quantity, int catagory_catogeryId) {
+        this.productId = productId;
+        this.productName = productName;
+        this.description = description;
+        this.image = image;
+        this.productPrice = productPrice;
+        this.quantity = quantity;
+        this.catagory_catogeryId = catagory_catogeryId;
+    }
+
+    public Product(String productName, String description, String image, Double productPrice, int quantity) {
+        this.productName = productName;
+        this.description = description;
+        this.image = image;
+        this.productPrice = productPrice;
+        this.quantity = quantity;
+    }
+
     public void setProductId(int productId) {
         this.productId = productId;
     }

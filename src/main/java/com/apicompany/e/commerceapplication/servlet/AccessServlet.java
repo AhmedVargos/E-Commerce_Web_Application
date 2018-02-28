@@ -5,29 +5,34 @@
  */
 package com.apicompany.e.commerceapplication.servlet;
 
+import com.apicompany.e.commerceapplication.bussiness.HomeController;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- *
  * @author Vargos
  */
 @WebServlet(name = "AccessServlet", urlPatterns = {"/AccessServlet"})
 public class AccessServlet extends HttpServlet {
 
+    public static final String PRODUCTS_LIST = "PRODUCTS_LIST";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -37,7 +42,7 @@ public class AccessServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AccessServlet</title>");            
+            out.println("<title>Servlet AccessServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet AccessServlet at " + request.getContextPath() + "</h1>");
@@ -47,32 +52,42 @@ public class AccessServlet extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        //check the data of the user in login and then open the shop jsp
+        //TODO check the validation of the user in DB
+        //TODO and if available navigate to home-full-width.jsp but first add the list of products in the request
+        HttpSession session = request.getSession();
+        HomeController homeController = new HomeController();
+        session.setAttribute(PRODUCTS_LIST,homeController.getListOfProducts());
+        response.sendRedirect("shop-full-width.jsp");
+        /*RequestDispatcher requestDispatcher = request.getRequestDispatcher("shop-full-width.jsp");
+        requestDispatcher.forward(request,response);*/
     }
 
     /**
