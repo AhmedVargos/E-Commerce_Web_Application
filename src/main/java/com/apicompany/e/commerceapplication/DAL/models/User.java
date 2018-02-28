@@ -15,7 +15,7 @@ public class User {
 
     private int userId;
     private String userName;
-    private Date birthDay;
+    private Date birthdate;
     private String passWord;
     private String email;
     private String job;
@@ -32,8 +32,8 @@ public class User {
         this.userName = userName;
     }
 
-    public void setBirthDay(Date birthDay) {
-        this.birthDay = birthDay;
+    public void setBirthdate(Date birthDay) {
+        this.birthdate = birthDay;
     }
 
     public void setPassWord(String passWord) {
@@ -52,8 +52,8 @@ public class User {
         return userName;
     }
 
-    public Date getBirthDay() {
-        return birthDay;
+    public Date getBirthdate() {
+        return birthdate;
     }
 
     public String getPassWord() {
