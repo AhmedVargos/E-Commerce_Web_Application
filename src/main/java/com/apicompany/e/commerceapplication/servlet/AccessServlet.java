@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.apicompany.e.commerceapplication.servlets;
+package com.apicompany.e.commerceapplication.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Vargos
  */
-@WebServlet(name = "UserProfileServlet", urlPatterns = {"/UserProfileServlet"})
-public class UserProfileServlet extends HttpServlet {
+@WebServlet(name = "AccessServlet", urlPatterns = {"/AccessServlet"})
+public class AccessServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +37,10 @@ public class UserProfileServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserProfileServlet</title>");            
+            out.println("<title>Servlet AccessServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserProfileServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AccessServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
