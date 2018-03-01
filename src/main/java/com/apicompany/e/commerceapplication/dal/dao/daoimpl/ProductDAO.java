@@ -15,6 +15,7 @@ import java.util.ArrayList;
  */
 public class ProductDAO implements ProductDAOInt {
 
+
     @Override
     public ArrayList<Product> getallProducts() {
         return null;
@@ -22,24 +23,21 @@ public class ProductDAO implements ProductDAOInt {
 
     @Override
     public boolean insertProduct(Product newProduct) {
-      return true;
-     
+        return false;
     }
 
     @Override
     public boolean deleteProduct(Product currentProduct) {
-      return true; 
+        return false;
     }
 
     @Override
     public boolean updateProduct(Product currentproduct) {
-       return true;
+        return false;
     }
 
     @Override
     public Product getSpecificProduct(int ProductId) {
-       return null; 
+        return null;
     }
-
-   
 }

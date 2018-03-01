@@ -92,7 +92,7 @@ public class UserDAO implements UserDAOInt{
                     + "password = ? , email = ? , job = ? , creditLimit = ? , address = ? , interests = ? , isAdmin = ? WHERE "
                     + "userId= ?");
             updateStatement.setString(1, user.getUserName());
-//            updateStatement.setDate(2, (Date) user.getBirthDay());
+            updateStatement.setDate(2, (Date) user.getBirthdate());
             updateStatement.setString(3, user.getPassWord());
             updateStatement.setString(4, user.getEmail());
             updateStatement.setString(5, user.getJob());
