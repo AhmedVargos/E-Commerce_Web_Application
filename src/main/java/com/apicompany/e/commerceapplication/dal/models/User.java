@@ -56,12 +56,12 @@ public class User {
         return birthdate;
     }
 
-    public String getPassWord() {
-        return passWord;
-    }
-
     public String getEmail() {
         return email;
+    }
+
+    public String getPassWord() {
+        return passWord;
     }
 
     public String getJob() {
