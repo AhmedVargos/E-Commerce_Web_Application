@@ -17,6 +17,18 @@ public class Cart {
     private Date date;
     private int user_userId;
 
+    public Cart() {
+    }
+
+    public Cart(int cartId, Date date, int user_userId) {
+        this.cartId = cartId;
+        this.date = date;
+        this.user_userId = user_userId;
+    }
+   public Cart( Date date, int user_userId) {
+        this.date = date;
+        this.user_userId = user_userId;
+    }
     public void setCartId(int cartId) {
         this.cartId = cartId;
     }

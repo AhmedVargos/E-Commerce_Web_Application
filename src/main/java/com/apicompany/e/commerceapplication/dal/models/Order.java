@@ -15,7 +15,21 @@ public class Order {
 
     private int order_id;
     private Date order_Date;
+
+    public Order(Date order_Date, int user_UserId) {
+        this.order_Date = order_Date;
+        this.user_UserId = user_UserId;
+    }
+
+    public Order(int order_id, Date order_Date, int user_UserId) {
+        this.order_id = order_id;
+        this.order_Date = order_Date;
+        this.user_UserId = user_UserId;
+    }
     private int user_UserId;
+
+    public Order() {
+    }
 
     public void setOrder_id(int order_id) {
         this.order_id = order_id;
