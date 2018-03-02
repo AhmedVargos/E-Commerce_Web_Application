@@ -32,7 +32,8 @@ public class UserDAO implements UserDAOInt{
 
     // this method returns all users
     //tested
-    public ArrayList<User> getAllUsers() {
+    @Override
+      public ArrayList<User> getAllUsers() {
         ArrayList<User> allUsers = new ArrayList<>();
         User user;
         PreparedStatement selectStatement;
@@ -61,7 +62,8 @@ public class UserDAO implements UserDAOInt{
 
     //this method finds user by his id, returns null if user isn't exist
     //tested
-    public User getUser(int id) {
+    @Override
+     public User getUser(int id) {
         User user = new User();
         PreparedStatement selectStatement;
         ResultSet rs;
@@ -90,6 +92,7 @@ public class UserDAO implements UserDAOInt{
 
     //this method finds user by his name, returns null if user isn't exist
     //tested
+    @Override
     public User getUser(String userName) {
         User user = new User();
         PreparedStatement selectStatement;
@@ -121,6 +124,7 @@ public class UserDAO implements UserDAOInt{
 
     //this methods is used to confirm login;it check if the username and password are correct or not
     // return the user if he existed, and null in case of invalid username/password
+    @Override
     public User isUserExist(String userName, String password) {
         User user = getUser(userName);
         if (user != null) {
@@ -134,6 +138,7 @@ public class UserDAO implements UserDAOInt{
     //-----------------------------------------------------------------------------------------------------------------------//
     // this method insert new user and return true in case of successful insertion, and false if insertion failed
     //tested
+    @Override
     public boolean addUser(User user) {
         PreparedStatement insertStatement;
         boolean isAdded;
@@ -159,6 +164,7 @@ public class UserDAO implements UserDAOInt{
     }
 
     //tested
+    @Override
     public boolean updateUser(User user) {
         PreparedStatement updateStatement;
         boolean isUpdated;
@@ -189,6 +195,7 @@ public class UserDAO implements UserDAOInt{
     }
     
     //tested
+    @Override
     public boolean removeUser(User user) {
         PreparedStatement deleteStatement;
         boolean isRemoved;
