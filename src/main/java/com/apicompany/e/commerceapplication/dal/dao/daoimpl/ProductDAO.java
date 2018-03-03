@@ -74,7 +74,6 @@ public class ProductDAO implements ProductDAOInt {
              {
                  resTest=true;
              }
-            connHandler.disconnectDB();
          } catch (SQLException ex) {
              Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
          }

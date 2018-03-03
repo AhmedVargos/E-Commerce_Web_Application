@@ -5,6 +5,7 @@
  */
 package com.apicompany.e.commerceapplication.dal.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -15,19 +16,9 @@ public class Order {
 
     private int order_id;
     private Date order_Date;
-
-    public Order(Date order_Date, int user_UserId) {
-        this.order_Date = order_Date;
-        this.user_UserId = user_UserId;
-    }
-
-    public Order(int order_id, Date order_Date, int user_UserId) {
-        this.order_id = order_id;
-        this.order_Date = order_Date;
-        this.user_UserId = user_UserId;
-    }
-    private int user_UserId;
-
+    private User user;
+    private ArrayList<Product> products;
+    
     public Order() {
     }
 
@@ -39,8 +30,12 @@ public class Order {
         this.order_Date = order_Date;
     }
 
-    public void setUser_UserId(int user_UserId) {
-        this.user_UserId = user_UserId;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setProducts(ArrayList<Product> products) {
+        this.products=products;
     }
 
     public int getOrder_id() {
@@ -51,8 +46,11 @@ public class Order {
         return order_Date;
     }
 
-    public int getUser_UserId() {
-        return user_UserId;
+    public User getUser() {
+        return user;
     }
 
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
 }
