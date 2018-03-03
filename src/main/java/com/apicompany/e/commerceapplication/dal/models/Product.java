@@ -16,6 +16,23 @@ public class Product {
     private String description;
     private String image;
     private Double productPrice;
+
+    public Product(String productName, String description, String image, Double productPrice, int quantity) {
+        this.productName = productName;
+        this.description = description;
+        this.image = image;
+        this.productPrice = productPrice;
+        this.quantity = quantity;
+    }
+
+    public Product(String productName, String description, String image, Double productPrice, int quantity, int catagory_catogeryId) {
+        this.productName = productName;
+        this.description = description;
+        this.image = image;
+        this.productPrice = productPrice;
+        this.quantity = quantity;
+        this.catagory_catogeryId = catagory_catogeryId;
+    }
     private int quantity;
     private int catagory_catogeryId;
 
@@ -32,14 +49,7 @@ public class Product {
         this.catagory_catogeryId = catagory_catogeryId;
     }
 
-    public Product(String productName, String description, String image, Double productPrice, int quantity) {
-        this.productName = productName;
-        this.description = description;
-        this.image = image;
-        this.productPrice = productPrice;
-        this.quantity = quantity;
-    }
-
+   
     public void setProductId(int productId) {
         this.productId = productId;
     }

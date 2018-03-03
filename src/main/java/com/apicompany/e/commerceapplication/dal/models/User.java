@@ -22,6 +22,34 @@ public class User {
     private int creaditLimit;
     private String address;
     private String interests;
+
+    public User() {
+    }
+
+    public User(int userId, String userName, Date birthdate, String passWord, String email, String job, int creaditLimit, String address, String interests, boolean isAdmin) {
+        this.userId = userId;
+        this.userName = userName;
+        this.birthdate = birthdate;
+        this.passWord = passWord;
+        this.email = email;
+        this.job = job;
+        this.creaditLimit = creaditLimit;
+        this.address = address;
+        this.interests = interests;
+        this.isAdmin = isAdmin;
+    }
+
+    public User(String userName, Date birthdate, String passWord, String email, String job, int creaditLimit, String address, String interests, boolean isAdmin) {
+        this.userName = userName;
+        this.birthdate = birthdate;
+        this.passWord = passWord;
+        this.email = email;
+        this.job = job;
+        this.creaditLimit = creaditLimit;
+        this.address = address;
+        this.interests = interests;
+        this.isAdmin = isAdmin;
+    }
     private boolean isAdmin;
 
     public void setUserId(int userId) {

@@ -18,6 +18,9 @@ public class Order {
     private Date order_Date;
     private User user;
     private ArrayList<Product> products;
+    
+    public Order() {
+    }
 
     public void setOrder_id(int order_id) {
         this.order_id = order_id;
@@ -32,7 +35,7 @@ public class Order {
     }
 
     public void setProducts(ArrayList<Product> products) {
-        this.products = products;
+        this.products=products;
     }
 
     public int getOrder_id() {
