@@ -597,6 +597,9 @@
 <!-- Theme Initialization Files -->
 <script src="js/theme.init.js"></script>
 
+<!-- Cart Scripts -->
+<script src="js/cart.js"></script>
+
 <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
