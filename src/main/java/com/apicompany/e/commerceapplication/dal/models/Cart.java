@@ -17,12 +17,12 @@ public class Cart {
     private int cartId;
     private Date date;
     private User cartUser;
-    private ArrayList<Product> products;
+    private ArrayList<CartItem> cartItems;
 
     public Cart() {
     }
 
-    public Cart(int cartId, Date date, int user_userId) {
+    public Cart(int cartId, Date date) {
         this.cartId = cartId;
         this.date = date;
     }
@@ -39,14 +39,14 @@ public class Cart {
 
     public void setCartUser(User cartUser) {
         this.cartUser = cartUser;
-    }    
-
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
     }
-    
-    public ArrayList<Product> getProducts() {
-        return products;
+
+    public ArrayList<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(ArrayList<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 
     public int getCartId() {
