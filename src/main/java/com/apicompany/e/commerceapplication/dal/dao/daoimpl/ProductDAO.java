@@ -214,15 +214,34 @@ public class ProductDAO implements ProductDAOInt {
          return allProduct;    
     
     }
-//    public static void main(String[] args) {
-//        ProductDAO myproduct=new ProductDAO();
-//       //Product newproduct = new Product("mkjhkj", "bjhj","f://dgndlkg",190.0,3 ,1);
-//   boolean test=myproduct.deleteProduct(2);
-//        
-//         System.out.println(test);   
-//        
-//         
-//         
-//    }   
+    public static void main(String[] args) {
+        ProductDAO myproduct=new ProductDAO();
+       //Product newproduct = new Product("mkjhkj", "bjhj","f://dgndlkg",190.0,3 ,1);
+ int test=myproduct.getProductId("mkjhkj");
+        
+         System.out.println(test);       
+    }   
+
+    @Override
+    public int getProductId(String productName) {
+        int productId = 0;
+         try {
+             String selectQuery="select "+DB_CoulmnNames.productId+" from product where "+DB_CoulmnNames.productName+"='"+productName+"'";
+             PreparedStatement Selectstatment=connHandler.getCon().prepareStatement(selectQuery);
+             ResultSet res=Selectstatment.executeQuery();
+             if (res.next()) {
+                
+            productId=res.getInt(DB_CoulmnNames.productId);
+                
+            }
+             
+         }
+           catch (SQLException ex) {
+             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return productId; 
+    
+    
+    }
     
 }
