@@ -16,6 +16,8 @@ public class Product {
     private String description;
     private String image;
     private Double productPrice;
+    private int quantity;
+    private int catagory_catogeryId;
 
     public Product(String productName, String description, String image, Double productPrice, int quantity) {
         this.productName = productName;
@@ -33,8 +35,7 @@ public class Product {
         this.quantity = quantity;
         this.catagory_catogeryId = catagory_catogeryId;
     }
-    private int quantity;
-    private int catagory_catogeryId;
+    
 
     public Product() {
     }

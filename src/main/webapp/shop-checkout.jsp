@@ -238,13 +238,49 @@
                     <hr class="tall">
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-md-12">
                     <h2 class="mb-none"><strong>Checkout</strong></h2>
                     <p>Returning customer? <a href="shop-login.jsp">Click here to login.</a></p>
                 </div>
             </div>
+                     <div class="col-sm-6">
+                                <div class="featured-box featured-box-primary align-left mt-xlg">
+                                    <div class="box-content">
+                                        <h4 class="heading-primary text-uppercase mb-md">Cart Totals</h4>
+                                        <table class="cart-totals">
+                                            <tbody>
+                                            <tr class="cart-subtotal">
+                                                <th>
+                                                    <strong>Cart Subtotal</strong>
+                                                </th>
+                                                <td>
+                                                    <strong><span class="amount">$431</span></strong>
+                                                </td>
+                                            </tr>
+                                            <tr class="shipping">
+                                                <th>
+                                                    Shipping
+                                                </th>
+                                                <td>
+                                                    Free Shipping<input type="hidden" value="free_shipping"
+                                                                        id="shipping_method" name="shipping_method">
+                                                </td>
+                                            </tr>
+                                            <tr class="total">
+                                                <th>
+                                                    <strong>Order Total</strong>
+                                                </th>
+                                                <td>
+                                                    <strong><span class="amount">$431</span></strong>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+            
 
             <div class="row">
                 <div class="col-md-9">
@@ -568,38 +604,7 @@
                     </div>
 
                 </div>
-                <div class="col-md-3">
-                    <h4 class="heading-primary">Cart Totals</h4>
-                    <table class="cart-totals">
-                        <tbody>
-                        <tr class="cart-subtotal">
-                            <th>
-                                <strong>Cart Subtotal</strong>
-                            </th>
-                            <td>
-                                <strong><span class="amount">$431</span></strong>
-                            </td>
-                        </tr>
-                        <tr class="shipping">
-                            <th>
-                                Shipping
-                            </th>
-                            <td>
-                                Free Shipping<input type="hidden" value="free_shipping" id="shipping_method"
-                                                    name="shipping_method">
-                            </td>
-                        </tr>
-                        <tr class="total">
-                            <th>
-                                <strong>Order Total</strong>
-                            </th>
-                            <td>
-                                <strong><span class="amount">$431</span></strong>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+    
             </div>
 
         </div>
@@ -715,9 +720,10 @@
 
 <!-- Theme Custom -->
 <script src="js/custom.js"></script>
-
 <!-- Theme Initialization Files -->
 <script src="js/theme.init.js"></script>
+<!-- checkout  page -->
+<script src="js/checkout.js"></script>
 
 <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
 <script>
