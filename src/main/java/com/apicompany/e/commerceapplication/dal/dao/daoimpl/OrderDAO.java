@@ -326,15 +326,15 @@ public class OrderDAO implements OrderDAOInt {
         return addNewOrder(currentUser, products);
     }
 
-    public static void main(String[] args) {
-        OrderDAO o = new OrderDAO();
+//    public static void main(String[] args) {
+//        OrderDAO o = new OrderDAO();
 //    o.getOrderByOrderId(1);
 //     o.getOrderByUserId(1);
 //    String name = "Gehad";
 //    o.getOrderByUserName(name);
 //    ArrayList<Order> temp = new ArrayList<>();
 //    temp = o.getAllOrders();
-    o.deleteOrder(19);
+//    o.deleteOrder(19);
 
     /* UserDAO udao = new UserDAO();
         User user = udao.getUser(1);
@@ -349,7 +349,7 @@ public class OrderDAO implements OrderDAOInt {
         ps.add(p);
 
         o.addNewOrder(user, ps);*/
-    }
+//    }
 
   
 }

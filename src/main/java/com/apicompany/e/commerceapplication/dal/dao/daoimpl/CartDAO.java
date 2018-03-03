@@ -204,14 +204,14 @@ public class CartDAO implements CartDAOInt {
         return isRemoved;
     }
 
-    public static void main(String[] args) {
-        UserDAO userDAO = new UserDAO();
-        CartDAO cDao = new CartDAO();
-        User user = userDAO.getUser("Gehad");
-
-        // Cart c = cDao.getUserCart(user);
-        Cart c = cDao.getCartByCartId(1);
-        ArrayList<Cart> carts = cDao.getAllCars();
-    }
+//    public static void main(String[] args) {
+//        UserDAO userDAO = new UserDAO();
+//        CartDAO cDao = new CartDAO();
+//        User user = userDAO.getUser("Gehad");
+//
+//        // Cart c = cDao.getUserCart(user);
+//        Cart c = cDao.getCartByCartId(1);
+//        ArrayList<Cart> carts = cDao.getAllCars();
+//    }
 
 }
