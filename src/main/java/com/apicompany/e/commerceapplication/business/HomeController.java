@@ -95,11 +95,16 @@ public class HomeController {
         return productList;
     }
 
-    //returns a list of products searched by the name
-    public List<Product> searchProductsByName(String name){
+    //returns a list of products searched by the name from the list passed to it
+    public List<Product> searchProductsByName(List<Product> listToSearch, String name){
 
         //TODO search the DB by the name and return a list of products
         List<Product> result = new ArrayList<>();
+        for (Product product: listToSearch) {
+            if(product.getProductName().toLowerCase().contains(name.toLowerCase())){
+                result.add(product);
+            }
+        }
 
         return result;
     }

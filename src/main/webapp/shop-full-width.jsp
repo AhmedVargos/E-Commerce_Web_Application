@@ -60,7 +60,7 @@
                 <div class="header-row">
                     <div class="header-column">
                         <div class="header-logo">
-                            <a href="shop-full-width.jsp">
+                            <a href="AllProductsServlet">
                                 <img alt="Porto" width="111" height="54" data-sticky-width="82" data-sticky-height="40"
                                      data-sticky-top="33" src="img/logo.png">
                             </a>
@@ -104,7 +104,7 @@
                                     <nav>
                                         <ul class="nav nav-pills" id="mainNav">
                                             <li class="dropdown active">
-                                                <a class="dropdown-toggle" href="shop-full-width.jsp">
+                                                <a class="dropdown-toggle" href="AllProductsServlet">
                                                     Shop Home
                                                 </a>
 
@@ -230,7 +230,7 @@
 
     <div role="main" class="main shop">
 
-        <div class="container">
+        <div class="container" id="products_container">
 
             <div class="row">
                 <div class="col-md-12">
@@ -241,13 +241,21 @@
             <div class="row">
                 <div class="col-md-6">
                     <h1 class="mb-none"><strong>${sessionScope.SHOP_TAG}</strong></h1>
-                    <p>Showing 1–12 of 25 results.</p>
+                    <p>Showing results.</p>
                 </div>
+            </div>
+
+            <div class="input-group input-group-lg">
+                <input class="form-control" placeholder="Search..." name="s" id="search_text" type="text">
+                <span class="input-group-btn">
+											<button type="button" id="search_btn" onclick="searchProducts()" class="btn btn-primary btn-lg"><i
+                                                    class="fa fa-search"></i></button>
+										</span>
             </div>
 
             <div class="row">
                 <c:if test="${not empty sessionScope.PRODUCTS_LIST}">
-                    <ul class="products product-thumb-info-list" data-plugin-masonry>
+                    <ul class="products product-thumb-info-list" id="list_of_products" style="height: auto;" data-plugin-masonry>
                         <c:forEach items="${sessionScope.PRODUCTS_LIST}" var="product">
                             <li class="col-md-3 col-sm-6 col-xs-12 product">
 								<span class="product-thumb-info">
@@ -283,7 +291,7 @@
 
             </div>
 
-            <div class="row">
+            <div class="row" id="page_footer">
                 <div class="col-md-12">
                     <ul class="pagination pull-right">
                         <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
@@ -412,6 +420,8 @@
 <!-- Theme Initialization Files -->
 <script src="js/theme.init.js"></script>
 
+<!-- Search Scripts -->
+<script src="js/search.js"></script>
 <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

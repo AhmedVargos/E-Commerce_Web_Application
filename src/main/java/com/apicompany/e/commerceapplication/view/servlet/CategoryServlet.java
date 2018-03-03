@@ -71,7 +71,7 @@ public class CategoryServlet extends HttpServlet {
         //TODO MAKE A CONSTANT FOR CATEGORIES NAMES TRANSLATING FROM AND TO INT
         session.setAttribute(AccessServlet.SHOP_TAG,"" + id);
         session.setAttribute(AccessServlet.PRODUCTS_LIST,homeController.getListOfProductsWithCategory(id));
-        response.sendRedirect("shop-full-width.jsp");
+        response.sendRedirect("shop-category-full-width.jsp");
 
     }
 
