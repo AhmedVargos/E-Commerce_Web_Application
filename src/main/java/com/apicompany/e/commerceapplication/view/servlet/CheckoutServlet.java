@@ -5,6 +5,8 @@
  */
 package com.apicompany.e.commerceapplication.view.servlet;
 
+import com.apicompany.e.commerceapplication.business.CheckoutController;
+import com.apicompany.e.commerceapplication.dal.dao.daoimpl.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -58,7 +61,20 @@ public class CheckoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession usersession=request.getSession(false);
+        int UserId= (int) usersession.getAttribute("userid");
+        CheckoutController mycontroller = new CheckoutController();
+         if( mycontroller.checkUserFound(UserId))
+         {
+             
+         }
+         else
+         {
+           response.sendRedirect("shop-login.jsp"); 
+          
+         }
+        
+        
     }
 
     /**

@@ -34,5 +34,10 @@ public interface ProductDAOInt {
        send catagory of product only 
        return List of All product with this catagory
     */
-    public ArrayList<Product> getProductByCatagory(int Productcatagory);  
+    public ArrayList<Product> getProductByCatagory(int Productcatagory); 
+    /*
+      given product name 
+    and return product id
+    */
+    public int getProductId(String productName);
 }

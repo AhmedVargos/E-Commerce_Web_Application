@@ -100,7 +100,7 @@ public class ProductDAO implements ProductDAOInt {
              {
                  resTest=true;
              }
-            connHandler.disconnectDB();
+            //connHandler.disconnectDB();
          } catch (SQLException ex) {
              Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -125,7 +125,7 @@ public class ProductDAO implements ProductDAOInt {
              {
                  resTest=true;
              }
-            connHandler.disconnectDB();
+            //connHandler.disconnectDB();
                   
              }  
          } catch (SQLException ex) {
@@ -179,7 +179,7 @@ public class ProductDAO implements ProductDAOInt {
                 product.setCatagory_catogeryId(res.getInt(DB_CoulmnNames.category_categoryId));
               allProduct.add(product);
             }
-           connHandler.disconnectDB();
+           //connHandler.disconnectDB();
          }
            catch (SQLException ex) {
              Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -206,7 +206,7 @@ public class ProductDAO implements ProductDAOInt {
                 product.setCatagory_catogeryId(res.getInt(DB_CoulmnNames.category_categoryId));
               allProduct.add(product);
             }
-           connHandler.disconnectDB();
+           //connHandler.disconnectDB();
          }
            catch (SQLException ex) {
              Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -214,15 +214,34 @@ public class ProductDAO implements ProductDAOInt {
          return allProduct;    
     
     }
-//    public static void main(String[] args) {
-//        ProductDAO myproduct=new ProductDAO();
-//       //Product newproduct = new Product("mkjhkj", "bjhj","f://dgndlkg",190.0,3 ,1);
-//   boolean test=myproduct.deleteProduct(2);
-//        
-//         System.out.println(test);   
-//        
-//         
-//         
-//    }   
+    public static void main(String[] args) {
+        ProductDAO myproduct=new ProductDAO();
+       //Product newproduct = new Product("mkjhkj", "bjhj","f://dgndlkg",190.0,3 ,1);
+ int test=myproduct.getProductId("mkjhkj");
+        
+         System.out.println(test);       
+    }   
+
+    @Override
+    public int getProductId(String productName) {
+        int productId = 0;
+         try {
+             String selectQuery="select "+DB_CoulmnNames.productId+" from product where "+DB_CoulmnNames.productName+"='"+productName+"'";
+             PreparedStatement Selectstatment=connHandler.getCon().prepareStatement(selectQuery);
+             ResultSet res=Selectstatment.executeQuery();
+             if (res.next()) {
+                
+            productId=res.getInt(DB_CoulmnNames.productId);
+                
+            }
+             
+         }
+           catch (SQLException ex) {
+             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return productId; 
+    
+    
+    }
     
 }

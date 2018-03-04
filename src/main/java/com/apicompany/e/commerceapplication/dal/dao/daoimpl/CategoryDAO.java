@@ -42,7 +42,7 @@ public class CategoryDAO implements CategoryDAOInt {
                 category.setCategoryName(rs.getString(DB_CoulmnNames.categoryName));
                 allCategory.add(category);
             }
-            connHandler.disconnectDB();
+            //connHandler.disconnectDB();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -63,7 +63,7 @@ public class CategoryDAO implements CategoryDAOInt {
              {
                  resTest=true;
              }
-            connHandler.disconnectDB();
+            //connHandler.disconnectDB();
          } catch (SQLException ex) {
              Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -86,7 +86,7 @@ public class CategoryDAO implements CategoryDAOInt {
              {
                  resTest=true;
              }
-            connHandler.disconnectDB();
+            //connHandler.disconnectDB();
          } catch (SQLException ex) {
              Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -111,7 +111,7 @@ public class CategoryDAO implements CategoryDAOInt {
              {
                  resTest=true;
              }
-            connHandler.disconnectDB();
+            //connHandler.disconnectDB();
                   
              }  
          } catch (SQLException ex) {
