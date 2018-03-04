@@ -4,4 +4,30 @@
  * and open the template in the editor.
  */
 
+function checkData()
+{
+    $.ajax({
+        url: 'CheckoutServlet',
+        type: 'POST',
+        contentType: 'application/json',
+        success: function (data) { 
+            $("#response").append("<label>"+data+"</label>");
+        }
+        
+    });  
+
+//    $.ajax({ 
+//    type: 'GET', 
+//    url: 'http://example/functions.php', 
+//    data: { get_param: 'value' }, 
+//    dataType: 'json',
+//    success: function (data) { 
+//        $.each(data, function(index, element) {
+//            $('body').append($('<div>', {
+//                text: element.name
+//            }));
+//        });
+//    }
+//});
+}
 

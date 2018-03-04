@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.apicompany.e.commerceapplication.view.servlet;
 
 import com.apicompany.e.commerceapplication.business.CheckoutController;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.UserDAO;
+import com.apicompany.e.commerceapplication.dal.models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,23 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-/**
- *
- * @author Vargos
- */
 @WebServlet(name = "CheckoutServlet", urlPatterns = {"/CheckoutServlet"})
 public class CheckoutServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -49,56 +30,70 @@ public class CheckoutServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+ 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession usersession=request.getSession(false);
-        int UserId= (int) usersession.getAttribute("userid");
+       // int UserId= (int) usersession.getAttribute("userid");
+       int UserId=1;
         CheckoutController mycontroller = new CheckoutController();
          if( mycontroller.checkUserFound(UserId))
          {
-             
+           int totalPrice=mycontroller.CalaulatetotalPrice(UserId);
+             User currentUser = mycontroller.getUser(UserId);
+             String username="B";
+             String address="R";
+             if(currentUser!=null)
+             {
+              username=currentUser.getUserName();
+               address = currentUser.getAddress();
+             }
+           HttpSession ToptalPriceSession = request.getSession(true);
+           ToptalPriceSession.setAttribute("TotalPrice", totalPrice);
+           ToptalPriceSession.setAttribute("userName",username );
+           ToptalPriceSession.setAttribute("adress", address);
+           response.sendRedirect("shop-checkout.jsp");   
          }
          else
          {
            response.sendRedirect("shop-login.jsp"); 
           
-         }
-        
-        
+         }   
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         HttpSession usersession=request.getSession(false);
+       // int UserId= (int) usersession.getAttribute("userid");
+       int UserId=1;
+        CheckoutController mycontroller = new CheckoutController();
+          int totalPrice=mycontroller.CalaulatetotalPrice(UserId);
+          boolean checkResult =mycontroller.checkLimitRange(UserId, totalPrice);
+          PrintWriter out=response.getWriter();
+          if(checkResult)
+          { 
+           boolean CreatOrder =mycontroller.MakeOrder();
+           {           
+            if(CreatOrder)
+            {
+            //boolean check=mycontroller.clearCard();
+              out.write("You create order successfuly and contact with you for payment"); 
+            }
+            
+           }
+           
+          }
+          else
+          {
+          out.write("the total price more than your credit  Limit sorry :( increase your creadit");
+          
+          }
+        
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }
