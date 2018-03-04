@@ -5,25 +5,14 @@
  */
 
 
-function addToCart(product) {
+function addToCart() {
     //get product object
-    //sedd ajax request with product obj
+    //send ajax request with product obj
     var productId = $("#myProduct").val();
-    var objProduct = {"id": productId};
-     $.ajax({
-        url: 'CartServlet',
-        type: 'POST',
-        contentType: 'application/json',
-        data: objProduct,
-        dataType: 'json',
-        success: updateCartCounter
-    });
+    var productQuantity = $("#myQuantity").val();
 
+    $.post("CartServlet",{"id": productId, "quantity":productQuantity},updateCartCounter);
 
-//    $.post("CartServlet", {"id": productId}, updateCartCounter);
-
-//    alert(product);
-//    alert("inaddcart");
 }
 
 function updateCartCounter() {
