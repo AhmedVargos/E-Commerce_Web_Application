@@ -212,23 +212,23 @@ public class UserDAO implements UserDAOInt{
         return isRemoved;
     }
 
-    /* public static void main(String[] args) {
+     public static void main(String[] args) {
         UserDAO udao = new UserDAO();
         ArrayList<User> temp = udao.getAllUsers();
         System.out.println(temp.size());
-        User u = new User();*/
- /* u.setUserName("David");
+        User u = new User();
+        u.setUserName("Sheriiiiiiif");
         u.setPassWord("123");
         u.setJob("Web developer");
-        u.setIsAdmin(true);
+        //u.setIsAdmin(true);
         u.setInterests("Movies");
-        u.setEmail("David@gmail.com");
-        u.setCreditLimit(2000);
-        Date date = new Date(2018-01-23);
-        u.setBirthDay(date);
+        u.setEmail("Daviiiid@gmail.com");
+       // u.setCreditLimit(2000);
+        Date date = new Date(2018-01-24);
+        u.setBirthdate(date);
         u.setAddress("Haram");
         boolean added = udao.addUser(u);
-        System.out.println(added);*/
+        System.out.println(added);
     // test update
     //u = udao.getUser(2);
     // u.setPassWord("12345");
@@ -240,5 +240,5 @@ public class UserDAO implements UserDAOInt{
             System.out.println("exists" + u.getEmail());
         else
             System.out.println("Invalid");*/
-    //}
+    }
 }
