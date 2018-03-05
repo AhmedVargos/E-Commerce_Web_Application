@@ -1,18 +1,21 @@
 package com.apicompany.e.commerceapplication.dal.dao.daoint;
 
 import com.apicompany.e.commerceapplication.dal.models.Cart;
-import com.apicompany.e.commerceapplication.dal.models.Order;
+import com.apicompany.e.commerceapplication.dal.models.CartItem;
 import com.apicompany.e.commerceapplication.dal.models.Product;
 import com.apicompany.e.commerceapplication.dal.models.User;
 import java.util.ArrayList;
 
 public interface CartDAOInt {
     
-    Cart getUserCart(User user);
-    Cart getCartByCartId(int CartId);
+    Cart getCartByUserID(int userId);
+    Cart getCartByCartID(int CartId);
     ArrayList<Cart> getAllCars();
-    Boolean addNewProductToExistingCart(Cart cart, Product product,int Quantity);
-    Boolean addNewProductToNewCart(User user, Product product,int Quantity);
-    Boolean removeProductFromCart(Cart cart, Product product);
-    Boolean removeCart(User user);
+    Boolean addNewProductToExistingCart(int cartId, int productId,int Quantity);
+    Boolean addNewProductToNewCart(int userId, int productId,int Quantity);
+    Boolean removeProductFromCart(int cartId, int productId);
+    Boolean removeCartByUserID(int userId);
+    Boolean removeCartByCartID(int cartId);
+    Boolean updateExistingCart(int cartId,ArrayList<CartItem> updatedItems);
+    int getProductQuantityInCart(int cartId,int productId);
 }
