@@ -325,7 +325,7 @@
                                                   
                      </div>                           
                     <div class="actions-continue">
-                        <input type="submit" value="Place Order" name="proceed" class="btn btn-lg btn-primary mt-xl" onclick="checkData()">
+                        <input type="submit" value="Place Order" name="proceed" class="btn btn-lg btn-primary mt-xl" onclick="checkData()" id="order">
                     </div>
 
                 </div>

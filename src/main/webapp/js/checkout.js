@@ -12,6 +12,7 @@ function checkData()
         contentType: 'application/json',
         success: function (data) { 
             $("#response").append("<label>"+data+"</label>");
+            $("#order").prop('disabled', true);
         }
         
     });  
