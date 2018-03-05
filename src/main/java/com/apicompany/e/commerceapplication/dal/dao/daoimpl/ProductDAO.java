@@ -100,7 +100,7 @@ public class ProductDAO implements ProductDAOInt {
              {
                  resTest=true;
              }
-            connHandler.disconnectDB();
+            //connHandler.disconnectDB();
          } catch (SQLException ex) {
              Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -125,7 +125,7 @@ public class ProductDAO implements ProductDAOInt {
              {
                  resTest=true;
              }
-            connHandler.disconnectDB();
+            //connHandler.disconnectDB();
                   
              }  
          } catch (SQLException ex) {
@@ -135,7 +135,7 @@ public class ProductDAO implements ProductDAOInt {
     }
 
     @Override
-    public Product getSpecieficProduct(int ProductId) {
+    public Product getSpecificProduct(int ProductId) {
       Product product=new  Product();
          try {
              String selectQuery="select * from product where "+DB_CoulmnNames.productId+"="+ProductId;
@@ -179,7 +179,7 @@ public class ProductDAO implements ProductDAOInt {
                 product.setCatagory_catogeryId(res.getInt(DB_CoulmnNames.category_categoryId));
               allProduct.add(product);
             }
-           connHandler.disconnectDB();
+           //connHandler.disconnectDB();
          }
            catch (SQLException ex) {
              Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -206,7 +206,7 @@ public class ProductDAO implements ProductDAOInt {
                 product.setCatagory_catogeryId(res.getInt(DB_CoulmnNames.category_categoryId));
               allProduct.add(product);
             }
-           connHandler.disconnectDB();
+           //connHandler.disconnectDB();
          }
            catch (SQLException ex) {
              Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);

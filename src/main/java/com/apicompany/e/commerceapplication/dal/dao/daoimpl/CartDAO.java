@@ -8,7 +8,6 @@ package com.apicompany.e.commerceapplication.dal.dao.daoimpl;
 import com.apicompany.e.commerceapplication.dal.dao.daoint.CartDAOInt;
 import com.apicompany.e.commerceapplication.dal.database.DatabaseHandler;
 import com.apicompany.e.commerceapplication.dal.models.Cart;
-import com.apicompany.e.commerceapplication.dal.models.Order;
 import com.apicompany.e.commerceapplication.dal.models.Product;
 import com.apicompany.e.commerceapplication.dal.models.User;
 import java.sql.PreparedStatement;
@@ -53,8 +52,8 @@ public class CartDAO implements CartDAOInt {
                 rs = selectStatement.executeQuery();
                 while (rs.next()) {
                     productId = rs.getInt("product_productId");
-                    if (pdao.getSpecieficProduct(productId) != null) {
-                        products.add(pdao.getSpecieficProduct(productId));
+                    if (pdao.getSpecificProduct(productId) != null) {
+                        products.add(pdao.getSpecificProduct(productId));
                     }
 
                 }
@@ -93,8 +92,8 @@ public class CartDAO implements CartDAOInt {
                 rs = selectStatement.executeQuery();
                 while (rs.next()) {
                     productId = rs.getInt("product_productId");
-                    if (pdao.getSpecieficProduct(productId) != null) {
-                        products.add(pdao.getSpecieficProduct(productId));
+                    if (pdao.getSpecificProduct(productId) != null) {
+                        products.add(pdao.getSpecificProduct(productId));
                     }
 
                 }
@@ -131,7 +130,7 @@ public class CartDAO implements CartDAOInt {
         ProductDAO productDAO = new ProductDAO();
         PreparedStatement insertStatement;
         Boolean isAdded=false;
-        if (productDAO.getSpecieficProduct(product.getProductId()) != null) {
+        if (productDAO.getSpecificProduct(product.getProductId()) != null) {
             try {
                 insertStatement = dbHandler.getCon().prepareStatement("INSERT INTO EcommerceDB.product_cart"
                         + " (product_productId, cart_cartId, product_quantity) VALUES(?,?,?)");
