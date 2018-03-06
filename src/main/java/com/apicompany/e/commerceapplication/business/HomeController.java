@@ -5,9 +5,6 @@
  */
 package com.apicompany.e.commerceapplication.business;
 
-import com.apicompany.e.commerceapplication.dal.dao.daoimpl.CategoryDAO;
-import com.apicompany.e.commerceapplication.dal.dao.daoimpl.ProductDAO;
-import com.apicompany.e.commerceapplication.dal.models.Category;
 import com.apicompany.e.commerceapplication.dal.models.Product;
 
 import java.util.ArrayList;
@@ -63,12 +60,6 @@ public class HomeController {
                 "",
                 65.00,
                 100));
-        /*CategoryDAO categoryDAO = new CategoryDAO();
-        Category category = new Category();
-        category.setCategoryName("test");
-        categoryDAO.insertCategory(category);
-        ProductDAO productDAO = new ProductDAO();
-        productDAO.insertProduct(productList.get(0));*/
         return productList;
     }
 

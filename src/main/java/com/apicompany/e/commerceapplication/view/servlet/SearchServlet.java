@@ -1,6 +1,8 @@
 package com.apicompany.e.commerceapplication.view.servlet;
 
 import com.apicompany.e.commerceapplication.business.HomeController;
+import com.apicompany.e.commerceapplication.dal.models.Cart;
+import com.apicompany.e.commerceapplication.dal.models.CartItem;
 import com.apicompany.e.commerceapplication.dal.models.Product;
 import com.google.gson.Gson;
 
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.apicompany.e.commerceapplication.view.servlet.AccessServlet.PRODUCTS_LIST;
@@ -25,6 +28,26 @@ public class SearchServlet extends HttpServlet {
 
         //Get the search text and a list to search from then returns a list of result products
         HttpSession session = request.getSession();
+        //TEST CODE adding a cart obj to the session for testing
+        Cart mCart = new Cart();
+        CartItem cartItem = new CartItem(2,new Product("Item 1",
+                "The item description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus",
+                "",
+                11.00,
+                50,
+                1));
+
+        CartItem cartItem1 = new CartItem(4,new Product("Item 2",
+                "The item description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus",
+                "",
+                133.00,
+                10,
+                1));
+        ArrayList<CartItem> products = new ArrayList<>();
+        products.add(cartItem);
+        products.add(cartItem1);
+        mCart.setCartItems(products);
+        session.setAttribute("CART",mCart);
         String productName = request.getParameter("name");
         List<Product> productList = (List<Product>) session.getAttribute(PRODUCTS_LIST);
         HomeController homeController = new HomeController();
