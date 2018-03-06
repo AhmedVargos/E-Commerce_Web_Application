@@ -5,6 +5,8 @@
  */
 package com.apicompany.e.commerceapplication.view.servlet;
 
+import com.apicompany.e.commerceapplication.business.CartController;
+import com.apicompany.e.commerceapplication.dal.dao.daoimpl.CartDAO;
 import com.apicompany.e.commerceapplication.dal.models.Cart;
 import com.apicompany.e.commerceapplication.dal.models.CartItem;
 import com.apicompany.e.commerceapplication.dal.models.Product;
@@ -73,29 +75,45 @@ public class CartServlet extends HttpServlet {
 
         int id = Integer.parseInt(id_qunt.get(1));
         int quantity = Integer.parseInt(id_qunt.get(3));
+        CartController cartController = new CartController();
+        Cart cart;
 
-        Product product;
-        ProductDAO productDAO = new ProductDAO();
-        product = productDAO.getSpecificProduct(id);
-        Cart cart = new Cart();
-        CartItem cartItem ;
-        cartItem = new CartItem(quantity,product);
-        ArrayList<CartItem> cartList = new ArrayList<>();
+//        CartItem cartItem ;
+//        Product product;
+//        ProductDAO productDAO = new ProductDAO();
+//        product = productDAO.getSpecificProduct(id);
+//        cartItem = new CartItem(quantity,product);
+//        ArrayList<CartItem> cartList = new ArrayList<>();
 
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
         if(session.getAttribute("cart")==null){
             //if it was the first time to add to cart
-
-           cartList.add(cartItem);
-           cart.setCartItems(cartList);
-           session.setAttribute("cart", cart);
+            cart = cartController.addToCart(id,quantity);
+            session.setAttribute("cart", cart);
         }else{
             //if cart has products
             Cart myCart = (Cart) session.getAttribute("cart");
-            cartList = myCart.getCartItems();
-            cartList.add(cartItem);
+            cart = cartController.appendToCart(id, quantity,myCart);
+            session.setAttribute("cart", cart);
         }
 
+        //if user is online insert products in DB
+        /*
+        boolean logedIn = (boolean)session.getAttribute("logedIn");
+        if(logedIn == true){
+            new Thread(){
+                public void run() {
+                    int userId = (int)session.getAttribute("userId");
+                    //check if user has cart ..............
+                    CartDAO cartDAO = new CartDAO();
+                    int cartId = cartDAO.getCartByUserID(userId).getCartId();
+                    cartDAO.addNewProductToExistingCart(cartId, id,quantity);
+
+                    //if NOT
+                    cartDAO.addNewProductToNewCart(userId,id,quantity);
+                }
+            }.start();
+        }*/
 
     }
 
