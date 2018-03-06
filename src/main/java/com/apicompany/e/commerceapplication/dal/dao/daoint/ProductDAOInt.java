@@ -24,7 +24,7 @@ public interface ProductDAOInt {
     /*get specific product to view it’s detail when click view product
        send id of product only  
     */
-    public Product getSpecieficProduct(int ProductId);
+    public Product getSpecificProduct(int ProductId);
     /* get speciefic product when search with price
         send price of product only 
        return List of All product with this price

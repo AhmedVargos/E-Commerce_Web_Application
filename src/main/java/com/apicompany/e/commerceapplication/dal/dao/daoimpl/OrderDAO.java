@@ -281,8 +281,10 @@ public class OrderDAO implements OrderDAOInt {
                 for (Product p : products) {
                     //productDAO.insertProduct(p);
                     insertStatement_2 = dbHandler.getCon().prepareStatement("INSERT INTO EcommerceDB.product_order (product_productId,order_orderId,product_quantityl) VALUES (?,?,?)");
-                    //this line will be updated 
-                    insertStatement_2.setInt(1, 16);
+                    /*
+                         TODO  the next line will be updated after having a method in productDAO whish returns productId
+                    */
+                    insertStatement_2.setInt(1, p.getProductId());
                     insertStatement_2.setInt(2, orderId);
                     insertStatement_2.setInt(3, p.getQuantity());
 
@@ -326,9 +328,9 @@ public class OrderDAO implements OrderDAOInt {
         return addNewOrder(currentUser, products);
     }
 
-//    public static void main(String[] args) {
-//        OrderDAO o = new OrderDAO();
-//    o.getOrderByOrderId(1);
+ /*  public static void main(String[] args) {
+        OrderDAO o = new OrderDAO();
+//    o.getOrderByOrderId(1); 
 //     o.getOrderByUserId(1);
 //    String name = "Gehad";
 //    o.getOrderByUserName(name);
@@ -336,7 +338,7 @@ public class OrderDAO implements OrderDAOInt {
 //    temp = o.getAllOrders();
 //    o.deleteOrder(19);
 
-    /* UserDAO udao = new UserDAO();
+     UserDAO udao = new UserDAO();
         User user = udao.getUser(1);
         Product p = new Product();
         ArrayList<Product> ps = new ArrayList<>();
@@ -344,12 +346,11 @@ public class OrderDAO implements OrderDAOInt {
         p.setProductPrice(100.0);
         p.setQuantity(12);
         p.setCatagory_catogeryId(1);
-        p.setDescription("jeans for women");
+        p.setDescription("jeans for women kkkkk");
         p.setImage("aaaaaa");
         ps.add(p);
-
-        o.addNewOrder(user, ps);*/
-//    }
-
-  
+        ProductDAO pDao = new ProductDAO();
+        pDao.insertProduct(p);
+        o.addNewOrder(user, ps);
+}*/ 
 }

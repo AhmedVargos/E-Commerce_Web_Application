@@ -135,7 +135,7 @@ public class ProductDAO implements ProductDAOInt {
     }
 
     @Override
-    public Product getSpecieficProduct(int ProductId) {
+    public Product getSpecificProduct(int ProductId) {
       Product product=new  Product();
          try {
              String selectQuery="select * from product where "+DB_CoulmnNames.productId+"="+ProductId;

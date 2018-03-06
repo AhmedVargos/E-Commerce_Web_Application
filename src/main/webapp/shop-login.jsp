@@ -5,9 +5,9 @@
 
 		<!-- Basic -->
 		<meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">	
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-		<title>Shop | Porto - Responsive HTML5 Template 4.3.1</title>	
+		<title>Shop | Porto - Responsive HTML5 Template 4.3.1</title>
 
 		<meta name="keywords" content="HTML5 Template" />
 		<meta name="description" content="Porto - Responsive HTML5 Template">
@@ -100,13 +100,13 @@
 														<a class="dropdown-toggle" href="AllProductsServlet">
 															Shop Home
 														</a>
-														
+
 													</li>
 													<li class="dropdown active">
 														<a class="dropdown-toggle" href="shop-login.jsp">
 															Login
 														</a>
-														
+
 													</li>
 													<li class="dropdown">
 														<a class="dropdown-toggle" href="#">
@@ -123,7 +123,7 @@
 																	Men Clothes
 																</a>
 															</li>
-										
+
 															<li>
 																<a href="#">
 																	Casual Clothes
@@ -142,19 +142,19 @@
 														<a class="dropdown-toggle" href="shop-cart.jsp">
 															Cart
 														</a>
-														
+
 													</li>
 													<li class="dropdown">
 														<a class="dropdown-toggle" href="shop-checkout.jsp">
 															Checkout
 														</a>
-														
+
 													</li>
 													<li class="dropdown">
 														<a class="dropdown-toggle" href="#">
 															About Us
 														</a>
-														
+
 													</li>
 													<li class="dropdown">
 														<a class="dropdown-toggle" href="#">
@@ -222,10 +222,10 @@
 					</div>
 
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-6">
 							<div class="featured-boxes">
 								<div class="row">
-									<div class="col-sm-6">
+									<div class="col-sm-12">
 										<div class="featured-box featured-box-primary align-left mt-xlg">
 											<div class="box-content">
 												<h4 class="heading-primary text-uppercase mb-md">I'm a Returning Customer</h4>
@@ -263,49 +263,19 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-sm-6">
-										<div class="featured-box featured-box-primary align-left mt-xlg">
-											<div class="box-content">
-												<h4 class="heading-primary text-uppercase mb-md">Register An Account</h4>
-												<form action="/" id="frmSignUp" method="post">
-													<div class="row">
-														<div class="form-group">
-															<div class="col-md-12">
-																<label>E-mail Address</label>
-																<input type="text" value="" class="form-control input-lg">
-															</div>
-														</div>
-													</div>
-													<div class="row">
-														<div class="form-group">
-															<div class="col-md-6">
-																<label>Password</label>
-																<input type="password" value="" class="form-control input-lg">
-															</div>
-															<div class="col-md-6">
-																<label>Re-enter Password</label>
-																<input type="password" value="" class="form-control input-lg">
-															</div>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-md-12">
-															<input type="submit" value="Register" class="btn btn-primary pull-right mb-xl" data-loading-text="Loading...">
-														</div>
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
 								</div>
 
 							</div>
+
 						</div>
+						<a href="shop-signup.jsp" class="col-md-3 btn pull-right btn-primary btn-lg" style="margin-top: 200px;margin-left: 100px;">Create An Account <i
+								class="fa fa-angle-right ml-xs"></i></a>
+
 					</div>
+
 
 				</div>
 
-			</div>
 
 			<footer id="footer">
 				<div class="container">
@@ -317,13 +287,13 @@
 							<div class="newsletter">
 								<h4>Newsletter</h4>
 								<p>Keep up on our always evolving product features and technology. Enter your e-mail and subscribe to our newsletter.</p>
-			
+
 								<div class="alert alert-success hidden" id="newsletterSuccess">
 									<strong>Success!</strong> You've been added to our email list.
 								</div>
-			
+
 								<div class="alert alert-danger hidden" id="newsletterError"></div>
-			
+
 								<form id="newsletterForm" action="php/newsletter-subscribe.php" method="POST">
 									<div class="input-group">
 										<input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text">
@@ -402,13 +372,13 @@
 		<script src="vendor/owl.carousel/owl.carousel.js"></script>
 		<script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
 		<script src="vendor/vide/vide.js"></script>
-		
+
 		<!-- Theme Base, Components and Settings -->
 		<script src="js/theme.js"></script>
-		
+
 		<!-- Theme Custom -->
 		<script src="js/custom.js"></script>
-		
+
 		<!-- Theme Initialization Files -->
 		<script src="js/theme.init.js"></script>
 
@@ -418,7 +388,7 @@
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		
+
 			ga('create', 'UA-12345678-1', 'auto');
 			ga('send', 'pageview');
 		</script>

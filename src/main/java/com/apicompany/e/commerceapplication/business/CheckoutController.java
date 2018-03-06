@@ -24,6 +24,7 @@ import javax.smartcardio.Card;
 public class CheckoutController {
       User user;
        ArrayList<Product> cardProducts;
+       int totalPrice=0;
    public  boolean checkUserFound(int Userid)
     {
        UserDAO myuserDao=new UserDAO();
@@ -53,7 +54,7 @@ public class CheckoutController {
  
    public int CalaulatetotalPrice(int userid)
    { 
-       int totalPrice=0;
+       
      UserDAO myuserDao=new UserDAO();
         user=myuserDao.getUser(userid);
        CartDAO mycard=new CartDAO();
@@ -85,6 +86,9 @@ public class CheckoutController {
 //          newOrder.setProducts(cardProducts);
           OrderDAO newOrderDAO = new OrderDAO();
           newOrderDAO.addNewOrder(user, cardProducts);
+          UserDAO userDao=new UserDAO();
+          user.setCreditLimit(user.getCreditLimit()-totalPrice);
+          userDao.updateUser(user);
    return true;
    }
    
