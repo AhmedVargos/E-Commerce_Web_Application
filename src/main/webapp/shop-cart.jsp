@@ -274,16 +274,17 @@
                                                 </thead>
                                                 <c:if test="${not empty sessionScope.CART.cartItems}">
                                                     <tbody>
-
                                                     <c:forEach items="${sessionScope.CART.cartItems}" var="cartItem">
                                                         <tr class="cart_table_item">
+                                                            <input type="hidden" id="item" value="${cartItem.product.productId}">
+
                                                             <td class="product-remove">
                                                                 <a title="Remove this item" class="remove" href="#">
                                                                     <i class="fa fa-times"></i>
                                                                 </a>
                                                             </td>
                                                             <td class="product-thumbnail">
-                                                                <a href="#">
+                                                                <a href="HomeServlet?id=${cartItem.product.productId}">
                                                                     <img width="100" height="100" alt=""
                                                                          class="img-responsive"
                                                                          src="img/products/product-1.jpg">
@@ -465,6 +466,8 @@
 <!-- Cart Scripts -->
 <script src="js/cart.js"></script>
 
+
+<!-- <script src="js/cartPage.js"></script> -->
 <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -30,14 +30,14 @@ public class SearchServlet extends HttpServlet {
         HttpSession session = request.getSession();
         //TEST CODE adding a cart obj to the session for testing
         Cart mCart = new Cart();
-        CartItem cartItem = new CartItem(2,new Product("Item 1",
+        CartItem cartItem = new CartItem(2,new Product(1,"Item 1",
                 "The item description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus",
                 "",
                 11.00,
                 50,
                 1));
 
-        CartItem cartItem1 = new CartItem(4,new Product("Item 2",
+        CartItem cartItem1 = new CartItem(4,new Product(2,"Item 2",
                 "The item description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus",
                 "",
                 133.00,
