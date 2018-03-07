@@ -259,7 +259,9 @@
                         <c:forEach items="${sessionScope.PRODUCTS_LIST}" var="product">
                             <li class="col-md-3 col-sm-6 col-xs-12 product">
 								<span class="product-thumb-info">
-									<a href="shop-cart.jsp" class="add-to-cart-product">
+                                    <input id="myProduct" type="hidden" value="${product.productId}"/>
+                                    <input id="myQuantity" type="hidden" value="1"/>
+									<a href="shop-cart.jsp" onclick="addToCart()" class="add-to-cart-product">
 										<span><i class="fa fa-shopping-cart"></i> Add to Cart</span>
 									</a>
 									<a href="HomeServlet?id=${product.productId}">
@@ -422,6 +424,8 @@
 
 <!-- Search Scripts -->
 <script src="js/search.js"></script>
+<!-- Cart Scripts -->
+<script src="js/cart.js"></script>
 <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

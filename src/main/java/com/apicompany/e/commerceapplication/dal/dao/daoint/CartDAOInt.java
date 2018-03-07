@@ -2,8 +2,6 @@ package com.apicompany.e.commerceapplication.dal.dao.daoint;
 
 import com.apicompany.e.commerceapplication.dal.models.Cart;
 import com.apicompany.e.commerceapplication.dal.models.CartItem;
-import com.apicompany.e.commerceapplication.dal.models.Product;
-import com.apicompany.e.commerceapplication.dal.models.User;
 import java.util.ArrayList;
 
 public interface CartDAOInt {
@@ -18,4 +16,6 @@ public interface CartDAOInt {
     Boolean removeCartByCartID(int cartId);
     Boolean updateExistingCart(int cartId,ArrayList<CartItem> updatedItems);
     int getProductQuantityInCart(int cartId,int productId);
+    Boolean addEmptyCart(Cart cart);
+    Boolean isCartExist(int userId);
 }
