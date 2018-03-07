@@ -250,7 +250,6 @@ public class CartDAO implements CartDAOInt {
     }
 
 //---------------------------------------------------------------------------------------------------------------------------------------//
-
     //tested
     @Override
     public Boolean updateExistingCart(int cartId, ArrayList<CartItem> updatedItems) {
@@ -284,13 +283,12 @@ public class CartDAO implements CartDAOInt {
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------//
-
     //tested
     @Override
     public int getProductQuantityInCart(int cartId, int productId) {
         PreparedStatement selectStatement;
         ResultSet rs;
-        int Quantity=-1;
+        int Quantity = -1;
         if (isProductExistInCart(cartId, productId)) {
             try {
                 selectStatement = dbHandler.getCon().prepareStatement("SELECT product_quantity"
@@ -299,9 +297,10 @@ public class CartDAO implements CartDAOInt {
                         + " AND product_productId = ?");
                 selectStatement.setInt(1, cartId);
                 selectStatement.setInt(2, productId);
-                rs=selectStatement.executeQuery();
-                if(rs.next())
-                  Quantity = rs.getInt("product_quantity");
+                rs = selectStatement.executeQuery();
+                if (rs.next()) {
+                    Quantity = rs.getInt("product_quantity");
+                }
 
             } catch (SQLException ex) {
                 Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -311,7 +310,6 @@ public class CartDAO implements CartDAOInt {
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------//
-
     //tested
     Boolean isProductExistInCart(int cartId, int productId) {
         PreparedStatement selectProduct;
@@ -334,7 +332,59 @@ public class CartDAO implements CartDAOInt {
 
     }
 
-   /* public static void main(String[] args) {
+    //---------------------------------------------------------------------------------------------------------------------------------------//
+    @Override
+    public Boolean addEmptyCart(Cart cart) {
+        PreparedStatement insertStatement;
+        Boolean isAdded = false;
+
+        try {
+            insertStatement = dbHandler.getCon().prepareStatement("INSERT INTO EcommerceDB.cart (date, user_userId)"
+                    + "VALUES(?,?)");
+            java.util.Date today = new java.util.Date();
+            java.sql.Date sqlDate = new java.sql.Date(today.getTime());
+            insertStatement.setDate(1, sqlDate);
+            insertStatement.setInt(2, cart.getCartUser().getUserId());
+            insertStatement.executeUpdate();
+            isAdded = true;
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isAdded;
+    }
+
+//---------------------------------------------------------------------------------------------------------------------------------------//
+    @Override
+    public Boolean isCartExist(int userId) {
+        PreparedStatement selectStatement;
+        ResultSet rs;
+        Boolean isExist = false;
+        try {
+            selectStatement = dbHandler.getCon().prepareStatement("SELECT cartId FROM EcommerceDB.cart WHERE user_userId=" + userId);
+            rs = selectStatement.executeQuery();
+            if (rs.next()) {
+                isExist = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isExist;
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------------//
+
+    public static void main(String[] args) {
+        CartDAO cartDAO = new CartDAO();
+        UserDAO udao = new UserDAO();
+
+        /*Cart c = new Cart();
+        c.setCartUser(udao.getUser(4));
+
+        cartDAO.addEmptyCart(c);*/
+        System.err.println(cartDAO.isCartExist(2));
+
+    }
+
+    /* public static void main(String[] args) {
         // UserDAO userDAO = new UserDAO();
         CartDAO cDao = new CartDAO();
         // User user = userDAO.getUser("Gehad");
@@ -363,6 +413,4 @@ public class CartDAO implements CartDAOInt {
        
         System.err.println(cDao.getProductQuantityInCart(2, 17));
     }*/
-    
-
 }
