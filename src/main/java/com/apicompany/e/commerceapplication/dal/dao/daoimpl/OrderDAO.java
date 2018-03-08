@@ -261,7 +261,7 @@ public class OrderDAO implements OrderDAOInt {
         PreparedStatement selectStatement;
         ResultSet rs;
         int orderId;
-        if (userDAO.getUser(user.getUserId()) == null) {
+        if (userDAO.getUserById(user.getUserId()) == null) {
             userDAO.addUser(user);
         }
 
