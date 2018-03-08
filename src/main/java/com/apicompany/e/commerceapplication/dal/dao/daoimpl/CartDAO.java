@@ -9,8 +9,6 @@ import com.apicompany.e.commerceapplication.dal.dao.daoint.CartDAOInt;
 import com.apicompany.e.commerceapplication.dal.database.DatabaseHandler;
 import com.apicompany.e.commerceapplication.dal.models.Cart;
 import com.apicompany.e.commerceapplication.dal.models.CartItem;
-import com.apicompany.e.commerceapplication.dal.models.Product;
-import com.apicompany.e.commerceapplication.dal.models.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -336,7 +334,12 @@ public class CartDAO implements CartDAOInt {
     @Override
     public Boolean addEmptyCart(Cart cart) {
         PreparedStatement insertStatement;
+        PreparedStatement selectStatement;
+        ResultSet rs;
+        int cartId=-1;
+
         Boolean isAdded = false;
+        ArrayList<CartItem> items;
 
         try {
             insertStatement = dbHandler.getCon().prepareStatement("INSERT INTO EcommerceDB.cart (date, user_userId)"
@@ -346,14 +349,26 @@ public class CartDAO implements CartDAOInt {
             insertStatement.setDate(1, sqlDate);
             insertStatement.setInt(2, cart.getCartUser().getUserId());
             insertStatement.executeUpdate();
+            
+            selectStatement = dbHandler.getCon().prepareStatement("SELECT cartId FROM EcommerceDB.cart WHERE  user_userId = ?");
+            selectStatement.setInt(1, cart.getCartUser().getUserId());
+            rs=selectStatement.executeQuery();
+            if(rs.next())
+                cartId = rs.getInt("cartId");
+                
+            items = cart.getCartItems();
+            for (int i = 0; i < items.size(); i++) {
+                addNewProductToExistingCart(cartId, items.get(i).getProduct().getProductId(), items.get(i).getQuantity());
+            }
             isAdded = true;
+
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return isAdded;
     }
 
-//---------------------------------------------------------------------------------------------------------------------------------------//
+    //---------------------------------------------------------------------------------------------------------------------------------------//
     @Override
     public Boolean isCartExist(int userId) {
         PreparedStatement selectStatement;
@@ -370,21 +385,26 @@ public class CartDAO implements CartDAOInt {
         }
         return isExist;
     }
+
     //---------------------------------------------------------------------------------------------------------------------------------------//
 
     public static void main(String[] args) {
         CartDAO cartDAO = new CartDAO();
         UserDAO udao = new UserDAO();
+        ProductDAO pdao = new ProductDAO();
 
-        /*Cart c = new Cart();
-        c.setCartUser(udao.getUser(4));
-
-        cartDAO.addEmptyCart(c);*/
-        System.err.println(cartDAO.isCartExist(2));
+        Cart c = new Cart();
+        c.setCartUser(udao.getUser(5));
+        ArrayList<CartItem> cartItems= new ArrayList<>();
+        cartItems.add(new CartItem(3, pdao.getSpecificProduct(14)));
+        cartItems.add(new CartItem(4, pdao.getSpecificProduct(15)));
+        c.setCartItems(cartItems);
+        System.err.println(cartDAO.addEmptyCart(c));
+      //  System.err.println(cartDAO.isCartExist(2));
 
     }
 
-    /* public static void main(String[] args) {
+ /* public static void main(String[] args) {
         // UserDAO userDAO = new UserDAO();
         CartDAO cDao = new CartDAO();
         // User user = userDAO.getUser("Gehad");
@@ -397,8 +417,8 @@ public class CartDAO implements CartDAOInt {
         // cDao.removeProductFromCart(1, 14);
 //        cDao.removeCartByCartID(1);
 //        
-//        ArrayList<CartItem> cartItems = new ArrayList<>();
-//        cartItems.add(new CartItem(15,pdao.getSpecificProduct(16)));
+//       ArrayList<CartItem> cartItems = new ArrayList<>();
+//       cartItems.add(new CartItem(15,pdao.getSpecificProduct(16)));
 //       Product p = new Product();
 //       p.setProductId(17);
 //       p.setProductName("jeans");
