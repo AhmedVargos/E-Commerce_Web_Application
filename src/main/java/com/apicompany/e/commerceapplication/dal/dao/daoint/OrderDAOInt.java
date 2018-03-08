@@ -1,5 +1,6 @@
 package com.apicompany.e.commerceapplication.dal.dao.daoint;
 
+import com.apicompany.e.commerceapplication.dal.models.CartItem;
 import com.apicompany.e.commerceapplication.dal.models.Order;
 import com.apicompany.e.commerceapplication.dal.models.Product;
 import com.apicompany.e.commerceapplication.dal.models.User;
@@ -13,7 +14,7 @@ public interface OrderDAOInt {
      ArrayList<Order> getOrderByUserName(String userName);
      ArrayList<Order> getOrderByDate(Date date);
      ArrayList<Order> getAllOrders();
-     Boolean addNewOrder(User user, ArrayList<Product> products);
+     Boolean addNewOrder(User user, ArrayList<CartItem> items);
      Boolean deleteOrder(int orderId);
-     Boolean updateExistingOrder(Order order);
+    // Boolean updateExistingOrder(Order order);
 }
