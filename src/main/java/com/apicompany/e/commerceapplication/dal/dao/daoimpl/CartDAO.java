@@ -61,7 +61,7 @@ public class CartDAO implements CartDAOInt {
                     }
 
                 }
-                cart.setCartUser(udao.getUser(userId));
+                cart.setCartUser(udao.getUserById(userId));
                 cart.setCartItems(cartItems);
             }
         } catch (SQLException ex) {
@@ -89,7 +89,7 @@ public class CartDAO implements CartDAOInt {
             rs = selectStatement.executeQuery();
             if (rs.next()) {
                 cart.setCartId(cartId);
-                cart.setCartUser(udao.getUser(rs.getInt("user_userId")));
+                cart.setCartUser(udao.getUserById(rs.getInt("user_userId")));
                 cart.setDate(rs.getDate("date"));
 
                 selectStatement = dbHandler.getCon().prepareStatement("SELECT PC.product_productId , PC.product_quantity"
@@ -308,7 +308,8 @@ public class CartDAO implements CartDAOInt {
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------//
-    //tested
+    
+//tested
     Boolean isProductExistInCart(int cartId, int productId) {
         PreparedStatement selectProduct;
         ResultSet rs;
@@ -394,7 +395,7 @@ public class CartDAO implements CartDAOInt {
         ProductDAO pdao = new ProductDAO();
 
         Cart c = new Cart();
-        c.setCartUser(udao.getUser(5));
+        c.setCartUser(udao.getUserById(5));
         ArrayList<CartItem> cartItems= new ArrayList<>();
         cartItems.add(new CartItem(3, pdao.getSpecificProduct(14)));
         cartItems.add(new CartItem(4, pdao.getSpecificProduct(15)));
@@ -433,4 +434,6 @@ public class CartDAO implements CartDAOInt {
        
         System.err.println(cDao.getProductQuantityInCart(2, 17));
     }*/
+
+
 }
