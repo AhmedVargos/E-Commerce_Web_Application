@@ -384,33 +384,27 @@ public class CartDAO implements CartDAOInt {
 
     }
 
-    /* public static void main(String[] args) {
-        // UserDAO userDAO = new UserDAO();
-        CartDAO cDao = new CartDAO();
-        // User user = userDAO.getUser("Gehad");
-        ProductDAO pdao = new ProductDAO();
-        Cart c = cDao.getCartByUserID(1);
-        Cart c2 = cDao.getCartByCartID(1);
-        ArrayList<Cart> carts = cDao.getAllCars();
-        // cDao.addNewProductToNewCart(3, 15, 10);
-        // cDao.addNewProductToExistingCart(1, 19, 3);
-        // cDao.removeProductFromCart(1, 14);
-//        cDao.removeCartByCartID(1);
-//        
-//        ArrayList<CartItem> cartItems = new ArrayList<>();
-//        cartItems.add(new CartItem(15,pdao.getSpecificProduct(16)));
-//       Product p = new Product();
-//       p.setProductId(17);
-//       p.setProductName("jeans");
-//       p.setDescription("jeans for women");
-//       p.setQuantity(20);
-//       p.setImage("aaaaaa");
-//       p.setProductPrice(100.0);
-//       p.setCatagory_catogeryId(1);
-//       cartItems.add(new CartItem(20, p));
-//       
-//       cDao.updateExistingCart(2, cartItems);
-       
-        System.err.println(cDao.getProductQuantityInCart(2, 17));
-    }*/
+    //-------------------- AHMED -----------
+
+    public Boolean replaceOldCartWithNew(int cartId, ArrayList<CartItem> updatedItems){
+        boolean result = false;
+        PreparedStatement deleteStatement;
+        try {
+            deleteStatement = dbHandler.getCon().prepareStatement("DELETE FROM EcommerceDB.product_cart WHERE cart_cartId = ?");
+            deleteStatement.setInt(1, cartId);
+            deleteStatement.executeUpdate();
+
+            for (int i = 0; i < updatedItems.size(); i++){
+                addNewProductToExistingCart(cartId,updatedItems.get(i).getProduct().getProductId(),updatedItems.get(i).getQuantity());
+            }
+
+            result = true;
+        } catch (SQLException ex) {
+            result = false;
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+        return result;
+    }
 }

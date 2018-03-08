@@ -30,7 +30,7 @@ public class SearchServlet extends HttpServlet {
         //Get the search text and a list to search from then returns a list of result products
         HttpSession session = request.getSession();
         //TEST CODE adding a cart obj to the session for testing
-        Cart mCart = new Cart();
+        /*Cart mCart = new Cart();
         CartItem cartItem = new CartItem(2,new Product(1,"Item 1",
                 "The item description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus",
                 "",
@@ -48,7 +48,7 @@ public class SearchServlet extends HttpServlet {
         products.add(cartItem);
         products.add(cartItem1);
         mCart.setCartItems(products);
-        session.setAttribute("CART",mCart);
+        session.setAttribute("CART",mCart);*/
         String productName = request.getParameter("name");
         List<Product> productList = (List<Product>) session.getAttribute(PRODUCTS_LIST);
         HomeController homeController = new HomeController();

@@ -49,10 +49,54 @@
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.js"></script>
 
+
+    <!-- Vendor -->
+    <script src="vendor/jquery/jquery.js"></script>
+    <script src="vendor/jquery.appear/jquery.appear.js"></script>
+    <script src="vendor/jquery.easing/jquery.easing.js"></script>
+    <script src="vendor/jquery-cookie/jquery-cookie.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="vendor/common/common.js"></script>
+    <script src="vendor/jquery.validation/jquery.validation.js"></script>
+    <script src="vendor/jquery.stellar/jquery.stellar.js"></script>
+    <script src="vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="vendor/jquery.gmap/jquery.gmap.js"></script>
+    <script src="vendor/jquery.lazyload/jquery.lazyload.js"></script>
+    <script src="vendor/isotope/jquery.isotope.js"></script>
+    <script src="vendor/owl.carousel/owl.carousel.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
+    <script src="vendor/vide/vide.js"></script>
+
+    <!-- Theme Base, Components and Settings -->
+    <script src="js/theme.js"></script>
+
+    <!-- Theme Custom -->
+    <script src="js/custom.js"></script>
+
+    <!-- Theme Initialization Files -->
+    <script src="js/theme.init.js"></script>
+
 </head>
 <body>
 
 <div class="body">
+    <script>
+        var userCart;
+
+        function getUserCart() {
+            $.ajax({
+                url: 'CartPageServlet',
+                type: 'GET',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (val) {
+                    userCart = val;
+                }
+            });
+        }
+        getUserCart();
+
+    </script>
     <header id="header"
             data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": true}'>
         <div class="header-body">
@@ -236,7 +280,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <hr class="tall">
+                    <hr class="tall" style="margin: 100;">
                 </div>
             </div>
 
@@ -264,7 +308,7 @@
                                                     <th class="product-price">
                                                         Price
                                                     </th>
-                                                    <th class="product-quantity">
+                                                    <th class="product-quantity" style="padding-left: 40px">
                                                         Quantity
                                                     </th>
                                                     <th class="product-subtotal">
@@ -279,9 +323,8 @@
                                                             <input type="hidden" id="item" value="${cartItem.product.productId}">
 
                                                             <td class="product-remove">
-                                                                <a title="Remove this item" class="remove" href="#">
-                                                                    <i class="fa fa-times"></i>
-                                                                </a>
+                                                                    <i class="fa fa-times" onclick="deleteAProduct(this)" style="cursor: pointer;"></i>
+
                                                             </td>
                                                             <td class="product-thumbnail">
                                                                 <a href="HomeServlet?id=${cartItem.product.productId}">
@@ -297,17 +340,15 @@
                                                                 <span class="amount">${cartItem.product.productPrice}</span>
                                                             </td>
                                                             <td class="product-quantity">
-                                                                <form enctype="multipart/form-data" method="post"
-                                                                      class="cart">
                                                                     <div class="quantity">
-                                                                        <input type="button" class="minus" value="-">
+                                                                        <input type="button" class="minus" value="-" onclick="decreaseQuantity(this)">
                                                                         <input type="text" class="input-text qty text"
-                                                                               title="Qty" value="1" name="quantity"
+                                                                               title="Qty" value="${cartItem.quantity}" name="quantity"
                                                                                min="1"
-                                                                               step="1">
-                                                                        <input type="button" class="plus" value="+">
+                                                                               step="1"
+                                                                                disabled>
+                                                                        <input type="button" class="plus" value="+" onclick="increaseQuantity(this)">
                                                                     </div>
-                                                                </form>
                                                             </td>
                                                             <td class="product-subtotal">
                                                                 <span class="amount">${cartItem.product.productPrice * cartItem.quantity}</span>
@@ -319,7 +360,7 @@
                                                             <div class="actions-continue">
                                                                 <input type="submit" value="Update Cart"
                                                                        name="update_cart"
-                                                                       class="btn btn-default">
+                                                                       class="btn btn-default" onclick="updateCart(this)">
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -340,8 +381,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="actions-continue">
-                        <button type="submit" class="btn pull-right btn-primary btn-lg">Proceed to Checkout <i
-                                class="fa fa-angle-right ml-xs"></i></button>
+                        <a href="shop-checkout.jsp" class="btn pull-right btn-primary btn-lg">Proceed to Checkout <i
+                                class="fa fa-angle-right ml-xs"></i></a>
                     </div>
                 </div>
             </div>
@@ -437,35 +478,9 @@
     </footer>
 </div>
 
-<!-- Vendor -->
-<script src="vendor/jquery/jquery.js"></script>
-<script src="vendor/jquery.appear/jquery.appear.js"></script>
-<script src="vendor/jquery.easing/jquery.easing.js"></script>
-<script src="vendor/jquery-cookie/jquery-cookie.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.js"></script>
-<script src="vendor/common/common.js"></script>
-<script src="vendor/jquery.validation/jquery.validation.js"></script>
-<script src="vendor/jquery.stellar/jquery.stellar.js"></script>
-<script src="vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
-<script src="vendor/jquery.gmap/jquery.gmap.js"></script>
-<script src="vendor/jquery.lazyload/jquery.lazyload.js"></script>
-<script src="vendor/isotope/jquery.isotope.js"></script>
-<script src="vendor/owl.carousel/owl.carousel.js"></script>
-<script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
-<script src="vendor/vide/vide.js"></script>
-
-<!-- Theme Base, Components and Settings -->
-<script src="js/theme.js"></script>
-
-<!-- Theme Custom -->
-<script src="js/custom.js"></script>
-
-<!-- Theme Initialization Files -->
-<script src="js/theme.init.js"></script>
-
 <!-- Cart Scripts -->
 <script src="js/cart.js"></script>
-
+<script src="js/cartPage.js"></script>
 
 <!-- <script src="js/cartPage.js"></script> -->
 <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
