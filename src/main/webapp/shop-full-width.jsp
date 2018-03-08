@@ -275,7 +275,7 @@
 										</span>
 									</a>
 									<span class="product-thumb-info-content">
-										<a href=""HomeServlet?id=${product.productId}">
+										<a href="HomeServlet?id=${product.productId}">
 											<h4>${product.productName}</h4>
 											<span class="price">
 												<span class="amount">${product.productPrice}</span>

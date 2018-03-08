@@ -34,7 +34,7 @@ public class RegistrationServlet extends HttpServlet {
         String address = request.getParameter("address");
         String job = request.getParameter("job");
         String credit = request.getParameter("credit");
-        Date birthdate;
+        Date birthdate = null;
         boolean isValidDate = false;
         try {
             birthdate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("birthdate"));
@@ -54,10 +54,10 @@ public class RegistrationServlet extends HttpServlet {
 
         if (isValidDate && isValidName && isValidPassword && isValidPasswordMatches && isValidEmail && isValidAddress && isValidJob && isValidCredit) {
             authController = new AuthController();
-            authController.registerNewUser(name, password, email, address, job, Integer.parseInt(credit));
+            authController.registerNewUser(name, password, email, address, job, Integer.parseInt(credit), birthdate);
             boolean registered = authController.isRegistered();
             if (registered) {
-                response.sendRedirect(/*"shop-full-width.jsp"*/"shop-login.jsp");
+                response.sendRedirect("shop-login.jsp");
             } else {
                 response.sendRedirect("shop-signup.jsp");
             }

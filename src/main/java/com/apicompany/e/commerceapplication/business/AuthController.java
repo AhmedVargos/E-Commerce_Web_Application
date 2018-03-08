@@ -10,6 +10,10 @@ public class AuthController {
     private boolean isRegistered;
     private boolean isLoggedIn;
 
+    public AuthController() {
+        this.userDAO = new UserDAO();
+    }
+
     public boolean isLoggedIn() {
         return isLoggedIn;
     }
@@ -26,17 +30,17 @@ public class AuthController {
         isRegistered = registered;
     }
 
-    public int login(String email, String password) {
-        int userId = userDAO.isUserExist(email, password);
-        if (userId != -1) {
-            setLoggedIn(true);
-        } else {
+    public User login(String email, String password) {
+        User user = userDAO.isUserExist(email, password);
+        if (user == null) {
             setLoggedIn(false);
+        } else {
+            setLoggedIn(true);
         }
-        return userId;
+        return user;
     }
 
-    public void registerNewUser(String name, String password, String email, String address, String job, int credit) {
+    public void registerNewUser(String name, String password, String email, String address, String job, int credit, java.util.Date birthdate) {
         User user = new User();
         user.setUserName(name);
         user.setPassWord(password);
@@ -44,11 +48,8 @@ public class AuthController {
         user.setAddress(address);
         user.setJob(job);
         user.setCreditLimit(credit);
-        String str = "2015-03-31";
-        Date date = Date.valueOf(str);
-        user.setBirthdate(date);
+        user.setBirthdate(birthdate);
 
-        userDAO = new UserDAO();
         boolean inserted = userDAO.addUser(user);
         setRegistered(inserted);
     }
