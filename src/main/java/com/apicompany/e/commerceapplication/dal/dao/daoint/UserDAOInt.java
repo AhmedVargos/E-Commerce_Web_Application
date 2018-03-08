@@ -10,7 +10,7 @@ public interface UserDAOInt {
     User getUserById(int id);
     User getUserByName(String userName);
     User getUserByEmail(String email);
-    int isUserExist(String userName, String password);
+    User isUserExist(String userName, String password);
     boolean addUser(User user);
     boolean updateUser(User user);
     boolean removeUser(User user);

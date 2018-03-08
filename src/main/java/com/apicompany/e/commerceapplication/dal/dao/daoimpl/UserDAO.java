@@ -61,13 +61,14 @@ public class UserDAO implements UserDAOInt {
     }
 
     private User getUser(PreparedStatement statement) {
-        User user = new User();
+        User user = null;
         PreparedStatement selectStatement;
         ResultSet rs;
         try {
             selectStatement = statement;
             rs = selectStatement.executeQuery();
             if (rs.next()) {
+                user = new User();
                 user.setUserId(rs.getInt("userId"));
                 user.setUserName(rs.getString("userName"));
                 user.setPassWord(rs.getString("password"));
@@ -80,7 +81,8 @@ public class UserDAO implements UserDAOInt {
                 user.setBirthdate(rs.getDate("birthdate"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("getUser()");
+            //Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user;
     }
@@ -126,7 +128,8 @@ public class UserDAO implements UserDAOInt {
             selectStatement.setString(1, email);
             user = getUser(selectStatement);
         } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("getUserByEmail()");
+            //Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user;
     }
@@ -134,13 +137,12 @@ public class UserDAO implements UserDAOInt {
     //this methods is used to confirm login;it check if the username and password are correct or not
     // return the user if he existed, and null in case of invalid username/password
     @Override
-    public int isUserExist(String email, String password) {
-        int userId = -1;
+    public User isUserExist(String email, String password) {
         User user = getUserByEmail(email);
-        if (user != null && user.getPassWord().equals(password)) {
-            userId = user.getUserId();
+        if (user == null || !user.getPassWord().equals(password)) {
+            user = null;
         }
-        return userId;
+        return user;
     }
 
     //-----------------------------------------------------------------------------------------------------------------------//
@@ -154,7 +156,7 @@ public class UserDAO implements UserDAOInt {
             insertStatement = dbHandler.getCon().prepareStatement("INSERT INTO USER (userName,birthdate,"
                     + "password, email,job,creditLimit,address,interests,isAdmin) VALUES (?,?,?,?,?,?,?,?,?)");
             insertStatement.setString(1, user.getUserName());
-            insertStatement.setDate(2, (Date) user.getBirthdate());
+            insertStatement.setDate(2, new Date(user.getBirthdate().getTime()));
             insertStatement.setString(3, user.getPassWord());
             insertStatement.setString(4, user.getEmail());
             insertStatement.setString(5, user.getJob());
