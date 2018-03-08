@@ -56,7 +56,7 @@ public class AdminCategoryServlet extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
+     * @throws ServletExceptsion if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     @Override
@@ -81,7 +81,9 @@ public class AdminCategoryServlet extends HttpServlet {
             throws ServletException, IOException {
         String name = request.getParameter("name");
         CategoryController categoryController = new CategoryController();
-        categoryController.addCategory(name);
+        categoryController.addCategory(name); 
+        HttpSession session = request.getSession();
+        session.setAttribute("Categories", categoryController.getAllCategories());
         response.sendRedirect("Admin/categories.jsp");
     }
 

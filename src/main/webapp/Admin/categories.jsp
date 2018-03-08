@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -18,11 +20,10 @@
         <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
         <!-- iCheck -->
         <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
+        <Link href="build/css/popup.css" rel="stylesheet">
         <!-- Custom Theme Style -->
         <link href="build/css/custom.min.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
 
     </head>
@@ -169,18 +170,14 @@
                                     </div>
                                     <div class="x_content">
                                         <div data-role="main" class="ui-content">
-                                            <a href="#myPopup" data-rel="popup" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-plus"></i>Add Category</a>
-
-                                            <div data-role="popup" id="myPopup" class="ui-content" style="min-width:250px;">
                                                 <form method="post" action="${pageContext.request.contextPath}/AdminCategoryServlet">
                                                     <div>
-                                                        <h3>New Category</h3>
+                                                        <h3>Add New Category</h3>
                                                         <label for="catnm" class="ui-hidden-accessible">Name</label>
-                                                        <input type="text" name="name" id="name" placeholder="name">
-                                                        <input type="submit" data-inline="true" value="Add">
+                                                        <input type="text" name="name" id="name" placeholder="Category name">
+                                                        <button type="submit" data-inline="true"  value="Add"class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-plus"></i>Add</button>
                                                     </div>
                                                 </form>
-                                            </div>
                                         </div>
 
                                         <!-- start project list -->
@@ -193,8 +190,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <c:if test="${not empty sessionScope.Categories}">
-                                                <c:forEach items="${sessionScope.Categories}" var="category">
+                                          <c:if test="${not empty sessionScope.Categories}">
+                                                <c:forEach items="${sessionScope.Categories}" var="category"> 
 
                                                     <tr>
                                                         <td>${category.categoryId}</td>
@@ -211,7 +208,7 @@
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
-                                            </c:if>
+                                            </c:if> 
                                             </tbody>
 
                                         </table>
