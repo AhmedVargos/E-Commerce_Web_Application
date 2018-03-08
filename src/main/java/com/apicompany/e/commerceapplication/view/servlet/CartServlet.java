@@ -5,6 +5,10 @@
  */
 package com.apicompany.e.commerceapplication.view.servlet;
 
+import com.apicompany.e.commerceapplication.business.CartController;
+import com.apicompany.e.commerceapplication.dal.dao.daoimpl.CartDAO;
+import com.apicompany.e.commerceapplication.dal.models.Cart;
+import com.apicompany.e.commerceapplication.dal.models.CartItem;
 import com.apicompany.e.commerceapplication.dal.models.Product;
 
 import java.io.BufferedReader;
@@ -21,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.ProductDAO;
 import com.apicompany.e.commerceapplication.dal.models.Product;
-import com.google.gson.Gson;
+
 
 /**
  *
@@ -34,10 +38,12 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int cnt = 0;
-//        HttpSession session = request.getSession();
+
+
 //        System.out.println(product);
 //        List<Product> cartList = (List<Product>) session.getAttribute("cart_list");
+
+
 
         // 1. get received JSON data from request
         BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
@@ -69,11 +75,45 @@ public class CartServlet extends HttpServlet {
 
         int id = Integer.parseInt(id_qunt.get(1));
         int quantity = Integer.parseInt(id_qunt.get(3));
+        CartController cartController = new CartController();
+        Cart cart;
 
+//        CartItem cartItem ;
+//        Product product;
+//        ProductDAO productDAO = new ProductDAO();
+//        product = productDAO.getSpecificProduct(id);
+//        cartItem = new CartItem(quantity,product);
+//        ArrayList<CartItem> cartList = new ArrayList<>();
 
-        Product product = new Product();
-        ProductDAO productDAO = new ProductDAO();
-        product = productDAO.getSpecificProduct(id);
+        HttpSession session = request.getSession(false);
+        if(session.getAttribute("cart")==null){
+            //if it was the first time to add to cart
+            cart = cartController.addToCart(id,quantity);
+            session.setAttribute("cart", cart);
+        }else{
+            //if cart has products
+            Cart myCart = (Cart) session.getAttribute("cart");
+            cart = cartController.appendToCart(id, quantity,myCart);
+            session.setAttribute("cart", cart);
+        }
+
+        //if user is online insert products in DB
+        /*
+        boolean logedIn = (boolean)session.getAttribute("logedIn");
+        if(logedIn == true){
+            new Thread(){
+                public void run() {
+                    int userId = (int)session.getAttribute("userId");
+                    //check if user has cart ..............
+                    CartDAO cartDAO = new CartDAO();
+                    int cartId = cartDAO.getCartByUserID(userId).getCartId();
+                    cartDAO.addNewProductToExistingCart(cartId, id,quantity);
+                    //if NOT
+                    cartDAO.addNewProductToNewCart(userId,id,quantity);
+                }
+            }.start();
+        }*/
+
     }
 
 }
