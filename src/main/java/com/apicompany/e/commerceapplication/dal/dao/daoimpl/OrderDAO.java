@@ -7,6 +7,7 @@ package com.apicompany.e.commerceapplication.dal.dao.daoimpl;
 
 import com.apicompany.e.commerceapplication.dal.dao.daoint.OrderDAOInt;
 import com.apicompany.e.commerceapplication.dal.database.DatabaseHandler;
+import com.apicompany.e.commerceapplication.dal.models.CartItem;
 import com.apicompany.e.commerceapplication.dal.models.Order;
 import com.apicompany.e.commerceapplication.dal.models.Product;
 import com.apicompany.e.commerceapplication.dal.models.User;
@@ -251,9 +252,8 @@ public class OrderDAO implements OrderDAOInt {
 
     
     @Override
-    public Boolean addNewOrder(User user, ArrayList<Product> products) {
+    public Boolean addNewOrder(User user, ArrayList<CartItem> items) {
         Boolean added = false;
-        ProductDAO productDAO = new ProductDAO();
         UserDAO userDAO = new UserDAO();
         PreparedStatement insertStatement;
         PreparedStatement insertStatement_2;
@@ -278,16 +278,11 @@ public class OrderDAO implements OrderDAOInt {
             if (rs.next()) {
                 orderId = rs.getInt("orderId");
 
-                for (Product p : products) {
-                    //productDAO.insertProduct(p);
-                    insertStatement_2 = dbHandler.getCon().prepareStatement("INSERT INTO EcommerceDB.product_order (product_productId,order_orderId,product_quantityl) VALUES (?,?,?)");
-                    /*
-                         TODO  the next line will be updated after having a method in productDAO whish returns productId
-                    */
-                    insertStatement_2.setInt(1, p.getProductId());
+                for (CartItem I : items) {
+                    insertStatement_2 = dbHandler.getCon().prepareStatement("INSERT INTO EcommerceDB.product_order (product_productId,order_orderId,product_quantityl) VALUES (?,?,?)");                  
+                    insertStatement_2.setInt(1, I.getProduct().getProductId());
                     insertStatement_2.setInt(2, orderId);
-                    insertStatement_2.setInt(3, p.getQuantity());
-
+                    insertStatement_2.setInt(3, I.getProduct().getQuantity());
                     insertStatement_2.executeUpdate();
                 }
             }
@@ -318,15 +313,15 @@ public class OrderDAO implements OrderDAOInt {
         return isRemoved;
     }
     
-      @Override
+    /*@Override
     public Boolean updateExistingOrder(Order order) {
         
         int orderId = order.getOrder_id();
         ArrayList<Product> products = order.getProducts();
         User currentUser = order.getUser();
         deleteOrder(orderId);
-        return addNewOrder(currentUser, products);
-    }
+        return addNewOrder(currentUser, products.);
+    }*/
 
  /*  public static void main(String[] args) {
         OrderDAO o = new OrderDAO();
