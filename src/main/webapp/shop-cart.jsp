@@ -199,6 +199,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="actions" colspan="6">
+                                                                        
                                                                         <div class="actions-continue">
                                                                             <button type="submit"
                                                                                     class="btn btn-default">View All
@@ -209,6 +210,7 @@
                                                                                     class="fa fa-angle-right ml-xs"></i>
                                                                             </button>
                                                                         </div>
+                                                                       
                                                                     </td>
                                                                 </tr>
                                                                 </tbody>
@@ -467,14 +469,17 @@
                         </div>
 
                     </div>
-
+                   
+                    
                     <div class="row">
+                        <a href="CheckoutServlet">
                         <div class="col-md-12">
                             <div class="actions-continue">
                                 <button type="submit" class="btn pull-right btn-primary btn-lg">Proceed to Checkout <i
                                         class="fa fa-angle-right ml-xs"></i></button>
                             </div>
                         </div>
+                        </a>
                     </div>
 
                 </div>

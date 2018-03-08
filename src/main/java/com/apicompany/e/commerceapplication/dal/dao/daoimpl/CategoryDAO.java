@@ -86,7 +86,7 @@ public class CategoryDAO implements CategoryDAOInt {
              {
                  resTest=true;
              }
-            //connHandler.disconnectDB();
+           // connHandler.disconnectDB();
          } catch (SQLException ex) {
              Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -111,7 +111,7 @@ public class CategoryDAO implements CategoryDAOInt {
              {
                  resTest=true;
              }
-            //connHandler.disconnectDB();
+          //  connHandler.disconnectDB();
                   
              }  
          } catch (SQLException ex) {

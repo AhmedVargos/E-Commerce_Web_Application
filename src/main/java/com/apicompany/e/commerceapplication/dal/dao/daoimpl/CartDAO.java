@@ -310,7 +310,8 @@ public class CartDAO implements CartDAOInt {
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------//
-    //tested
+    
+//tested
     Boolean isProductExistInCart(int cartId, int productId) {
         PreparedStatement selectProduct;
         ResultSet rs;
@@ -378,7 +379,6 @@ public class CartDAO implements CartDAOInt {
 
         /*Cart c = new Cart();
         c.setCartUser(udao.getUser(4));
-
         cartDAO.addEmptyCart(c);*/
         System.err.println(cartDAO.isCartExist(2));
 
@@ -413,4 +413,6 @@ public class CartDAO implements CartDAOInt {
        
         System.err.println(cDao.getProductQuantityInCart(2, 17));
     }*/
+
+
 }

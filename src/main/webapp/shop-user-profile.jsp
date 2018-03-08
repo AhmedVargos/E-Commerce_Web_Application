@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -49,8 +50,7 @@
     <script src="vendor/modernizr/modernizr.js"></script>
 
 </head>
-<body>
-
+<body onload="getUserData()">
 <div class="body">
     <header id="header"
             data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": true}'>
@@ -157,8 +157,8 @@
 
                                             </li>
                                             <li class="dropdown">
-                                                <a class="dropdown-toggle" href="#">
-                                                    About Us
+                                                <a class="dropdown-toggle" href="shop-user-profile.jsp">
+                                                    Edit profile
                                                 </a>
 
                                             </li>
@@ -245,14 +245,21 @@
                             <div class="col-sm-12">
                                 <div class="featured-box featured-box-primary align-left mt-xlg">
                                     <div class="box-content">
-                                        <h4 class="heading-primary text-uppercase mb-md">Register New Account</h4>
-
-                                        <form action="AccessServlet" id="signupForm" method="post">
+                                        <h4 class="heading-primary text-uppercase mb-md" align="center">profile</h4>
+                                        <img width="225" height="225" src="img/personal.png"/>
+                                        <label text-align="Right"><h3>${sessionScope.userObj.userName}</h3></label>
+                                        <br/><br/><br/>
+                                        <form action="UserProfileServlet" id="signupForm" method="post">
+                                         
                                             <div class="row">
                                                 <div class="form-group">
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-6">
                                                         <label>User Name</label>
-                                                        <input type="text" value="" class="form-control">
+                                                        <input id="Uuser" name="UserName" type="text" value=${sessionScope.userObj.userName} class="form-control">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>Birth Day </label>
+                                                        <input id="Ubirth" type="date" name="BirthDay" value=${sessionScope.userObj.birthdate}  class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -260,48 +267,51 @@
                                                 <div class="form-group">
                                                     <div class="col-md-6">
                                                         <label>Password</label>
-                                                        <input type="password" value="" class="form-control">
+                                                        <input id="Upass" type="password" name="Password" value=${sessionScope.userObj.passWord} class="form-control">
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label>Confirm</label>
-                                                        <input type="password" value="" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
                                                         <label>E-mail</label>
-                                                        <input type="text" value="" class="form-control">
+                                                        <input id="Uemail" type="text" name="Email" value=${sessionScope.userObj.email} class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            
+                                               <div class="row">
                                                 <div class="form-group">
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-6">
                                                         <label>Address </label>
-                                                        <input type="text" value="" class="form-control">
+                                                        <input id="Uaddres" type="text" name="Address" value=${sessionScope.userObj.address} class="form-control">
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group">
                                                     <div class="col-md-6">
                                                         <label>Job</label>
-                                                        <input type="text" value="" class="form-control">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label>Credit</label>
-                                                        <input type="number" value="" class="form-control">
+                                                        <input id="Ujob" type="text" name="Job" value='${sessionScope.thejob}' class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-12">
-                                                <input type="submit" value="SignUp"
-                                                       class="col-md-3 btn btn-primary pull-right mb-xl"
-                                                       data-loading-text="Loading...">
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <div class="col-md-6">
+                                                        <label>Credit</label>
+                                                        <input id="Ucreadit" type="number" name="Credit" value=${sessionScope.theCredit} class="form-control">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>interests </label>
+                                                        <input  id="Uinterests" type="text" name="interests" value=${sessionScope.userObj.interests} class="form-control">
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <br/><br/>
+                                            <div class="absolute1" class="col-md-6">
+                                                
+                                                    <input id="save" type="submit" value="Save"
+                                                       class="col-md-3 btn btn-primary pull-right mb-xl"
+                                                       >
+                                            </div>
+                                                <div class="absolute2" class="col-md-6">
+                                                    <input id="Edit" type="button" value="Edit"  onclick="EditAction()" class="col-md-3 btn btn-primary pull-right mb-xl"
+                                                       >
+                                             </div>
+                                            <br/><br/><br/> 
                                         </form>
                                     </div>
                                 </div>
@@ -428,6 +438,10 @@
 
     <!-- Theme Initialization Files -->
     <script src="js/theme.init.js"></script>
+    
+    <script src="js/editProfile.js"></script>
+    
+   
 
     <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
     <script>

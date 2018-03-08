@@ -167,7 +167,7 @@ public class UserDAO implements UserDAOInt{
     @Override
     public boolean updateUser(User user) {
         PreparedStatement updateStatement;
-        boolean isUpdated;
+        boolean isUpdated=false;
         int userID = user.getUserId();
 
         try {
@@ -185,8 +185,11 @@ public class UserDAO implements UserDAOInt{
             updateStatement.setString(8, user.getInterests());
             updateStatement.setBoolean(9, user.isIsAdmin());
             updateStatement.setInt(10, userID);
-            updateStatement.executeUpdate();
-            isUpdated = true;
+            int res=updateStatement.executeUpdate();
+            if(res>0)
+            {
+                isUpdated = true;
+            }
         } catch (SQLException ex) {
             isUpdated = false;
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);

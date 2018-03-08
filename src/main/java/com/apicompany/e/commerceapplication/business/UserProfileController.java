@@ -1,14 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.apicompany.e.commerceapplication.business;
 
-/**
- *
- * @author Vargos
- */
+import com.apicompany.e.commerceapplication.dal.dao.daoimpl.UserDAO;
+import com.apicompany.e.commerceapplication.dal.models.User;
+
 public class UserProfileController {
-    
+  public User getuserdata(int userid)
+  {
+      UserDAO myUserDao = new UserDAO();
+      User myuser=myUserDao.getUser(userid);
+      return myuser;
+  }
+  public boolean updateUserData(User user)
+  {
+    UserDAO myUserDao = new UserDAO();
+    boolean res=myUserDao.updateUser(user);
+    return res;
+  
+  }
 }
