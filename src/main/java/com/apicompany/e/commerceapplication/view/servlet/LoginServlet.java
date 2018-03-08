@@ -2,6 +2,7 @@ package com.apicompany.e.commerceapplication.view.servlet;
 
 import com.apicompany.e.commerceapplication.business.AuthController;
 import com.apicompany.e.commerceapplication.business.CartController;
+import com.apicompany.e.commerceapplication.business.HomeController;
 import com.apicompany.e.commerceapplication.dal.models.Cart;
 import com.apicompany.e.commerceapplication.dal.models.User;
 import com.apicompany.e.commerceapplication.view.utility.Validation;
@@ -17,12 +18,16 @@ import java.io.IOException;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
+    public static final String PRODUCTS_LIST = "PRODUCTS_LIST";
+    public static final String SHOP_TAG = "SHOP_TAG";
+
     private Validation validation;
     private AuthController authController;
     private CartController cartController;
 
-    @Override
-    public void init() throws ServletException {
+    public LoginServlet() {
+        authController = new AuthController();
+        cartController = new CartController();
         validation = new Validation();
     }
 
@@ -34,28 +39,34 @@ public class LoginServlet extends HttpServlet {
         boolean isValidPassword = validation.isValidPassword(password);
 
         if (isValidEmail && isValidPassword) {
-            authController = new AuthController();
             User user = authController.login(email, password);
 
             if (authController.isLoggedIn()) {
                 HttpSession session = request.getSession(false);
 
                 if (session != null) {
-                    cartController = new CartController();
-                    cartController.addCart((Cart) session.getAttribute("cart"));
+                    if (session.getAttribute("cart") != null) {
+                        Cart cart = (Cart) session.getAttribute("cart");
+                        cartController.addProductsToCart(cart);
+                    }
+                    session.setAttribute("cart", cartController.getCurrentCart(user.getUserId()));
                 } else {
                     session = request.getSession(true);
+                    session.setAttribute("cart", cartController.getCurrentCart(user.getUserId()));
                 }
 
                 session.setAttribute("userObj", user);
                 session.setAttribute("loggedin", true);
 
+                HomeController homeController = new HomeController();
+                session.setAttribute(SHOP_TAG, "Shop");
+                session.setAttribute(PRODUCTS_LIST, homeController.getListOfProducts());
+
                 response.sendRedirect("shop-full-width.jsp");
             } else {
                 response.sendRedirect("shop-login.jsp");
             }
-        }
-        else {
+        } else {
             response.sendRedirect("shop-login.jsp");
         }
     }

@@ -1,6 +1,8 @@
 package com.apicompany.e.commerceapplication.view.servlet;
 
 import com.apicompany.e.commerceapplication.business.AuthController;
+import com.apicompany.e.commerceapplication.business.CartController;
+import com.apicompany.e.commerceapplication.dal.models.Cart;
 import com.apicompany.e.commerceapplication.view.utility.Validation;
 
 import javax.servlet.ServletConfig;
@@ -19,6 +21,7 @@ import java.util.Date;
 public class RegistrationServlet extends HttpServlet {
     private Validation validation;
     private AuthController authController;
+    private CartController cartController;
 
     @Override
     public void init() throws ServletException {
@@ -57,6 +60,9 @@ public class RegistrationServlet extends HttpServlet {
             authController.registerNewUser(name, password, email, address, job, Integer.parseInt(credit), birthdate);
             boolean registered = authController.isRegistered();
             if (registered) {
+                cartController = new CartController();
+                int userId = authController.getRegisteredUsedId();
+                cartController.createNewCart(userId);
                 response.sendRedirect("shop-login.jsp");
             } else {
                 response.sendRedirect("shop-signup.jsp");
