@@ -1,1 +1,13 @@
 /* Add here all your CSS customizations */
+div.absolute1 {
+    position: absolute;
+    top:700px;
+    right:400;
+    width: 500
+}
+div.absolute2 {
+    position: absolute;
+    top:700px;
+    right: 600;
+    width: 500
+}

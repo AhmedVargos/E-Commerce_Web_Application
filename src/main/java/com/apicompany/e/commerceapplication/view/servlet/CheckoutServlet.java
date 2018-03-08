@@ -73,11 +73,12 @@ public class CheckoutServlet extends HttpServlet {
           PrintWriter out=response.getWriter();
           if(checkResult)
           { 
-           boolean CreatOrder =mycontroller.MakeOrder();
+           boolean CreatOrder =mycontroller.MakeOrder(UserId);
+           
            {           
             if(CreatOrder)
             {
-            //boolean check=mycontroller.clearCard();
+            boolean check=mycontroller.clearCard(UserId);
               out.write("You create order successfuly and contact with you for payment"); 
             }
             

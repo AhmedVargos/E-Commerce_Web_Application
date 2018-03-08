@@ -10,6 +10,7 @@ import com.apicompany.e.commerceapplication.dal.dao.daoimpl.OrderDAO;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.ProductDAO;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.UserDAO;
 import com.apicompany.e.commerceapplication.dal.models.Cart;
+import com.apicompany.e.commerceapplication.dal.models.CartItem;
 import com.apicompany.e.commerceapplication.dal.models.Order;
 import com.apicompany.e.commerceapplication.dal.models.Product;
 import com.apicompany.e.commerceapplication.dal.models.User;
@@ -22,9 +23,9 @@ import javax.smartcardio.Card;
  * @author Vargos
  */
 public class CheckoutController {
-      User user;
-       ArrayList<Product> cardProducts;
-       int totalPrice=0;
+       //User user;
+       //ArrayList<Product> cardProducts;
+       //int totalPrice=0;
    public  boolean checkUserFound(int Userid)
     {
        UserDAO myuserDao=new UserDAO();
@@ -54,49 +55,56 @@ public class CheckoutController {
  
    public int CalaulatetotalPrice(int userid)
    { 
-       
-     UserDAO myuserDao=new UserDAO();
-        user=myuserDao.getUser(userid);
-       CartDAO mycard=new CartDAO();
-      Cart card= mycard.getUserCart(user);
-       //ArrayList<Product> cardProducts=card.getProducts();
-       ProductDAO pp= new ProductDAO(); 
-       cardProducts=pp.getAllProducts();
-       int quantity =1;
+     int totalprice=0;  
+     CartDAO mycard=new CartDAO();
+     Cart card= mycard.getCartByUserID(userid);
+       ArrayList<CartItem> cardProducts=card.getCartItems();
          for(int i=0;i<cardProducts.size();i++)
          {
-          totalPrice+=cardProducts.get(i).getProductPrice()*quantity;
+          double currentProductSalary=cardProducts.get(i).getProduct().getProductPrice();
+          int currentProductQuantity=cardProducts.get(i).getQuantity();
+          totalprice+=currentProductSalary*currentProductQuantity;
          
          }
-     return totalPrice ;
+     return totalprice ;
  }
    public User getUser(int userId)
    {
-     //  UserDAO myuserDao=new UserDAO();
-      // User user=myuserDao.getUser(userId);
+        UserDAO myuserDao=new UserDAO();
+       User user=myuserDao.getUser(userId);
        System.out.println("username: "+ user.getUserName());
        System.out.println("addres: "+ user.getAddress());
        return user;
    }
-   public boolean MakeOrder()
+   public boolean MakeOrder(int userId)
    {
-//       Order newOrder = new Order();
-//          newOrder.setUser(user);
-//          newOrder.setOrder_Date(new Date());
-//          newOrder.setProducts(cardProducts);
+          CartDAO myCartDao=new CartDAO();
+          Cart currentCart=myCartDao.getCartByUserID(userId);
           OrderDAO newOrderDAO = new OrderDAO();
-          newOrderDAO.addNewOrder(user, cardProducts);
+//          newOrderDAO.addNewOrderCopy(getUser(userId), currentCart.getCartItems());
           UserDAO userDao=new UserDAO();
-          user.setCreditLimit(user.getCreditLimit()-totalPrice);
-          userDao.updateUser(user);
+          User currentUser=getUser(userId);
+          currentUser.setCreditLimit(currentUser.getCreditLimit()-CalaulatetotalPrice(userId));
+          userDao.updateUser(currentUser);
+          ArrayList<CartItem> totalItemsOfCards = currentCart.getCartItems();
+          for(int i=0;i<totalItemsOfCards.size();i++)
+          {
+              int pureProductQuantity= totalItemsOfCards.get(i).getProduct().getQuantity();
+             int buyProductQuantity=totalItemsOfCards.get(i).getQuantity();
+             int NewProductQuantity=pureProductQuantity-buyProductQuantity;
+             Product newproductValue= totalItemsOfCards.get(i).getProduct();
+             newproductValue.setQuantity(NewProductQuantity);
+             ProductDAO newProductDao=new ProductDAO();
+             newProductDao.updateProduct(newproductValue);
+          }
    return true;
    }
    
-   public boolean clearCard()
+   public boolean clearCard(int userid)
    {
       CartDAO removedCard=new CartDAO();
-      boolean check=removedCard.removeCart(user);
-      return check;
+      boolean check=removedCard.removeCartByUserID(userid);
+      return true;
    }
    
    

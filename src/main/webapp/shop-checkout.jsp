@@ -159,8 +159,8 @@
 
                                             </li>
                                             <li class="dropdown">
-                                                <a class="dropdown-toggle" href="#">
-                                                    About Us
+                                                <a class="dropdown-toggle" href="shop-user-profile.jsp">
+                                                    Edit profile
                                                 </a>
 
                                             </li>
