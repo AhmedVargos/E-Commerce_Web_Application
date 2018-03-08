@@ -48,7 +48,7 @@ public class ProductDAO implements ProductDAOInt {
                 product.setCatagory_catogeryId(rs.getInt(DB_CoulmnNames.category_categoryId));
                 allProduct.add(product);
             }
-            connHandler.disconnectDB();
+            
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -214,13 +214,13 @@ public class ProductDAO implements ProductDAOInt {
          return allProduct;    
     
     }
-    public static void main(String[] args) {
-        ProductDAO myproduct=new ProductDAO();
-       //Product newproduct = new Product("mkjhkj", "bjhj","f://dgndlkg",190.0,3 ,1);
- int test=myproduct.getProductId("mkjhkj");
-        
-         System.out.println(test);       
-    }   
+//    public static void main(String[] args) {
+//        ProductDAO myproduct=new ProductDAO();
+//       //Product newproduct = new Product("mkjhkj", "bjhj","f://dgndlkg",190.0,3 ,1);
+// int test=myproduct.getProductId("mkjhkj");
+//        
+//         System.out.println(test);       
+//    }   
 
     @Override
     public int getProductId(String productName) {

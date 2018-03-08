@@ -5,12 +5,14 @@
  */
 package com.apicompany.e.commerceapplication.view.utility;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *
  * @author David Emil
  */
 public class Validation {
@@ -24,12 +26,11 @@ public class Validation {
      *
      * @param string
      * @return - true if empty <br>
-     * - false if not 
-     *
+     * - false if not
      */
     public boolean isEmptyString(String string) {
         boolean emptyString = false;
-        if (string.trim().length() == 0 || string.equals(null) || "".equals(string.trim())) {
+        if (string.trim().isEmpty() || string == null) {
             emptyString = true;
         }
         return emptyString;
@@ -40,8 +41,7 @@ public class Validation {
      *
      * @param email
      * @return - true if valid <br>
-     * - false if not 
-     *
+     * - false if not
      */
     public boolean isEmail(String email) {
         patternMatcher = EMAIL_PATTERN.matcher(email);
@@ -53,20 +53,20 @@ public class Validation {
      *
      * @param name
      * @return - true if valid <br>
-     * - false if not 
-     *
+     * - false if not
      */
     public boolean isName(String name) {
         patternMatcher = NAME_PATTERN.matcher(name);
         return !isEmptyString(name) && patternMatcher.matches();
     }
-    
+
     /**
-    * check if the password is valid or not, it should be more than or equal 8 and less than or equal 30 
-    * @param password 
-    * @return - true if valid <br> 
-    *          - false if not 
-    **/
+     * check if the password is valid or not, it should be more than or equal 8 and less than or equal 30
+     *
+     * @param password
+     * @return - true if valid <br>
+     * - false if not
+     **/
     public boolean isValidPassword(String password) {
         boolean validPass = false;
         if (password.length() >= 8 && password.length() <= 30) {
@@ -74,15 +74,14 @@ public class Validation {
         }
         return validPass;
     }
-    
+
     /**
      * check if the name is valid or not
      *
      * @param password1
      * @param password2
      * @return - true if password1 equals password2 <br>
-     * - false if not 
-     *
+     * - false if not
      */
     public boolean isPasswordMatches(String password1, String password2) {
         boolean passwordMatch = false;
@@ -91,20 +90,25 @@ public class Validation {
         }
         return passwordMatch;
     }
-    
+
     /**
-    * check if the age of the user is legal or not 
-    * @param dateOfBirth 
-    * @return - true if age greater than 16 years old <br> 
-    *          - false if not 
-    **/
-    public boolean isLegalAged(LocalDate dateOfBirth){
+     * check if the age of the user is legal or not
+     *
+     * @param dateOfBirth
+     * @return - true if age greater than 16 years old <br>
+     * - false if not
+     **/
+    public boolean isLegalAged(Date dateOfBirth) {
         boolean legalAge = false;
-        if(!isEmptyString(dateOfBirth.toString()) && dateOfBirth.getYear() <= 2002){
+        if (!isEmptyString(dateOfBirth.toString()) && dateOfBirth.getYear() <= 2002) {
             legalAge = true;
         }
-    
+
         return legalAge;
     }
-    
+
+    public boolean isNumber(String num) {
+        return StringUtils.isNumeric(num);
+    }
+
 }

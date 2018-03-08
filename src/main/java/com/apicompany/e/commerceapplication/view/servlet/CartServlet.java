@@ -108,7 +108,6 @@ public class CartServlet extends HttpServlet {
                     CartDAO cartDAO = new CartDAO();
                     int cartId = cartDAO.getCartByUserID(userId).getCartId();
                     cartDAO.addNewProductToExistingCart(cartId, id,quantity);
-
                     //if NOT
                     cartDAO.addNewProductToNewCart(userId,id,quantity);
                 }

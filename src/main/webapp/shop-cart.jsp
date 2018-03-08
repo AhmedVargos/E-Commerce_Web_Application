@@ -94,6 +94,7 @@
                 }
             });
         }
+
         getUserCart();
 
     </script>
@@ -244,6 +245,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="actions" colspan="6">
+
                                                                         <div class="actions-continue">
                                                                             <button type="submit"
                                                                                     class="btn btn-default">View All
@@ -254,6 +256,7 @@
                                                                                     class="fa fa-angle-right ml-xs"></i>
                                                                             </button>
                                                                         </div>
+
                                                                     </td>
                                                                 </tr>
                                                                 </tbody>
@@ -320,10 +323,12 @@
                                                     <tbody>
                                                     <c:forEach items="${sessionScope.CART.cartItems}" var="cartItem">
                                                         <tr class="cart_table_item">
-                                                            <input type="hidden" id="item" value="${cartItem.product.productId}">
+                                                            <input type="hidden" id="item"
+                                                                   value="${cartItem.product.productId}">
 
                                                             <td class="product-remove">
-                                                                    <i class="fa fa-times" onclick="deleteAProduct(this)" style="cursor: pointer;"></i>
+                                                                <i class="fa fa-times" onclick="deleteAProduct(this)"
+                                                                   style="cursor: pointer;"></i>
 
                                                             </td>
                                                             <td class="product-thumbnail">
@@ -340,15 +345,18 @@
                                                                 <span class="amount">${cartItem.product.productPrice}</span>
                                                             </td>
                                                             <td class="product-quantity">
-                                                                    <div class="quantity">
-                                                                        <input type="button" class="minus" value="-" onclick="decreaseQuantity(this)">
-                                                                        <input type="text" class="input-text qty text"
-                                                                               title="Qty" value="${cartItem.quantity}" name="quantity"
-                                                                               min="1"
-                                                                               step="1"
-                                                                                disabled>
-                                                                        <input type="button" class="plus" value="+" onclick="increaseQuantity(this)">
-                                                                    </div>
+                                                                <div class="quantity">
+                                                                    <input type="button" class="minus" value="-"
+                                                                           onclick="decreaseQuantity(this)">
+                                                                    <input type="text" class="input-text qty text"
+                                                                           title="Qty" value="${cartItem.quantity}"
+                                                                           name="quantity"
+                                                                           min="1"
+                                                                           step="1"
+                                                                           disabled>
+                                                                    <input type="button" class="plus" value="+"
+                                                                           onclick="increaseQuantity(this)">
+                                                                </div>
                                                             </td>
                                                             <td class="product-subtotal">
                                                                 <span class="amount">${cartItem.product.productPrice * cartItem.quantity}</span>
@@ -360,7 +368,8 @@
                                                             <div class="actions-continue">
                                                                 <input type="submit" value="Update Cart"
                                                                        name="update_cart"
-                                                                       class="btn btn-default" onclick="updateCart(this)">
+                                                                       class="btn btn-default"
+                                                                       onclick="updateCart(this)">
                                                             </div>
                                                         </td>
                                                     </tr>
