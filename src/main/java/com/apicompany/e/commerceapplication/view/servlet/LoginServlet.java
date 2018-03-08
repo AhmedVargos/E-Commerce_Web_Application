@@ -3,6 +3,7 @@ package com.apicompany.e.commerceapplication.view.servlet;
 import com.apicompany.e.commerceapplication.business.AuthController;
 import com.apicompany.e.commerceapplication.business.CartController;
 import com.apicompany.e.commerceapplication.dal.models.Cart;
+import com.apicompany.e.commerceapplication.dal.models.User;
 import com.apicompany.e.commerceapplication.view.utility.Validation;
 
 import javax.servlet.ServletException;
@@ -34,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 
         if (isValidEmail && isValidPassword) {
             authController = new AuthController();
-            int userId = authController.login(email, password);
+            User user = authController.login(email, password);
 
             if (authController.isLoggedIn()) {
                 HttpSession session = request.getSession(false);
@@ -46,13 +47,16 @@ public class LoginServlet extends HttpServlet {
                     session = request.getSession(true);
                 }
 
-                session.setAttribute("userId", userId);
+                session.setAttribute("userObj", user);
                 session.setAttribute("loggedin", true);
 
-                response.sendRedirect("shop-product-full-width.jsp");
+                response.sendRedirect("shop-full-width.jsp");
             } else {
                 response.sendRedirect("shop-login.jsp");
             }
+        }
+        else {
+            response.sendRedirect("shop-login.jsp");
         }
     }
 
