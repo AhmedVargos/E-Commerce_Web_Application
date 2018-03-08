@@ -63,7 +63,7 @@ public class CartDAO implements CartDAOInt {
                     }
 
                 }
-                cart.setCartUser(udao.getUser(userId));
+                cart.setCartUser(udao.getUserById(userId));
                 cart.setCartItems(cartItems);
             }
         } catch (SQLException ex) {
@@ -91,7 +91,7 @@ public class CartDAO implements CartDAOInt {
             rs = selectStatement.executeQuery();
             if (rs.next()) {
                 cart.setCartId(cartId);
-                cart.setCartUser(udao.getUser(rs.getInt("user_userId")));
+                cart.setCartUser(udao.getUserById(rs.getInt("user_userId")));
                 cart.setDate(rs.getDate("date"));
 
                 selectStatement = dbHandler.getCon().prepareStatement("SELECT PC.product_productId , PC.product_quantity"

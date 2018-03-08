@@ -75,4 +75,7 @@ public class CartController {
         return cart;
     }
 
+    public void addCart(Cart cart) {
+
+    }
 }

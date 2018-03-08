@@ -29,7 +29,7 @@ public class CheckoutController {
    public  boolean checkUserFound(int Userid)
     {
        UserDAO myuserDao=new UserDAO();
-       if(myuserDao.getUser(Userid)==null)
+       if(myuserDao.getUserById(Userid)==null)
        {
          return false;
        }
@@ -71,7 +71,7 @@ public class CheckoutController {
    public User getUser(int userId)
    {
         UserDAO myuserDao=new UserDAO();
-       User user=myuserDao.getUser(userId);
+       User user=myuserDao.getUserById(userId);
        System.out.println("username: "+ user.getUserName());
        System.out.println("addres: "+ user.getAddress());
        return user;
