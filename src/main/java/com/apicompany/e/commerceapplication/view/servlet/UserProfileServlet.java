@@ -88,7 +88,7 @@ public class UserProfileServlet extends HttpServlet {
         User myuser = myDao.getUserById(UserId);
         myuser.setUserName(userName);
         myuser.setPassWord(password);
-        myuser.setBirthdate(birthDay);
+        myuser.setBirthdate(new java.sql.Date(birthDay.getTime()));
         myuser.setEmail(email);
         myuser.setAddress(address);
         myuser.setJob(job);

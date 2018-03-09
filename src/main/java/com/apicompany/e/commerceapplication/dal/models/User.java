@@ -5,7 +5,9 @@
  */
 package com.apicompany.e.commerceapplication.dal.models;
 
-import java.util.Date;
+//import java.util.Date;
+
+import java.sql.Date;
 
 /**
  * @author Vargos
