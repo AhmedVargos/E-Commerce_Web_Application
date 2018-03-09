@@ -54,3 +54,4 @@ public class DatabaseHandler {
     }
 }
 //jdbc:mysql://localhost:3306/EcommerceDB?zeroDateTimeBehavior=convertToNull [root on Default schema]
+//3306 - 1010

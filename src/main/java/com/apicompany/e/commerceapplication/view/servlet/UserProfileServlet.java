@@ -53,6 +53,7 @@ public class UserProfileServlet extends HttpServlet {
         HttpSession usersession = request.getSession(false);
         // int UserId= (int) usersession.getAttribute("userid");
         int UserId = 1;
+
         PrintWriter out= response.getWriter();
         UserProfileController myuserconController = new UserProfileController();
         User mycurrentUserData = myuserconController.getuserdata(UserId);
@@ -72,13 +73,12 @@ public class UserProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession usersession=request.getSession(false);
-       // int UserId= (int) usersession.getAttribute("userid");
-       int UserId=1;
+         int UserId=1;
         
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
      
         String userName = request.getParameter("UserName");
+        UserDAO myDao = new UserDAO();
 
         Date birthDay = null;
         try {
@@ -86,33 +86,11 @@ public class UserProfileServlet extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(UserProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String password=request.getParameter("PasswordNew");
-        String address=request.getParameter("Address");
-        String job=request.getParameter("Job");
-       int credit= Integer.parseInt(request.getParameter("Credit"));
-        String interests=request.getParameter("interests");
-        UserDAO myDao = new UserDAO();
-         User myuser=myDao.getUserById(UserId);
-         myuser.setPassWord(password);
-         myuser.setBirthdate(birthDay);
-         myuser.setAddress(address);
-         myuser.setJob(job);
-         myuser.setCreditLimit(credit);
-         myuser.setInterests(interests);
-        UserProfileController myuserconController=new UserProfileController();
-        boolean updateUserData=myuserconController.updateUserData(myuser); 
-        PrintWriter out=response.getWriter();
-        if(updateUserData)
-        {
-        //out.write("The Data Updated successfuly");
-          response.sendRedirect("shop-user-profile.jsp");
+        HttpSession usersession=request.getSession(false);
+       // int UserId= (int) usersession.getAttribute("userid");
+      
         }
-        else
-        {
-        out.write("try again"+":pass:"+password+":birth:"+birthDay+":email:"+":address:"+address+":job:"+job
-        +":credit:"+credit+":interests:"+interests);
-        }
-    }
+    
     @Override
     public String getServletInfo() {
         return "Short description";
