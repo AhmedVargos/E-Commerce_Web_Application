@@ -22,10 +22,6 @@ public class AdminUsersServlet extends HttpServlet {
         allUsers = new ArrayList<>();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         allUsers = usersController.getAllUsers();
         request.setAttribute("users", allUsers);
