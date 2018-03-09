@@ -4,9 +4,17 @@
         <servlet-name>Category</servlet-name>
         <servlet-class>com.apicompany.e.commerceapplication.view.servlet.AdminCategoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminOrderServlet</servlet-name>
+        <servlet-class>com.apicompany.e.commerceapplication.view.servlet.AdminOrderServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Category</servlet-name>
         <url-pattern>/Category</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminOrderServlet</servlet-name>
+        <url-pattern>/AdminOrderServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -24,21 +32,13 @@
         <filter-name>Login Filter</filter-name>
         <url-pattern>/shop-checkout.jsp</url-pattern>
     </filter-mapping>
-
-    <filter>
+    <!--    <filter>
         <filter-name>Admin Filter</filter-name>
         <filter-class>com.apicompany.e.commerceapplication.view.filter.AdminFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>Admin Filter</filter-name>
         <url-pattern>/Admin/*</url-pattern>
-    </filter-mapping>
-    <filter>
-        <filter-name>category Filter</filter-name>
-        <filter-class>com.apicompany.e.commerceapplication.view.filter.LoadCategoriesFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>category Filter</filter-name>
-        <url-pattern>/shop-login.jsp</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
+
 </web-app>
