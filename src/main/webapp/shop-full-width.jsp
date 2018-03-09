@@ -256,7 +256,7 @@
 								<span class="product-thumb-info">
                                     <input id="myProduct" type="hidden" value="${product.productId}"/>
                                     <input id="myQuantity" type="hidden" value="1"/>
-									<a href="shop-cart.jsp" onclick="addToCart()" class="add-to-cart-product">
+									<a href="shop-cart.jsp" onclick="addToCart(this)" class="add-to-cart-product">
 										<span><i class="fa fa-shopping-cart"></i> Add to Cart</span>
 									</a>
 									<a href="HomeServlet?id=${product.productId}">

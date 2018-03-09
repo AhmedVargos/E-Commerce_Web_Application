@@ -144,6 +144,7 @@ public class CartDAO implements CartDAOInt {
         Boolean isAdded = false;
         if (productDAO.getSpecificProduct(productId) != null) {
             try {
+
                 insertStatement = dbHandler.getCon().prepareStatement("INSERT INTO EcommerceDB.product_cart"
                         + " (product_productId, cart_cartId, product_quantity) VALUES(?,?,?)");
                 insertStatement.setInt(1, productId);
@@ -280,6 +281,38 @@ public class CartDAO implements CartDAOInt {
         return isUpdated;
     }
 
+    //-------------------------------------------NEW AHMED-------------------------
+
+    public Boolean addExistingCartItems(int cartId, ArrayList<CartItem> updatedItems) {
+        PreparedStatement updateStatement;
+        boolean isUpdated = false;
+        Cart tempCart = getCartByCartID(cartId);
+        if (tempCart != null) {
+            for (CartItem updatedItem : updatedItems) {
+                try {
+                    if (isProductExistInCart(cartId, updatedItem.getProduct().getProductId())) {
+                        int oldQuantity = getProductQuantityInCart(cartId,updatedItem.getProduct().getProductId());
+                        updateStatement = dbHandler.getCon().prepareStatement("UPDATE EcommerceDB.product_cart"
+                                + " SET product_quantity = ?"
+                                + " WHERE cart_cartId = ?"
+                                + " AND product_productId = ?");
+                        updateStatement.setInt(1,oldQuantity + updatedItem.getQuantity());
+                        updateStatement.setInt(2, cartId);
+                        updateStatement.setInt(3, updatedItem.getProduct().getProductId());
+                        updateStatement.executeUpdate();
+                        isUpdated = true;
+                    } else {
+                        addNewProductToExistingCart(cartId, updatedItem.getProduct().getProductId(), updatedItem.getQuantity());
+                    }
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        return isUpdated;
+    }
     //---------------------------------------------------------------------------------------------------------------------------------------//
     //tested
     @Override

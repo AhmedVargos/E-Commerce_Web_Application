@@ -97,9 +97,9 @@ public class CartServlet extends HttpServlet {
         }
 
         //if user is online insert products in DB
-
-        boolean logedIn = (boolean) session.getAttribute("loggedin");
         if (session.getAttribute("loggedin") != null) {
+            boolean logedIn = (boolean) session.getAttribute("loggedin");
+
             if (logedIn == true) {
                 new Thread() {
                     public void run() {
@@ -125,6 +125,7 @@ public class CartServlet extends HttpServlet {
                 }.start();
             }
         }
-    }
 
+
+    }
 }
