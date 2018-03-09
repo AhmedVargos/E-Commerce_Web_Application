@@ -24,12 +24,8 @@ public class OrderController {
         orderDAO=new OrderDAO();
     }
     
-    public List<Order> getAllOrders(){   
-        return orderDAO.getAllOrders();
-    }
-    
-    public List<Order> calculateOrderPrice(){
-        List<Order> orders = getAllOrders();
+    public List<Order> getAllOrders(){
+        List<Order> orders = orderDAO.getAllOrders();
         double sum=0;
         List<Product> products = new ArrayList<>();
         for(int i=0; i< orders.size(); i++){
