@@ -10,6 +10,7 @@ function checkData()
         url: 'CheckoutServlet',
         type: 'POST',
         contentType: 'application/json',
+        dataType: 'json',
         success: function (data) { 
             $("#response").append("<label>"+data+"</label>");
             $("#order").prop('disabled', true);
@@ -17,19 +18,19 @@ function checkData()
         
     });  
 }
-
-function updateDatab()
+/*
+function updateDataE()
 {
     $.ajax({
         url: 'CheckoutServlet',
         type: 'GET',
-        contentType: 'application/json',
+        dataType: 'json',
         success: function (data) { 
-           $("#totalUpdated").html(data.totalPrice);
-           $("#UserTotoal").html(data.userCurrent);
-           $("#AddressTotal").html(data.userAddress);
+           $("#totalUpdated").val(data.totalPrice);
+           $("#UserTotoal").val(data.userCurrent);
+           $("#AddressTotal").val(data.userAddress);
            
         }     
     });         
 }
-
+*/

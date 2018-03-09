@@ -16,14 +16,14 @@
     <welcome-file-list>
         <welcome-file>shop-login.jsp</welcome-file>
     </welcome-file-list>
-    <filter>
+<!--    <filter>
         <filter-name>Login Filter</filter-name>
         <filter-class>com.apicompany.e.commerceapplication.view.filter.LoginFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>Login Filter</filter-name>
         <url-pattern>/shop-checkout.jsp</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
 
     <filter>
         <filter-name>Admin Filter</filter-name>

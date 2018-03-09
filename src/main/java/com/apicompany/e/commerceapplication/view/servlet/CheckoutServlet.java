@@ -3,6 +3,7 @@ package com.apicompany.e.commerceapplication.view.servlet;
 import com.apicompany.e.commerceapplication.business.CheckoutController;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.UserDAO;
 import com.apicompany.e.commerceapplication.dal.models.User;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
@@ -53,15 +54,19 @@ public class CheckoutServlet extends HttpServlet {
               username=currentUser.getUserName();
                address = currentUser.getAddress();
              }
+             response.setContentType("application/json");
 //           HttpSession ToptalPriceSession = request.getSession(true);
 //           ToptalPriceSession.setAttribute("TotalPrice", totalPrice);
 //           ToptalPriceSession.setAttribute("userName",username );
 //           ToptalPriceSession.setAttribute("adress", address);
-             JsonObjectBuilder myjson=Json.createObjectBuilder();
-             myjson.add("totalPrice",totalPrice);
-             myjson.add("userCurrent",username);
-             myjson.add("userAddress",address);
-             out.write(myjson.build().toString());
+          //  JsonObjectBuilder myjson=Json.createObjectBuilder();
+//             myjson.add("totalPrice",totalPrice);
+//             myjson.add("userCurrent",username);
+//             myjson.add("userAddress",address);
+
+                //Gson mygson=new Gson();
+                String mydata="{totalPrice:"+totalPrice+",userCurrent:"+username+",userAddress: test}";
+             out.write(mydata );
           // response.sendRedirect("shop-checkout.jsp");   
          }
          else

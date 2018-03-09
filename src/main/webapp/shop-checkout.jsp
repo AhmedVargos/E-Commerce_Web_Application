@@ -49,11 +49,31 @@
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.js"></script>
     <!-- checkout  page -->
-    <script src="js/checkout.js"></script>
+    
+    
+<!-- Vendor -->
+<script src="vendor/jquery/jquery.js"></script>
+<script src="vendor/jquery.appear/jquery.appear.js"></script>
+<script src="vendor/jquery.easing/jquery.easing.js"></script>
+<script src="vendor/jquery-cookie/jquery-cookie.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.js"></script>
+<script src="vendor/common/common.js"></script>
+<script src="vendor/jquery.validation/jquery.validation.js"></script>
+<script src="vendor/jquery.stellar/jquery.stellar.js"></script>
+<script src="vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
+<script src="vendor/jquery.gmap/jquery.gmap.js"></script>
+<script src="vendor/jquery.lazyload/jquery.lazyload.js"></script>
+<script src="vendor/isotope/jquery.isotope.js"></script>
+<script src="vendor/owl.carousel/owl.carousel.js"></script>
+<script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
+<script src="vendor/vide/vide.js"></script>
+<script src=http://code.jquery.com/jquery-latest.min.js ></script>
+  <script src="js/checkout.js"></script>
+
+  
 
 </head>
-<body onload="updateDatab()">
-
+<body>
 <div class="body">
     <header id="header"
             data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": true}'>
@@ -418,26 +438,28 @@
             </div>
         </div>
     </footer>
+    
+    
+    <script>
+        
+function updateDataE()
+{
+    $.ajax({
+        url: 'CheckoutServlet',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) { 
+           $("#totalUpdated").val(data.totalPrice);
+           $("#UserTotoal").val(data.userCurrent);
+           $("#AddressTotal").val(data.userAddress);
+           
+        }     
+    });         
+}
+updateDataE();
+
+    </script>
 </div>
-
-<!-- Vendor -->
-<script src="vendor/jquery/jquery.js"></script>
-<script src="vendor/jquery.appear/jquery.appear.js"></script>
-<script src="vendor/jquery.easing/jquery.easing.js"></script>
-<script src="vendor/jquery-cookie/jquery-cookie.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.js"></script>
-<script src="vendor/common/common.js"></script>
-<script src="vendor/jquery.validation/jquery.validation.js"></script>
-<script src="vendor/jquery.stellar/jquery.stellar.js"></script>
-<script src="vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
-<script src="vendor/jquery.gmap/jquery.gmap.js"></script>
-<script src="vendor/jquery.lazyload/jquery.lazyload.js"></script>
-<script src="vendor/isotope/jquery.isotope.js"></script>
-<script src="vendor/owl.carousel/owl.carousel.js"></script>
-<script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
-<script src="vendor/vide/vide.js"></script>
-<script src=http://code.jquery.com/jquery-latest.min.js ></script>
-
 
 
 <!-- Theme Base, Components and Settings -->
