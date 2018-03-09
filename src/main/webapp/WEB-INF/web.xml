@@ -33,4 +33,12 @@
         <filter-name>Admin Filter</filter-name>
         <url-pattern>/Admin/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>category Filter</filter-name>
+        <filter-class>com.apicompany.e.commerceapplication.view.filter.LoadCategoriesFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>category Filter</filter-name>
+        <url-pattern>/shop-login.jsp</url-pattern>
+    </filter-mapping>
 </web-app>
