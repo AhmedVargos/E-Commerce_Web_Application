@@ -215,7 +215,7 @@ public class CartDAO implements CartDAOInt {
                 deleteStatement.setInt(1, cart.getCartId());
                 deleteStatement.executeUpdate();
 
-                deleteStatement = dbHandler.getCon().prepareStatement("DELETE FROM EcommerceDB.cart WHERE userId = ?");
+                deleteStatement = dbHandler.getCon().prepareStatement("DELETE FROM EcommerceDB.cart WHERE user_userId = ?");
                 deleteStatement.setInt(1, userId);
                 deleteStatement.executeUpdate();
                 isRemoved = true;

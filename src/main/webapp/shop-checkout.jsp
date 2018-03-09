@@ -68,12 +68,9 @@
 <script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
 <script src="vendor/vide/vide.js"></script>
 <script src=http://code.jquery.com/jquery-latest.min.js ></script>
-  <script src="js/checkout.js"></script>
-
-  
 
 </head>
-<body>
+<body onload="updateDataEdit()">
 <div class="body">
     <jsp:include page="header.jsp"></jsp:include>
 
@@ -119,7 +116,7 @@
                                                     <strong>Order Total</strong>
                                                 </th>
                                                 <td>
-                                                    <strong><span class="amount">$<label id="totalUpdated"></label></span></strong>
+                                                    <strong><span class="amount">$<label id="totalUpdated2"></label></span></strong>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -168,11 +165,11 @@
                         </div>
                       
                     </div>
-                     <div id="response">
+                     <div id="responseE">
                                                   
                      </div>                           
                     <div class="actions-continue">
-                        <input type="submit" value="Place Order" name="proceed" class="btn btn-lg btn-primary mt-xl" onclick="checkData()" id="order">
+                        <input type="submit" value="Place Order" name="proceed" class="btn btn-lg btn-primary mt-xl" onclick="checkData()" id="orderE">
                     </div>
 
                 </div>
@@ -268,27 +265,6 @@
             </div>
         </div>
     </footer>
-    
-    
-    <script>
-        
-function updateDataE()
-{
-    $.ajax({
-        url: 'CheckoutServlet',
-        type: 'GET',
-        dataType: 'json',
-        success: function (data) { 
-           $("#totalUpdated").val(data.totalPrice);
-           $("#UserTotoal").val(data.userCurrent);
-           $("#AddressTotal").val(data.userAddress);
-           
-        }     
-    });         
-}
-updateDataE();
-
-    </script>
 </div>
 
 
@@ -299,6 +275,8 @@ updateDataE();
 <script src="js/custom.js"></script>
 <!-- Theme Initialization Files -->
 <script src="js/theme.init.js"></script>
+
+  <script src="js/checkout.js"></script>
 
 
 
