@@ -1,5 +1,6 @@
 // var userCart;
 
+//userCart.date = userCart.date.toISOString();
 
 function deleteAProduct(val) {
     var id = $(val).parent().parent().parent().find('input:hidden:first').attr('value');
@@ -87,6 +88,16 @@ function decreaseQuantity(val) {
 }
 
 function updateCart(val) {
+    //FIXING the date format
+   /* var testDate = new Date(userCart.date);
+    var month = testDate.getMonth() + 1;
+    var day = userCart.date.substring(4,5);
+    var year = userCart.date.substring(7,11);
+
+    if(day > 10){
+        day = "0" + day;
+
+    }    userCart.date = year + "-" + month +  "-" + day;*/
     $.ajax({
         url: 'CartPageServlet',
         type: 'POST',
@@ -96,7 +107,8 @@ function updateCart(val) {
         dataType: 'json',
         success: function (val) {
             if(val.status == 1){
-                window.location.href = "shop-cart.jsp";
+                //window.location.href = "shop-cart.jsp";
+                window.location.reload(true);
             }else{
                 alert("Cart failed to be updated");
             }

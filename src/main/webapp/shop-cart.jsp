@@ -96,8 +96,8 @@
         }
 
         getUserCart();
-
     </script>
+
     <header id="header"
             data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": true}'>
         <div class="header-body">
@@ -283,7 +283,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <hr class="tall" style="margin: 100;">
+                    <hr class="tall" style="margin: 100px;">
                 </div>
             </div>
 
@@ -319,9 +319,9 @@
                                                     </th>
                                                 </tr>
                                                 </thead>
-                                                <c:if test="${not empty sessionScope.CART.cartItems}">
+                                                <c:if test="${not empty sessionScope.cart.cartItems}">
                                                     <tbody>
-                                                    <c:forEach items="${sessionScope.CART.cartItems}" var="cartItem">
+                                                    <c:forEach items="${sessionScope.cart.cartItems}" var="cartItem">
                                                         <tr class="cart_table_item">
                                                             <input type="hidden" id="item"
                                                                    value="${cartItem.product.productId}">

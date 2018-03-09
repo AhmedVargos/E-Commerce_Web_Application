@@ -57,7 +57,7 @@ public class AuthController {
         user.setAddress(address);
         user.setJob(job);
         user.setCreditLimit(credit);
-        user.setBirthdate(birthdate);
+        user.setBirthdate(new Date(birthdate.getTime()));
 
         boolean inserted = userDAO.addUser(user);
         setRegisteredUsedId(userDAO.getUserByEmail(email).getUserId());

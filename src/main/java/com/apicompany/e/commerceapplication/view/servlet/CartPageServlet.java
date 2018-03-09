@@ -60,7 +60,7 @@ public class CartPageServlet extends HttpServlet {
         HttpSession session = request.getSession();
         //TEST CODE adding a cart obj to the session for testing
 
-        Cart mCart = (Cart) session.getAttribute("CART");
+        Cart mCart = (Cart) session.getAttribute("cart");
         response.setContentType("application/json");
         Gson gson = new Gson();
         response.getWriter().write(gson.toJson(mCart));
