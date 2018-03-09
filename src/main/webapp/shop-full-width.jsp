@@ -158,15 +158,10 @@
 
                                             </li>
                                             <li class="dropdown">
-                                                <a class="dropdown-toggle" href="#">
-                                                    About Us
+                                                <a class="dropdown-toggle" href="shop-user-profile.jsp">
+                                                    Profile
                                                 </a>
 
-                                            </li>
-                                            <li class="dropdown">
-                                                <a class="dropdown-toggle" href="#">
-                                                    Contact Us
-                                                </a>
                                             </li>
                                             <li class="dropdown dropdown-mega dropdown-mega-shop" id="headerShop">
                                                 <a class="dropdown-toggle" href="shop-login.jsp">

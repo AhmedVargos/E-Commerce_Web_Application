@@ -2,7 +2,7 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>Category</servlet-name>
-        <servlet-class>com.apicompany.e.commerceapplication.view.adminservlets.AdminCategoryServlet</servlet-class>
+        <servlet-class>com.apicompany.e.commerceapplication.view.servlet.AdminCategoryServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Category</servlet-name>
@@ -32,13 +32,5 @@
     <filter-mapping>
         <filter-name>Admin Filter</filter-name>
         <url-pattern>/Admin/*</url-pattern>
-    </filter-mapping>
-    <filter>
-        <filter-name>category Filter</filter-name>
-        <filter-class>com.apicompany.e.commerceapplication.view.filter.LoadCategoriesFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>category Filter</filter-name>
-        <url-pattern>/shop-login.jsp</url-pattern>
     </filter-mapping>
 </web-app>

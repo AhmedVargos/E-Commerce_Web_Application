@@ -22,6 +22,7 @@ public class AdminUsersServlet extends HttpServlet {
         allUsers = new ArrayList<>();
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         allUsers = usersController.getAllUsers();
         request.setAttribute("users", allUsers);
