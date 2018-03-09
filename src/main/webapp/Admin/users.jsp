@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +22,7 @@
 
     <!-- Custom Theme Style -->
     <link href="build/css/custom.min.css" rel="stylesheet">
+    <jsp:include page="/AdminUsersServlet"/>
 </head>
 
 <body class="nav-md">
@@ -41,7 +43,7 @@
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
-                        <h2>John Doe</h2>
+                        <h2>Admin</h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -169,40 +171,39 @@
                                     <tr>
                                         <th style="width: 10%">#User ID</th>
                                         <th>Image</th>
-                                        <th style="width: 20%">Customer Name</th>
+                                        <th style="width: 25%">Customer Name</th>
                                         <th>Email</th>
                                         <th>Credit Limit</th>
-                                        <th style="width: 21%">#Edit</th>
+                                        <th style="width: 11%">#Edit</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>#350</td>
-                                        <td>
-                                            <ul class="list-inline">
-                                                <li>
-                                                    <img src="images/user.png" class="avatar" alt="Avatar">
-                                                </li>
-                                            </ul>
-                                        </td>
-                                        <td>
-                                            <a>Sherif Zakaria</a>
-                                        </td>
-                                        <td>
-                                            <a>sherifzakaria@outlook.com</a>
-                                        </td>
-                                        <td>
-                                            <a>5000</a>
-                                        </td>
-                                        <td>
-                                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View
-                                            </a>
-                                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit
-                                            </a>
-                                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
-                                                Delete </a>
-                                        </td>
-                                    </tr>
+                                    <c:forEach items="${users}" var="user">
+                                        <tr>
+                                            <td>#${user.userId}</td>
+                                            <td>
+                                                <ul class="list-inline">
+                                                    <li>
+                                                        <img src="images/user.png" class="avatar" alt="Avatar">
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <a>${user.userName}</a>
+                                            </td>
+                                            <td>
+                                                <a>${user.email}</a>
+                                            </td>
+                                            <td>
+                                                <a>${user.creditLimit}</a>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>
+                                                    View
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                                 <!-- end project list -->

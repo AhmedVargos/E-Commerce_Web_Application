@@ -55,6 +55,10 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("cart", cartController.getCurrentCart(user.getUserId()));
                 }
 
+                if (user.isIsAdmin()) {
+                    session.setAttribute("isAdmin", true);
+                }
+
                 session.setAttribute("userObj", user);
                 session.setAttribute("loggedin", true);
 

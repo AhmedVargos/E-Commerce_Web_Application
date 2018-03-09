@@ -211,7 +211,7 @@
                                             </li>
                                             <li class="dropdown dropdown-mega dropdown-mega-shop" id="headerShop">
                                                 <a class="dropdown-toggle" href="page-login.jsp">
-                                                    <i class="fa fa-user"></i> Cart (1) - $299
+                                                    <i class="fa fa-user"></i> Cart (<span id="cart_counter"></span>)
                                                 </a>
                                                 <ul class="dropdown-menu">
                                                     <li>
