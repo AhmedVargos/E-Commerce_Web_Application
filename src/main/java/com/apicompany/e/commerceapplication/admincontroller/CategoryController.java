@@ -16,17 +16,33 @@ import java.util.List;
  * @author gehad
  */
 public class CategoryController {
-    
-    public void addCategory(String name){
+
+    CategoryDAOInt catDao;
+
+    public void addCategory(String name) {
         Category newCategory = new Category();
         newCategory.setCategoryName(name);
-        CategoryDAOInt catDao = new CategoryDAO();
+        catDao = new CategoryDAO();
         catDao.insertCategory(newCategory);
     }
-    
-    public List<Category> getAllCategories(){
-        CategoryDAOInt catDao = new CategoryDAO();
-        return  catDao.getAllCatagory();
+
+    public List<Category> getAllCategories() {
+        catDao = new CategoryDAO();
+        return catDao.getAllCatagory();
     }
-    
+
+    public void deleteCategory(int id) {
+        catDao = new CategoryDAO();
+        catDao.deleteCategory(id);
+    }
+
+    /*public void updateCategory(int id) {
+        catDao = new CategoryDAO();
+        Category currentCategory = new Category();
+
+        currentCategory = catDao.getSpecieficCategory(id);
+        catDao.updateCategory(currentCategory)
+
+    }*/
+
 }

@@ -6,6 +6,7 @@
 package com.apicompany.e.commerceapplication.view.adminservlets;
 
 import com.apicompany.e.commerceapplication.admincontroller.CategoryController;
+import com.apicompany.e.commerceapplication.dal.models.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -24,6 +25,8 @@ import javax.servlet.http.HttpSession;
 
 public class AdminCategoryServlet extends HttpServlet {
 
+    CategoryController categoryController;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,7 +44,7 @@ public class AdminCategoryServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Category</title>");            
+            out.println("<title>Servlet Category</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Category at " + request.getContextPath() + "</h1>");
@@ -62,10 +65,20 @@ public class AdminCategoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        /* HttpSession session = request.getSession();
         CategoryController categoryController = new CategoryController();
         session.setAttribute("Categories", categoryController.getAllCategories());
-        response.sendRedirect("Admin/categories.jsp");
+        response.sendRedirect("Admin/categories.jsp");*/
+        categoryController = new CategoryController();
+
+        int id = Integer.parseInt(request.getParameter("id"));
+            categoryController.deleteCategory(id);
+            System.err.println(id);
+            HttpSession session = request.getSession();
+            session.setAttribute("Categories", categoryController.getAllCategories());
+            response.sendRedirect("Admin/categories.jsp");
+       
+
     }
 
     /**
@@ -80,8 +93,8 @@ public class AdminCategoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String name = request.getParameter("name");
-        CategoryController categoryController = new CategoryController();
-        categoryController.addCategory(name); 
+        categoryController = new CategoryController();
+        categoryController.addCategory(name);
         HttpSession session = request.getSession();
         session.setAttribute("Categories", categoryController.getAllCategories());
         response.sendRedirect("Admin/categories.jsp");

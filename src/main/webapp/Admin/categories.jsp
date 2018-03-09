@@ -20,12 +20,28 @@
         <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
         <!-- iCheck -->
         <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-        <Link href="build/css/popup.css" rel="stylesheet">
+        <Link href="css/style.css" rel="stylesheet">
         <!-- Custom Theme Style -->
         <link href="build/css/custom.min.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">     
 
+        <script>
+            function addNew() {
+                document.getElementById("catTable").style.display = "none";
+                document.getElementById("newCatDiv").style.display = "block";
+            }
+
+            function backToTable() {
+                document.getElementById("catTable").style.display = "block";
+                document.getElementById("newCatDiv").style.display = "none";
+            }
+
+            function startEdit(catId) {
+                document.getElementById("catTable").style.display = "none";
+                document.getElementById("editCatDiv").style.display = "block";
+            }
+        </script>
     </head>
 
     <body class="nav-md">
@@ -168,20 +184,34 @@
                                         </ul>
                                         <div class="clearfix"></div>
                                     </div>
+
+                                    <!--========================================== Categories List ================================================-->   
+
                                     <div class="x_content">
                                         <div data-role="main" class="ui-content">
+                                            <button type="button" id="addBtn" onclick="addNew()" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-plus"></i>Add New Category</button>
+
+                                            <div id="newCatDiv">
                                                 <form method="post" action="${pageContext.request.contextPath}/AdminCategoryServlet">
-                                                    <div>
-                                                        <h3>Add New Category</h3>
-                                                        <label for="catnm" class="ui-hidden-accessible">Name</label>
-                                                        <input type="text" name="name" id="name" placeholder="Category name">
-                                                        <button type="submit" data-inline="true"  value="Add"class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-plus"></i>Add</button>
-                                                    </div>
+                                                    <h3>Add New Category</h3>
+                                                    <label for="catnm" class="ui-hidden-accessible">Name</label>
+                                                    <input type="text" name="name" id="name" placeholder="Category name">
+                                                    <button type="submit" data-inline="true"  value="Add" class="btn btn-warning btn-xs" onclick="backToTable()">Add</button>
                                                 </form>
+                                            </div>
+
+                                            <div id="editCatDiv">
+                                                <h3> Edit Category </h3>
+                                                <label for="Category ID " class="ui-hidden-accessible">ID</label>
+                                                <input type="text" name="cID"  placeholder="Category ID" disabled>
+                                                <label for="Category Name " class="ui-hidden-accessible">Name</label>
+                                                <input type="text" name="cName"  placeholder="Category Name" >
+
+                                            </div>
                                         </div>
 
                                         <!-- start project list -->
-                                        <table class="table table-striped projects">
+                                        <table class="table table-striped projects" id="catTable">
                                             <thead>
                                                 <tr>
                                                     <th style="width: 10%">#Category ID</th>
@@ -190,30 +220,23 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                          <c:if test="${not empty sessionScope.Categories}">
-                                                <c:forEach items="${sessionScope.Categories}" var="category"> 
+                                                <c:if test="${not empty sessionScope.Categories}">
+                                                    <c:forEach items="${sessionScope.Categories}" var="category"> 
 
-                                                    <tr>
-                                                        <td>${category.categoryId}</td>
-                                                        <td>
-                                                            <a>${category.categoryName}</a>
-                                                        </td>
-                                                        <td>
-                                                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View
-                                                            </a>
-                                                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit
-                                                            </a>
-                                                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
-                                                                Delete </a>
-                                                        </td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </c:if> 
+                                                        <tr>
+                                                            <td>${category.categoryId}</td>
+                                                            <td>
+                                                                <a>${category.categoryName}</a>
+                                                            </td>
+                                                            <td>
+                                                                <button href="#" class="btn btn-info btn-xs" onclick="startEdit(${category.categoryId})"><i class="fa fa-pencil"></i> Edit </button>
+                                                                <a href="${pageContext.request.contextPath}/AdminCategoryServlet?id=${category.categoryId}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </c:if> 
                                             </tbody>
-
                                         </table>
-
-                                        <!-- end project list -->
 
                                     </div>
                                 </div>
@@ -226,7 +249,6 @@
                 <!-- footer content -->
                 <footer>
                     <div class="pull-right">
-                        Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
                     </div>
                     <div class="clearfix"></div>
                 </footer>
@@ -235,7 +257,6 @@
         </div>
 
         <!-- jQuery -->
-        <script src="vendors/jquery/dist/jquery.min.js"></script>
         <!-- Bootstrap -->
         <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
         <!-- FastClick -->

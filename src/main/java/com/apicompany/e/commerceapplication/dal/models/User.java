@@ -19,7 +19,7 @@ public class User {
     private String passWord;
     private String email;
     private String job;
-    private int creaditLimit;
+    private int creditLimit;
     private String address;
     private String interests;
 
@@ -33,7 +33,7 @@ public class User {
         this.passWord = passWord;
         this.email = email;
         this.job = job;
-        this.creaditLimit = creaditLimit;
+        this.creditLimit = creaditLimit;
         this.address = address;
         this.interests = interests;
         this.isAdmin = isAdmin;
@@ -45,7 +45,7 @@ public class User {
         this.passWord = passWord;
         this.email = email;
         this.job = job;
-        this.creaditLimit = creaditLimit;
+        this.creditLimit = creaditLimit;
         this.address = address;
         this.interests = interests;
         this.isAdmin = isAdmin;
@@ -97,7 +97,7 @@ public class User {
     }
 
     public int getCreditLimit() {
-        return creaditLimit;
+        return creditLimit;
     }
 
     public String getAddress() {
@@ -117,7 +117,7 @@ public class User {
     }
 
     public void setCreditLimit(int creaditLimit) {
-        this.creaditLimit = creaditLimit;
+        this.creditLimit = creaditLimit;
     }
 
     public void setAddress(String address) {
