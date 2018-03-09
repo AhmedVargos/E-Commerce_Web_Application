@@ -66,8 +66,9 @@ public class UserProfileServlet extends HttpServlet {
         HttpSession usersession=request.getSession(false);
        // int UserId= (int) usersession.getAttribute("userid");
        int UserId=1;
-        String userName=request.getParameter("UserName");
-        DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
+        
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+       
 
         Date birthDay = null;
         try {
@@ -75,19 +76,15 @@ public class UserProfileServlet extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(UserProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        String password=request.getParameter("password");
-        String email=request.getParameter("Email");
+        String password=request.getParameter("PasswordNew");
         String address=request.getParameter("Address");
         String job=request.getParameter("Job");
        int credit= Integer.parseInt(request.getParameter("Credit"));
         String interests=request.getParameter("interests");
         UserDAO myDao = new UserDAO();
          User myuser=myDao.getUser(UserId);
-         myuser.setUserName(userName);
          myuser.setPassWord(password);
          myuser.setBirthdate(birthDay);
-         myuser.setEmail(email);
          myuser.setAddress(address);
          myuser.setJob(job);
          myuser.setCreditLimit(credit);
@@ -102,7 +99,8 @@ public class UserProfileServlet extends HttpServlet {
         }
         else
         {
-        out.write("try again");
+        out.write("try again"+":pass:"+password+":birth:"+birthDay+":email:"+":address:"+address+":job:"+job
+        +":credit:"+credit+":interests:"+interests);
         }
     }
     @Override

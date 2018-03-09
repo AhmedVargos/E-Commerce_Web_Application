@@ -50,7 +50,7 @@
     <script src="vendor/modernizr/modernizr.js"></script>
 
 </head>
-<body onload="getUserData()">
+<body onfocus="getUserData()">
 <div class="body">
     <header id="header"
             data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": true}'>
@@ -158,14 +158,9 @@
                                             </li>
                                             <li class="dropdown">
                                                 <a class="dropdown-toggle" href="shop-user-profile.jsp">
-                                                    Edit profile
+                                                    Profile
                                                 </a>
 
-                                            </li>
-                                            <li class="dropdown">
-                                                <a class="dropdown-toggle" href="#">
-                                                    Contact Us
-                                                </a>
                                             </li>
                                             <li class="dropdown dropdown-mega dropdown-mega-shop" id="headerShop">
                                                 <a class="dropdown-toggle" href="page-login.jsp">
@@ -255,7 +250,7 @@
                                                 <div class="form-group">
                                                     <div class="col-md-6">
                                                         <label>User Name</label>
-                                                        <input id="Uuser" name="UserName" type="text" value=${sessionScope.userObj.userName} class="form-control">
+                                                        <input id="Uuser" name="userNameNewU" type="text" value=${sessionScope.userObj.userName} class="form-control">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label>Birth Day </label>
@@ -267,11 +262,11 @@
                                                 <div class="form-group">
                                                     <div class="col-md-6">
                                                         <label>Password</label>
-                                                        <input id="Upass" type="password" name="Password" value=${sessionScope.userObj.passWord} class="form-control">
+                                                        <input id="Upass" type="password" name="PasswordNew" value=${sessionScope.userObj.passWord} class="form-control">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label>E-mail</label>
-                                                        <input id="Uemail" type="text" name="Email" value=${sessionScope.userObj.email} class="form-control">
+                                                        <input id="Uemail" type="text" name="emailNewU" value=${sessionScope.userObj.email} class="form-control">
                                                     </div>
                                                 </div>
                                             </div>

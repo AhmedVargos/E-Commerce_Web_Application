@@ -158,15 +158,10 @@
 
                                             </li>
                                             <li class="dropdown">
-                                                <a class="dropdown-toggle" href="#">
-                                                    About Us
+                                               <a class="dropdown-toggle" href="shop-user-profile.jsp">
+                                                    Profile
                                                 </a>
 
-                                            </li>
-                                            <li class="dropdown">
-                                                <a class="dropdown-toggle" href="#">
-                                                    Contact Us
-                                                </a>
                                             </li>
                                             <li class="dropdown dropdown-mega dropdown-mega-shop" id="headerShop">
                                                 <a class="dropdown-toggle" href="page-login.jsp">
@@ -472,14 +467,14 @@
                    
                     
                     <div class="row">
-                        <a href="CheckoutServlet">
+                        
                         <div class="col-md-12">
                             <div class="actions-continue">
-                                <button type="submit" class="btn pull-right btn-primary btn-lg">Proceed to Checkout <i
+                                <button type="submit" class="btn pull-right btn-primary btn-lg" onclick="updateData()">Proceed to Checkout <i
                                         class="fa fa-angle-right ml-xs"></i></button>
                             </div>
                         </div>
-                        </a>
+                        
                     </div>
 
                 </div>
@@ -604,6 +599,7 @@
 
 <!-- Cart Scripts -->
 <script src="js/cart.js"></script>
+<script src="js/checkout.js"></script>
 
 <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
 <script>
