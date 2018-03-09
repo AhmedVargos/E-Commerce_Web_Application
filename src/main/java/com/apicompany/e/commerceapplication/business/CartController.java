@@ -84,8 +84,8 @@ public class CartController {
 //        cartItem = new CartItem(quantity,product);
         //cartList.add(cartItem);
 
-        cart.setCartItems(cartList);
-        return cart;
+        oldCart.setCartItems(cartList);
+        return oldCart;
     }
 
     public void createNewCart(int userId) {
@@ -98,9 +98,8 @@ public class CartController {
 
     public void addProductsToCart(Cart cart) {
         ArrayList<CartItem> cartItems = cart.getCartItems();
-        for (int i = 0; i < cartItems.size(); i++) {
-            cartDAO.addNewProductToExistingCart(cart.getCartId(), cartItems.get(i).getProduct().getProductId(), cartItems.get(i).getQuantity());
-        }
+
+        cartDAO.addExistingCartItems(cart.getCartId(), cartItems);
     }
 
     public Cart getCurrentCart(int userId) {
