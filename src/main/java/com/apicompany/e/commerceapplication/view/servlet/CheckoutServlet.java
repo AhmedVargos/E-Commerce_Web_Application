@@ -3,8 +3,12 @@ package com.apicompany.e.commerceapplication.view.servlet;
 import com.apicompany.e.commerceapplication.business.CheckoutController;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.UserDAO;
 import com.apicompany.e.commerceapplication.dal.models.User;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import javax.json.Json;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,23 +41,33 @@ public class CheckoutServlet extends HttpServlet {
         HttpSession usersession=request.getSession(false);
        // int UserId= (int) usersession.getAttribute("userid");
        int UserId=1;
+       PrintWriter out=response.getWriter();
         CheckoutController mycontroller = new CheckoutController();
          if( mycontroller.checkUserFound(UserId))
          {
            int totalPrice=mycontroller.CalaulatetotalPrice(UserId);
              User currentUser = mycontroller.getUser(UserId);
-             String username="B";
-             String address="R";
+             String username=" ";
+             String address=" ";
              if(currentUser!=null)
              {
               username=currentUser.getUserName();
                address = currentUser.getAddress();
              }
-           HttpSession ToptalPriceSession = request.getSession(true);
-           ToptalPriceSession.setAttribute("TotalPrice", totalPrice);
-           ToptalPriceSession.setAttribute("userName",username );
-           ToptalPriceSession.setAttribute("adress", address);
-           response.sendRedirect("shop-checkout.jsp");   
+             response.setContentType("application/json");
+//           HttpSession ToptalPriceSession = request.getSession(true);
+//           ToptalPriceSession.setAttribute("TotalPrice", totalPrice);
+//           ToptalPriceSession.setAttribute("userName",username );
+//           ToptalPriceSession.setAttribute("adress", address);
+          //  JsonObjectBuilder myjson=Json.createObjectBuilder();
+//             myjson.add("totalPrice",totalPrice);
+//             myjson.add("userCurrent",username);
+//             myjson.add("userAddress",address);
+
+                //Gson mygson=new Gson();
+                String mydata="{totalPrice:"+totalPrice+",userCurrent:"+username+",userAddress: test}";
+             out.write(mydata );
+          // response.sendRedirect("shop-checkout.jsp");   
          }
          else
          {
@@ -67,10 +81,13 @@ public class CheckoutServlet extends HttpServlet {
          HttpSession usersession=request.getSession(false);
        // int UserId= (int) usersession.getAttribute("userid");
        int UserId=1;
+       PrintWriter out=response.getWriter();
         CheckoutController mycontroller = new CheckoutController();
           int totalPrice=mycontroller.CalaulatetotalPrice(UserId);
+          if(totalPrice>0)
+          {
           boolean checkResult =mycontroller.checkLimitRange(UserId, totalPrice);
-          PrintWriter out=response.getWriter();
+          
           if(checkResult)
           { 
            boolean CreatOrder =mycontroller.MakeOrder(UserId);
@@ -87,11 +104,17 @@ public class CheckoutServlet extends HttpServlet {
           }
           else
           {
-          out.write("the total price more than your credit  Limit sorry :( increase your creadit");
+          out.write(" the total price more than your credit  Limit sorry :( increase your creadit ");
           
           }
+          }
+          else
+          {
+             out.write("your card is Empty ");   
+          }
+          }
         
-    }
+    
     @Override
     public String getServletInfo() {
         return "Short description";

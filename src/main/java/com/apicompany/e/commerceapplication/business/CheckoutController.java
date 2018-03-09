@@ -72,8 +72,6 @@ public class CheckoutController {
    {
         UserDAO myuserDao=new UserDAO();
        User user=myuserDao.getUserById(userId);
-       System.out.println("username: "+ user.getUserName());
-       System.out.println("addres: "+ user.getAddress());
        return user;
    }
    public boolean MakeOrder(int userId)
@@ -81,12 +79,12 @@ public class CheckoutController {
           CartDAO myCartDao=new CartDAO();
           Cart currentCart=myCartDao.getCartByUserID(userId);
           OrderDAO newOrderDAO = new OrderDAO();
-//          newOrderDAO.addNewOrderCopy(getUser(userId), currentCart.getCartItems());
           UserDAO userDao=new UserDAO();
           User currentUser=getUser(userId);
           currentUser.setCreditLimit(currentUser.getCreditLimit()-CalaulatetotalPrice(userId));
           userDao.updateUser(currentUser);
           ArrayList<CartItem> totalItemsOfCards = currentCart.getCartItems();
+          newOrderDAO.addNewOrder(currentUser,totalItemsOfCards);
           for(int i=0;i<totalItemsOfCards.size();i++)
           {
               int pureProductQuantity= totalItemsOfCards.get(i).getProduct().getQuantity();
