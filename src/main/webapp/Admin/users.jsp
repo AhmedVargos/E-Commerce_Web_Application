@@ -157,16 +157,111 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
                                     </li>
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
 
+                                <%--View User Form--%>
+                                <div id="viewForm" style="display: none;" class="col-md-12 col-xs-12">
+                                    <div class="x_panel">
+                                        <div class="x_title">
+                                            <h2>Form Basic Elements
+                                                <small>different form elements</small>
+                                            </h2>
+                                            <ul class="nav navbar-right panel_toolbox">
+                                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                                       role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="#">Settings 1</a>
+                                                        </li>
+                                                        <li><a href="#">Settings 2</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li><a class="close-link" onclick="closeForm();"><i
+                                                        class="fa fa-close"></i></a>
+                                                </li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                            <br/>
+                                            <form class="form-horizontal form-label-left">
+                                                <form class="form-horizontal form-label-left">
+
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Customer
+                                                            ID</label>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <input id="userId" type="text" class="form-control"
+                                                                   readonly="readonly">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Customer
+                                                            Name</label>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <input id="userName" type="text" class="form-control"
+                                                                   readonly="readonly">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <input id="userEmail" type="text" class="form-control"
+                                                                   readonly="readonly">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Birthdate</label>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <input id="userBDate" type="text" class="form-control"
+                                                                   readonly="readonly">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Job</label>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <input id="userJob" type="text" class="form-control"
+                                                                   readonly="readonly">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Address</label>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <input id="userAddress" type="text" class="form-control"
+                                                                   readonly="readonly">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Credit
+                                                            Limit</label>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <input id="userCredit" type="text" class="form-control"
+                                                                   readonly="readonly">
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <!-- start project list -->
-                                <table class="table table-striped projects">
+                                <table class="table table-striped projects" id="userTable">
                                     <thead>
                                     <tr>
                                         <th style="width: 10%">#User ID</th>
@@ -198,9 +293,10 @@
                                                 <a>${user.creditLimit}</a>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>
+                                                <button type="button" onclick="viewDetails(${user.userId})"
+                                                        class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>
                                                     View
-                                                </a>
+                                                </button>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -240,5 +336,6 @@
 
 <!-- Custom Theme Scripts -->
 <script src="build/js/custom.min.js"></script>
+<script src="js/AdminUsers.js"></script>
 </body>
 </html>

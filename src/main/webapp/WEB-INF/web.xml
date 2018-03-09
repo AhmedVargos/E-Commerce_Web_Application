@@ -25,12 +25,12 @@
         <url-pattern>/shop-checkout.jsp</url-pattern>
     </filter-mapping>
 
-    <filter>
-        <filter-name>Admin Filter</filter-name>
-        <filter-class>com.apicompany.e.commerceapplication.view.filter.AdminFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>Admin Filter</filter-name>
-        <url-pattern>/Admin/*</url-pattern>
-    </filter-mapping>
+    <!--<filter>-->
+        <!--<filter-name>Admin Filter</filter-name>-->
+        <!--<filter-class>com.apicompany.e.commerceapplication.view.filter.AdminFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>Admin Filter</filter-name>-->
+        <!--<url-pattern>/Admin/*</url-pattern>-->
+    <!--</filter-mapping>-->
 </web-app>
