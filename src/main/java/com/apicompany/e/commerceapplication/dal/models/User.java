@@ -8,7 +8,6 @@ package com.apicompany.e.commerceapplication.dal.models;
 import java.util.Date;
 
 /**
- *
  * @author Vargos
  */
 public class User {
@@ -19,38 +18,38 @@ public class User {
     private String passWord;
     private String email;
     private String job;
-    private int creaditLimit;
+    private int creditLimit;
     private String address;
     private String interests;
+    private boolean isAdmin;
 
     public User() {
     }
 
-    public User(int userId, String userName, Date birthdate, String passWord, String email, String job, int creaditLimit, String address, String interests, boolean isAdmin) {
+    public User(int userId, String userName, Date birthdate, String passWord, String email, String job, int creditLimit, String address, String interests, boolean isAdmin) {
         this.userId = userId;
         this.userName = userName;
         this.birthdate = birthdate;
         this.passWord = passWord;
         this.email = email;
         this.job = job;
-        this.creaditLimit = creaditLimit;
+        this.creditLimit = creditLimit;
         this.address = address;
         this.interests = interests;
         this.isAdmin = isAdmin;
     }
 
-    public User(String userName, Date birthdate, String passWord, String email, String job, int creaditLimit, String address, String interests, boolean isAdmin) {
+    public User(String userName, Date birthdate, String passWord, String email, String job, int creditLimit, String address, String interests, boolean isAdmin) {
         this.userName = userName;
         this.birthdate = birthdate;
         this.passWord = passWord;
         this.email = email;
         this.job = job;
-        this.creaditLimit = creaditLimit;
+        this.creditLimit = creditLimit;
         this.address = address;
         this.interests = interests;
         this.isAdmin = isAdmin;
     }
-    private boolean isAdmin;
 
     public void setUserId(int userId) {
         this.userId = userId;
@@ -97,7 +96,7 @@ public class User {
     }
 
     public int getCreditLimit() {
-        return creaditLimit;
+        return creditLimit;
     }
 
     public String getAddress() {
@@ -116,8 +115,8 @@ public class User {
         this.job = job;
     }
 
-    public void setCreditLimit(int creaditLimit) {
-        this.creaditLimit = creaditLimit;
+    public void setCreditLimit(int creditLimit) {
+        this.creditLimit = creditLimit;
     }
 
     public void setAddress(String address) {
