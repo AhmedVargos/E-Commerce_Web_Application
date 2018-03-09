@@ -5,11 +5,14 @@
  */
 
 
-function addToCart() {
+function addToCart(val) {
     //get product object
     //send ajax request with product obj
-    var productId = $("#myProduct").val();
-    var productQuantity = $("#myQuantity").val();
+    var productId = $(val).prev().prev().val();//$(val).find('#myProduct').val();
+    var productQuantity =$(val).prev().val(); //$(val).find('#myQuantity').val();
+
+    //var productId = $("#myProduct").val();
+    //var productQuantity = $("#myQuantity").val();
 
     $.post("CartServlet",{"id": productId, "quantity":productQuantity},updateCartCounter);
 

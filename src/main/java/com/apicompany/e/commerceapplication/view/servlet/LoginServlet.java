@@ -45,8 +45,10 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession(false);
 
                 if (session != null) {
+                    Cart userOldCart = cartController.getCurrentCart(user.getUserId());
                     if (session.getAttribute("cart") != null) {
                         Cart cart = (Cart) session.getAttribute("cart");
+                        cart.setCartId(userOldCart.getCartId());
                         cartController.addProductsToCart(cart);
                     }
                     session.setAttribute("cart", cartController.getCurrentCart(user.getUserId()));
