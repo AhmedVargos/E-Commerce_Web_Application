@@ -23,12 +23,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.ProductDAO;
 import com.apicompany.e.commerceapplication.dal.models.Product;
 
 
 /**
- *
  * @author Vargos
  */
 @WebServlet(name = "CartServlet", urlPatterns = {"/CartServlet"})
@@ -44,29 +44,28 @@ public class CartServlet extends HttpServlet {
 //        List<Product> cartList = (List<Product>) session.getAttribute("cart_list");
 
 
-
         // 1. get received JSON data from request
         BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
         String json = "";
-        if(br != null){
+        if (br != null) {
             json = br.readLine();
         }
 
         //TODO split string to get id and quantity
-        int counter=0, i=0;
+        int counter = 0, i = 0;
 //        String []id_qunt={"",""};
-        ArrayList<String> id_qunt= new ArrayList<>();
-        StringTokenizer arr= new StringTokenizer(json,"&");
-        while(arr.hasMoreElements()){
-           String insideElement = arr.nextToken();
-            StringTokenizer element= new StringTokenizer(insideElement,"=");
-            while(element.hasMoreElements()){
+        ArrayList<String> id_qunt = new ArrayList<>();
+        StringTokenizer arr = new StringTokenizer(json, "&");
+        while (arr.hasMoreElements()) {
+            String insideElement = arr.nextToken();
+            StringTokenizer element = new StringTokenizer(insideElement, "=");
+            while (element.hasMoreElements()) {
 //                System.out.println(element.nextToken());
-                if(counter%2==0){
+                if (counter % 2 == 0) {
                     counter++;
                     continue;
                 }
-                id_qunt.add(i,element.nextToken() );
+                id_qunt.add(i, element.nextToken());
                 i++;
                 counter++;
             }
@@ -86,34 +85,46 @@ public class CartServlet extends HttpServlet {
 //        ArrayList<CartItem> cartList = new ArrayList<>();
 
         HttpSession session = request.getSession(false);
-        if(session.getAttribute("cart")==null){
+        if (session.getAttribute("cart") == null) {
             //if it was the first time to add to cart
-            cart = cartController.addToCart(id,quantity);
+            cart = cartController.addToCart(id, quantity);
             session.setAttribute("cart", cart);
-        }else{
+        } else {
             //if cart has products
             Cart myCart = (Cart) session.getAttribute("cart");
-            cart = cartController.appendToCart(id, quantity,myCart);
+            cart = cartController.appendToCart(id, quantity, myCart);
             session.setAttribute("cart", cart);
         }
 
         //if user is online insert products in DB
-        /*
-        boolean logedIn = (boolean)session.getAttribute("logedIn");
-        if(logedIn == true){
-            new Thread(){
-                public void run() {
-                    int userId = (int)session.getAttribute("userId");
-                    //check if user has cart ..............
-                    CartDAO cartDAO = new CartDAO();
-                    int cartId = cartDAO.getCartByUserID(userId).getCartId();
-                    cartDAO.addNewProductToExistingCart(cartId, id,quantity);
-                    //if NOT
-                    cartDAO.addNewProductToNewCart(userId,id,quantity);
-                }
-            }.start();
-        }*/
 
+        boolean logedIn = (boolean) session.getAttribute("loggedin");
+        if (session.getAttribute("loggedin") != null) {
+            if (logedIn == true) {
+                new Thread() {
+                    public void run() {
+                        //TODO use cart object on session
+//                        boolean hasCart = false;
+//                        int userId = (int) session.getAttribute("userId");
+                        CartDAO cartDAO = new CartDAO();
+                        int cartId = cart.getCartId();
+                        cartDAO.addNewProductToExistingCart(cartId, id, quantity);
+
+
+                        //check if user has cart ..............
+//                    if (cartDAO.isCartExist(userId)==true){
+//
+//
+//                        int cartId = cartDAO.getCartByUserID(userId).getCartId();
+//                        cartDAO.addNewProductToExistingCart(cartId, id,quantity);
+//                    }else {
+//                        //if NOT
+//                        cartDAO.addNewProductToNewCart(userId, id, quantity);
+//                    }
+                    }
+                }.start();
+            }
+        }
     }
 
 }
