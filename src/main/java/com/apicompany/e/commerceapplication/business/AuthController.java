@@ -9,6 +9,7 @@ public class AuthController {
     private UserDAO userDAO;
     private boolean isRegistered;
     private boolean isLoggedIn;
+    private int registeredUsedId;
 
     public AuthController() {
         this.userDAO = new UserDAO();
@@ -40,6 +41,14 @@ public class AuthController {
         return user;
     }
 
+    public int getRegisteredUsedId() {
+        return registeredUsedId;
+    }
+
+    private void setRegisteredUsedId(int registeredUsedId) {
+        this.registeredUsedId = registeredUsedId;
+    }
+
     public void registerNewUser(String name, String password, String email, String address, String job, int credit, java.util.Date birthdate) {
         User user = new User();
         user.setUserName(name);
@@ -48,9 +57,11 @@ public class AuthController {
         user.setAddress(address);
         user.setJob(job);
         user.setCreditLimit(credit);
-        user.setBirthdate(birthdate);
+        user.setBirthdate(new Date(birthdate.getTime()));
 
         boolean inserted = userDAO.addUser(user);
+        setRegisteredUsedId(userDAO.getUserByEmail(email).getUserId());
+
         setRegistered(inserted);
     }
 }

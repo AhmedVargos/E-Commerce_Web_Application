@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -48,10 +49,55 @@
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.js"></script>
 
+
+    <!-- Vendor -->
+    <script src="vendor/jquery/jquery.js"></script>
+    <script src="vendor/jquery.appear/jquery.appear.js"></script>
+    <script src="vendor/jquery.easing/jquery.easing.js"></script>
+    <script src="vendor/jquery-cookie/jquery-cookie.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="vendor/common/common.js"></script>
+    <script src="vendor/jquery.validation/jquery.validation.js"></script>
+    <script src="vendor/jquery.stellar/jquery.stellar.js"></script>
+    <script src="vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="vendor/jquery.gmap/jquery.gmap.js"></script>
+    <script src="vendor/jquery.lazyload/jquery.lazyload.js"></script>
+    <script src="vendor/isotope/jquery.isotope.js"></script>
+    <script src="vendor/owl.carousel/owl.carousel.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
+    <script src="vendor/vide/vide.js"></script>
+
+    <!-- Theme Base, Components and Settings -->
+    <script src="js/theme.js"></script>
+
+    <!-- Theme Custom -->
+    <script src="js/custom.js"></script>
+
+    <!-- Theme Initialization Files -->
+    <script src="js/theme.init.js"></script>
+
 </head>
 <body>
 
 <div class="body">
+    <script>
+        var userCart;
+
+        function getUserCart() {
+            $.ajax({
+                url: 'CartPageServlet',
+                type: 'GET',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (val) {
+                    userCart = val;
+                }
+            });
+        }
+
+        getUserCart();
+    </script>
+
     <header id="header"
             data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": true}'>
         <div class="header-body">
@@ -199,7 +245,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="actions" colspan="6">
-                                                                        
+
                                                                         <div class="actions-continue">
                                                                             <button type="submit"
                                                                                     class="btn btn-default">View All
@@ -210,7 +256,7 @@
                                                                                     class="fa fa-angle-right ml-xs"></i>
                                                                             </button>
                                                                         </div>
-                                                                       
+
                                                                     </td>
                                                                 </tr>
                                                                 </tbody>
@@ -237,7 +283,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <hr class="tall">
+                    <hr class="tall" style="margin: 100px;">
                 </div>
             </div>
 
@@ -265,7 +311,7 @@
                                                     <th class="product-price">
                                                         Price
                                                     </th>
-                                                    <th class="product-quantity">
+                                                    <th class="product-quantity" style="padding-left: 40px">
                                                         Quantity
                                                     </th>
                                                     <th class="product-subtotal">
@@ -273,115 +319,62 @@
                                                     </th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                <tr class="cart_table_item">
-                                                    <td class="product-remove">
-                                                        <a title="Remove this item" class="remove" href="#">
-                                                            <i class="fa fa-times"></i>
-                                                        </a>
-                                                    </td>
-                                                    <td class="product-thumbnail">
-                                                        <a href="shop-product-sidebar.jsp">
-                                                            <img width="100" height="100" alt="" class="img-responsive"
-                                                                 src="img/products/product-1.jpg">
-                                                        </a>
-                                                    </td>
-                                                    <td class="product-name">
-                                                        <a href="shop-product-sidebar.jsp">Photo Camera</a>
-                                                    </td>
-                                                    <td class="product-price">
-                                                        <span class="amount">$299</span>
-                                                    </td>
-                                                    <td class="product-quantity">
-                                                        <form enctype="multipart/form-data" method="post" class="cart">
-                                                            <div class="quantity">
-                                                                <input type="button" class="minus" value="-">
-                                                                <input type="text" class="input-text qty text"
-                                                                       title="Qty" value="1" name="quantity" min="1"
-                                                                       step="1">
-                                                                <input type="button" class="plus" value="+">
+                                                <c:if test="${not empty sessionScope.cart.cartItems}">
+                                                    <tbody>
+                                                    <c:forEach items="${sessionScope.cart.cartItems}" var="cartItem">
+                                                        <tr class="cart_table_item">
+                                                            <input type="hidden" id="item"
+                                                                   value="${cartItem.product.productId}">
+
+                                                            <td class="product-remove">
+                                                                <i class="fa fa-times" onclick="deleteAProduct(this)"
+                                                                   style="cursor: pointer;"></i>
+
+                                                            </td>
+                                                            <td class="product-thumbnail">
+                                                                <a href="HomeServlet?id=${cartItem.product.productId}">
+                                                                    <img width="100" height="100" alt=""
+                                                                         class="img-responsive"
+                                                                         src="img/products/product-1.jpg">
+                                                                </a>
+                                                            </td>
+                                                            <td class="product-name">
+                                                                <a href="HomeServlet?id=${cartItem.product.productId}">${cartItem.product.productName}</a>
+                                                            </td>
+                                                            <td class="product-price">
+                                                                <span class="amount">${cartItem.product.productPrice}</span>
+                                                            </td>
+                                                            <td class="product-quantity">
+                                                                <div class="quantity">
+                                                                    <input type="button" class="minus" value="-"
+                                                                           onclick="decreaseQuantity(this)">
+                                                                    <input type="text" class="input-text qty text"
+                                                                           title="Qty" value="${cartItem.quantity}"
+                                                                           name="quantity"
+                                                                           min="1"
+                                                                           step="1"
+                                                                           disabled>
+                                                                    <input type="button" class="plus" value="+"
+                                                                           onclick="increaseQuantity(this)">
+                                                                </div>
+                                                            </td>
+                                                            <td class="product-subtotal">
+                                                                <span class="amount">${cartItem.product.productPrice * cartItem.quantity}</span>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                    <tr>
+                                                        <td class="actions" colspan="6">
+                                                            <div class="actions-continue">
+                                                                <input type="submit" value="Update Cart"
+                                                                       name="update_cart"
+                                                                       class="btn btn-default"
+                                                                       onclick="updateCart(this)">
                                                             </div>
-                                                        </form>
-                                                    </td>
-                                                    <td class="product-subtotal">
-                                                        <span class="amount">$299</span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="cart_table_item">
-                                                    <td class="product-remove">
-                                                        <a title="Remove this item" class="remove" href="#">
-                                                            <i class="fa fa-times"></i>
-                                                        </a>
-                                                    </td>
-                                                    <td class="product-thumbnail">
-                                                        <a href="shop-product-sidebar.jsp">
-                                                            <img width="100" height="100" alt="" class="img-responsive"
-                                                                 src="img/products/product-2.jpg">
-                                                        </a>
-                                                    </td>
-                                                    <td class="product-name">
-                                                        <a href="shop-product-sidebar.jsp">Golf Bag</a>
-                                                    </td>
-                                                    <td class="product-price">
-                                                        <span class="amount">$72</span>
-                                                    </td>
-                                                    <td class="product-quantity">
-                                                        <form enctype="multipart/form-data" method="post" class="cart">
-                                                            <div class="quantity">
-                                                                <input type="button" class="minus" value="-">
-                                                                <input type="text" class="input-text qty text"
-                                                                       title="Qty" value="1" name="quantity" min="1"
-                                                                       step="1">
-                                                                <input type="button" class="plus" value="+">
-                                                            </div>
-                                                        </form>
-                                                    </td>
-                                                    <td class="product-subtotal">
-                                                        <span class="amount">$72</span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="cart_table_item">
-                                                    <td class="product-remove">
-                                                        <a title="Remove this item" class="remove" href="#">
-                                                            <i class="fa fa-times"></i>
-                                                        </a>
-                                                    </td>
-                                                    <td class="product-thumbnail">
-                                                        <a href="shop-product-sidebar.jsp">
-                                                            <img width="100" height="100" alt="" class="img-responsive"
-                                                                 src="img/products/product-3.jpg">
-                                                        </a>
-                                                    </td>
-                                                    <td class="product-name">
-                                                        <a href="shop-product-sidebar.jsp">Workout</a>
-                                                    </td>
-                                                    <td class="product-price">
-                                                        <span class="amount">$60</span>
-                                                    </td>
-                                                    <td class="product-quantity">
-                                                        <form enctype="multipart/form-data" method="post" class="cart">
-                                                            <div class="quantity">
-                                                                <input type="button" class="minus" value="-">
-                                                                <input type="text" class="input-text qty text"
-                                                                       title="Qty" value="1" name="quantity" min="1"
-                                                                       step="1">
-                                                                <input type="button" class="plus" value="+">
-                                                            </div>
-                                                        </form>
-                                                    </td>
-                                                    <td class="product-subtotal">
-                                                        <span class="amount">$60</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="actions" colspan="6">
-                                                        <div class="actions-continue">
-                                                            <input type="submit" value="Update Cart" name="update_cart"
-                                                                   class="btn btn-default">
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </c:if>
                                             </table>
                                         </form>
                                     </div>
@@ -390,98 +383,16 @@
                         </div>
                     </div>
 
-                    <div class="featured-boxes">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="featured-box featured-box-primary align-left mt-xlg">
-                                    <div class="box-content">
-                                        <h4 class="heading-primary text-uppercase mb-md">Calculate Shipping</h4>
-                                        <form action="/" id="frmCalculateShipping" method="post">
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label>Country</label>
-                                                        <select class="form-control">
-                                                            <option value="">Select a country</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <div class="col-md-6">
-                                                        <label>State</label>
-                                                        <input type="text" value="" class="form-control">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label>Zip Code</label>
-                                                        <input type="text" value="" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <input type="submit" value="Update Totals"
-                                                           class="btn btn-default pull-right mb-xl"
-                                                           data-loading-text="Loading...">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="featured-box featured-box-primary align-left mt-xlg">
-                                    <div class="box-content">
-                                        <h4 class="heading-primary text-uppercase mb-md">Cart Totals</h4>
-                                        <table class="cart-totals">
-                                            <tbody>
-                                            <tr class="cart-subtotal">
-                                                <th>
-                                                    <strong>Cart Subtotal</strong>
-                                                </th>
-                                                <td>
-                                                    <strong><span class="amount">$431</span></strong>
-                                                </td>
-                                            </tr>
-                                            <tr class="shipping">
-                                                <th>
-                                                    Shipping
-                                                </th>
-                                                <td>
-                                                    Free Shipping<input type="hidden" value="free_shipping"
-                                                                        id="shipping_method" name="shipping_method">
-                                                </td>
-                                            </tr>
-                                            <tr class="total">
-                                                <th>
-                                                    <strong>Order Total</strong>
-                                                </th>
-                                                <td>
-                                                    <strong><span class="amount">$431</span></strong>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
-                   
-                    
-                    <div class="row">
-                        <a href="CheckoutServlet">
-                        <div class="col-md-12">
-                            <div class="actions-continue">
-                                <button type="submit" class="btn pull-right btn-primary btn-lg">Proceed to Checkout <i
-                                        class="fa fa-angle-right ml-xs"></i></button>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="actions-continue">
+                        <a href="shop-checkout.jsp" class="btn pull-right btn-primary btn-lg">Proceed to Checkout <i
+                                class="fa fa-angle-right ml-xs"></i></a>
+                    </div>
                 </div>
             </div>
 
@@ -576,35 +487,11 @@
     </footer>
 </div>
 
-<!-- Vendor -->
-<script src="vendor/jquery/jquery.js"></script>
-<script src="vendor/jquery.appear/jquery.appear.js"></script>
-<script src="vendor/jquery.easing/jquery.easing.js"></script>
-<script src="vendor/jquery-cookie/jquery-cookie.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.js"></script>
-<script src="vendor/common/common.js"></script>
-<script src="vendor/jquery.validation/jquery.validation.js"></script>
-<script src="vendor/jquery.stellar/jquery.stellar.js"></script>
-<script src="vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
-<script src="vendor/jquery.gmap/jquery.gmap.js"></script>
-<script src="vendor/jquery.lazyload/jquery.lazyload.js"></script>
-<script src="vendor/isotope/jquery.isotope.js"></script>
-<script src="vendor/owl.carousel/owl.carousel.js"></script>
-<script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
-<script src="vendor/vide/vide.js"></script>
-
-<!-- Theme Base, Components and Settings -->
-<script src="js/theme.js"></script>
-
-<!-- Theme Custom -->
-<script src="js/custom.js"></script>
-
-<!-- Theme Initialization Files -->
-<script src="js/theme.init.js"></script>
-
 <!-- Cart Scripts -->
 <script src="js/cart.js"></script>
+<script src="js/cartPage.js"></script>
 
+<!-- <script src="js/cartPage.js"></script> -->
 <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
