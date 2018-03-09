@@ -52,7 +52,7 @@ public class UserProfileServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession usersession = request.getSession(false);
         // int UserId= (int) usersession.getAttribute("userid");
-        int UserId = 1;
+        int UserId = 3;
 
         PrintWriter out= response.getWriter();
         UserProfileController myuserconController = new UserProfileController();
@@ -64,6 +64,7 @@ public class UserProfileServlet extends HttpServlet {
         usersession.setAttribute("thejob", job);
         userDatasession.setAttribute("userObj", mycurrentUserData);
         response.setContentType("application/json");
+        
         Gson mygson=new Gson();
        out.write(mygson.toJson(mycurrentUserData));
        out.close();
@@ -73,21 +74,36 @@ public class UserProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         int UserId=1;
+         int UserId=3;
         
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-     
-        String userName = request.getParameter("UserName");
+       HttpSession usersession=request.getSession(false);
+     // int UserId= (int) usersession.getAttribute("userid");
+ 
+        
+        String password=request.getParameter("PasswordNew");
+        String address=request.getParameter("Address");
+        String job=request.getParameter("Job");
+       int credit= Integer.parseInt(request.getParameter("Credit"));
+        String interests=request.getParameter("interests");
         UserDAO myDao = new UserDAO();
-
-        Date birthDay = null;
-        try {
-            birthDay = formatter.parse(request.getParameter("BirthDay"));
-        } catch (ParseException ex) {
-            Logger.getLogger(UserProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
+         User myuser=myDao.getUserById(UserId);
+         myuser.setPassWord(password);
+         myuser.setAddress(address);
+         myuser.setJob(job);
+         myuser.setCreditLimit(credit);
+         myuser.setInterests(interests);
+        UserProfileController myuserconController=new UserProfileController();
+        boolean updateUserData=myuserconController.updateUserData(myuser); 
+        PrintWriter out=response.getWriter();
+        if(updateUserData)
+        {
+        //out.write("The Data Updated successfuly");
+          response.sendRedirect("shop-user-profile.jsp");
         }
-        HttpSession usersession=request.getSession(false);
-       // int UserId= (int) usersession.getAttribute("userid");
+        else
+        {
+        out.write("try again");
+        }
       
         }
     

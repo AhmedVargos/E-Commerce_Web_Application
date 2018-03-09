@@ -287,7 +287,7 @@
                                                 <div class="form-group">
                                                     <div class="col-md-6">
                                                         <label>Credit</label>
-                                                        <input id="Ucreadit" type="number" name="Credit" value="" class="form-control">
+                                                        <input id="UcreaditE" type="number" name="Credit" value="" class="form-control">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label>interests </label>
