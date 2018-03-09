@@ -9,8 +9,7 @@ import com.apicompany.e.commerceapplication.dal.dao.daoint.CartDAOInt;
 import com.apicompany.e.commerceapplication.dal.database.DatabaseHandler;
 import com.apicompany.e.commerceapplication.dal.models.Cart;
 import com.apicompany.e.commerceapplication.dal.models.CartItem;
-import com.apicompany.e.commerceapplication.dal.models.Product;
-import com.apicompany.e.commerceapplication.dal.models.User;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +18,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author Vargos
  */
 public class CartDAO implements CartDAOInt {
@@ -63,7 +61,7 @@ public class CartDAO implements CartDAOInt {
                     }
 
                 }
-                cart.setCartUser(udao.getUser(userId));
+                cart.setCartUser(udao.getUserById(userId));
                 cart.setCartItems(cartItems);
             }
         } catch (SQLException ex) {
@@ -91,7 +89,7 @@ public class CartDAO implements CartDAOInt {
             rs = selectStatement.executeQuery();
             if (rs.next()) {
                 cart.setCartId(cartId);
-                cart.setCartUser(udao.getUser(rs.getInt("user_userId")));
+                cart.setCartUser(udao.getUserById(rs.getInt("user_userId")));
                 cart.setDate(rs.getDate("date"));
 
                 selectStatement = dbHandler.getCon().prepareStatement("SELECT PC.product_productId , PC.product_quantity"
@@ -137,7 +135,7 @@ public class CartDAO implements CartDAOInt {
         return carts;
     }
 
-//---------------------------------------------------------------------------------------------------------------------------------------//
+    //---------------------------------------------------------------------------------------------------------------------------------------//
     //tested
     @Override
     public Boolean addNewProductToExistingCart(int cartId, int productId, int Quantity) {
@@ -183,7 +181,7 @@ public class CartDAO implements CartDAOInt {
 
     }
 
-//---------------------------------------------------------------------------------------------------------------------------------------//
+    //---------------------------------------------------------------------------------------------------------------------------------------//
     //tested
     @Override
     public Boolean removeProductFromCart(int cartId, int productId) {
@@ -249,7 +247,7 @@ public class CartDAO implements CartDAOInt {
         return isRemoved;
     }
 
-//---------------------------------------------------------------------------------------------------------------------------------------//
+    //---------------------------------------------------------------------------------------------------------------------------------------//
     //tested
     @Override
     public Boolean updateExistingCart(int cartId, ArrayList<CartItem> updatedItems) {
@@ -310,8 +308,8 @@ public class CartDAO implements CartDAOInt {
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------//
-    
-//tested
+
+    //tested
     Boolean isProductExistInCart(int cartId, int productId) {
         PreparedStatement selectProduct;
         ResultSet rs;
@@ -337,7 +335,12 @@ public class CartDAO implements CartDAOInt {
     @Override
     public Boolean addEmptyCart(Cart cart) {
         PreparedStatement insertStatement;
+        PreparedStatement selectStatement;
+        ResultSet rs;
+        int cartId = -1;
+
         Boolean isAdded = false;
+        ArrayList<CartItem> items;
 
         try {
             insertStatement = dbHandler.getCon().prepareStatement("INSERT INTO EcommerceDB.cart (date, user_userId)"
@@ -347,14 +350,45 @@ public class CartDAO implements CartDAOInt {
             insertStatement.setDate(1, sqlDate);
             insertStatement.setInt(2, cart.getCartUser().getUserId());
             insertStatement.executeUpdate();
+
+            selectStatement = dbHandler.getCon().prepareStatement("SELECT cartId FROM EcommerceDB.cart WHERE  user_userId = ?");
+            selectStatement.setInt(1, cart.getCartUser().getUserId());
+            rs = selectStatement.executeQuery();
+            if (rs.next())
+                cartId = rs.getInt("cartId");
+
+            items = cart.getCartItems();
+            for (int i = 0; i < items.size(); i++) {
+                addNewProductToExistingCart(cartId, items.get(i).getProduct().getProductId(), items.get(i).getQuantity());
+            }
             isAdded = true;
+
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return isAdded;
     }
 
-//---------------------------------------------------------------------------------------------------------------------------------------//
+    public Boolean createEmptyCart(int userId) {
+        PreparedStatement insertStatement;
+        boolean isCartCreated = false;
+        try {
+            insertStatement = dbHandler.getCon().prepareStatement("INSERT INTO EcommerceDB.cart (date, user_userId)"
+                    + "VALUES(?,?)");
+            java.util.Date today = new java.util.Date();
+            java.sql.Date sqlDate = new java.sql.Date(today.getTime());
+            insertStatement.setDate(1, sqlDate);
+            insertStatement.setInt(2, userId);
+            insertStatement.executeUpdate();
+            isCartCreated = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return isCartCreated;
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------//
     @Override
     public Boolean isCartExist(int userId) {
         PreparedStatement selectStatement;
@@ -371,20 +405,26 @@ public class CartDAO implements CartDAOInt {
         }
         return isExist;
     }
+
     //---------------------------------------------------------------------------------------------------------------------------------------//
 
     public static void main(String[] args) {
         CartDAO cartDAO = new CartDAO();
         UserDAO udao = new UserDAO();
+        ProductDAO pdao = new ProductDAO();
 
-        /*Cart c = new Cart();
-        c.setCartUser(udao.getUser(4));
-        cartDAO.addEmptyCart(c);*/
-        System.err.println(cartDAO.isCartExist(2));
+        Cart c = new Cart();
+        c.setCartUser(udao.getUserById(5));
+        ArrayList<CartItem> cartItems = new ArrayList<>();
+        cartItems.add(new CartItem(3, pdao.getSpecificProduct(14)));
+        cartItems.add(new CartItem(4, pdao.getSpecificProduct(15)));
+        c.setCartItems(cartItems);
+        System.err.println(cartDAO.addEmptyCart(c));
+        //  System.err.println(cartDAO.isCartExist(2));
 
     }
 
-    /* public static void main(String[] args) {
+ /* public static void main(String[] args) {
         // UserDAO userDAO = new UserDAO();
         CartDAO cDao = new CartDAO();
         // User user = userDAO.getUser("Gehad");
@@ -397,8 +437,8 @@ public class CartDAO implements CartDAOInt {
         // cDao.removeProductFromCart(1, 14);
 //        cDao.removeCartByCartID(1);
 //        
-//        ArrayList<CartItem> cartItems = new ArrayList<>();
-//        cartItems.add(new CartItem(15,pdao.getSpecificProduct(16)));
+//       ArrayList<CartItem> cartItems = new ArrayList<>();
+//       cartItems.add(new CartItem(15,pdao.getSpecificProduct(16)));
 //       Product p = new Product();
 //       p.setProductId(17);
 //       p.setProductName("jeans");

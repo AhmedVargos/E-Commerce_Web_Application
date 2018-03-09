@@ -8,6 +8,7 @@ package com.apicompany.e.commerceapplication.dal.dao.daoimpl;
 import com.apicompany.e.commerceapplication.dal.dao.daoint.UserDAOInt;
 import com.apicompany.e.commerceapplication.dal.database.DatabaseHandler;
 import com.apicompany.e.commerceapplication.dal.models.User;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,10 +18,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author Vargos
  */
-public class UserDAO implements UserDAOInt{
+public class UserDAO implements UserDAOInt {
 
     DatabaseHandler dbHandler;
 
@@ -33,7 +33,7 @@ public class UserDAO implements UserDAOInt{
     // this method returns all users
     //tested
     @Override
-      public ArrayList<User> getAllUsers() {
+    public ArrayList<User> getAllUsers() {
         ArrayList<User> allUsers = new ArrayList<>();
         User user;
         PreparedStatement selectStatement;
@@ -60,49 +60,15 @@ public class UserDAO implements UserDAOInt{
         return allUsers;
     }
 
-    //this method finds user by his id, returns null if user isn't exist
-    //tested
-    @Override
-     public User getUser(int id) {
-        User user = new User();
+    private User getUser(PreparedStatement statement) {
+        User user = null;
         PreparedStatement selectStatement;
         ResultSet rs;
         try {
-            selectStatement = dbHandler.getCon().prepareStatement("SELECT * FROM USER WHERE userId = ?");
-            selectStatement.setInt(1, id);
+            selectStatement = statement;
             rs = selectStatement.executeQuery();
             if (rs.next()) {
-                user.setUserId(id);
-                user.setUserName(rs.getString("userName"));
-                user.setPassWord(rs.getString("password"));
-                user.setEmail(rs.getString("email"));
-                user.setJob(rs.getString("job"));
-                user.setCreditLimit(rs.getInt("creditLimit"));
-                user.setAddress(rs.getString("address"));
-                user.setInterests(rs.getString("interests"));
-                user.setIsAdmin(rs.getBoolean("isAdmin"));
-                user.setBirthdate(rs.getDate("birthdate"));
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return user;
-    }
-
-    //this method finds user by his name, returns null if user isn't exist
-    //tested
-    @Override
-    public User getUser(String userName) {
-        User user = new User();
-        PreparedStatement selectStatement;
-        ResultSet rs;
-        try {
-            selectStatement = dbHandler.getCon().prepareStatement("SELECT * FROM USER WHERE userName = ?");
-            selectStatement.setString(1, userName);
-            rs = selectStatement.executeQuery();
-            if (rs.next());
-            {
+                user = new User();
                 user.setUserId(rs.getInt("userId"));
                 user.setUserName(rs.getString("userName"));
                 user.setPassWord(rs.getString("password"));
@@ -113,11 +79,57 @@ public class UserDAO implements UserDAOInt{
                 user.setInterests(rs.getString("interests"));
                 user.setIsAdmin(rs.getBoolean("isAdmin"));
                 user.setBirthdate(rs.getDate("birthdate"));
-
             }
+        } catch (SQLException ex) {
+            System.out.println("getUser()");
+            //Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+    }
 
+    //this method finds user by his id, returns null if user isn't exist
+    //tested
+    @Override
+    public User getUserById(int id) {
+        User user = null;
+        PreparedStatement selectStatement;
+        try {
+            selectStatement = dbHandler.getCon().prepareStatement("SELECT * FROM USER WHERE userId = ?");
+            selectStatement.setInt(1, id);
+            user = getUser(selectStatement);
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+    }
+
+    //this method finds user by his name, returns null if user isn't exist
+    //tested
+    @Override
+    public User getUserByName(String userName) {
+        User user = null;
+        PreparedStatement selectStatement;
+        try {
+            selectStatement = dbHandler.getCon().prepareStatement("SELECT * FROM USER WHERE userName LIKE ?");
+            selectStatement.setString(1, "%" + userName + "%");
+            user = getUser(selectStatement);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        User user = null;
+        PreparedStatement selectStatement;
+        try {
+            selectStatement = dbHandler.getCon().prepareStatement("SELECT * FROM USER WHERE email = ?");
+            selectStatement.setString(1, email);
+            user = getUser(selectStatement);
+        } catch (SQLException ex) {
+            System.out.println("getUserByEmail()");
+            //Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user;
     }
@@ -125,12 +137,10 @@ public class UserDAO implements UserDAOInt{
     //this methods is used to confirm login;it check if the username and password are correct or not
     // return the user if he existed, and null in case of invalid username/password
     @Override
-    public User isUserExist(String userName, String password) {
-        User user = getUser(userName);
-        if (user != null) {
-            if (!user.getPassWord().equals(password)) {
-                user = null;
-            }
+    public User isUserExist(String email, String password) {
+        User user = getUserByEmail(email);
+        if (user == null || !user.getPassWord().equals(password)) {
+            user = null;
         }
         return user;
     }
@@ -146,7 +156,7 @@ public class UserDAO implements UserDAOInt{
             insertStatement = dbHandler.getCon().prepareStatement("INSERT INTO USER (userName,birthdate,"
                     + "password, email,job,creditLimit,address,interests,isAdmin) VALUES (?,?,?,?,?,?,?,?,?)");
             insertStatement.setString(1, user.getUserName());
-            insertStatement.setDate(2, (Date) user.getBirthdate());
+            insertStatement.setDate(2, new Date(user.getBirthdate().getTime()));
             insertStatement.setString(3, user.getPassWord());
             insertStatement.setString(4, user.getEmail());
             insertStatement.setString(5, user.getJob());
@@ -167,7 +177,7 @@ public class UserDAO implements UserDAOInt{
     @Override
     public boolean updateUser(User user) {
         PreparedStatement updateStatement;
-        boolean isUpdated=false;
+        boolean isUpdated;
         int userID = user.getUserId();
 
         try {
@@ -185,18 +195,15 @@ public class UserDAO implements UserDAOInt{
             updateStatement.setString(8, user.getInterests());
             updateStatement.setBoolean(9, user.isIsAdmin());
             updateStatement.setInt(10, userID);
-            int res=updateStatement.executeUpdate();
-            if(res>0)
-            {
-                isUpdated = true;
-            }
+            updateStatement.executeUpdate();
+            isUpdated = true;
         } catch (SQLException ex) {
             isUpdated = false;
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return isUpdated;
     }
-    
+
     //tested
     @Override
     public boolean removeUser(User user) {
@@ -215,33 +222,33 @@ public class UserDAO implements UserDAOInt{
         return isRemoved;
     }
 
-//     public static void main(String[] args) {
-//        UserDAO udao = new UserDAO();
-//        ArrayList<User> temp = udao.getAllUsers();
-//        System.out.println(temp.size());
-//        User u = new User();
-//        u.setUserName("Sheriiiiiiif");
-//        u.setPassWord("123");
-//        u.setJob("Web developer");
-//        //u.setIsAdmin(true);
-//        u.setInterests("Movies");
-//        u.setEmail("Daviiiid@gmail.com");
-//       // u.setCreditLimit(2000);
-//        Date date = new Date(2018-01-24);
-//        u.setBirthdate(date);
-//        u.setAddress("Haram");
-//        boolean added = udao.addUser(u);
-//        System.out.println(added);
-//    // test update
-//    //u = udao.getUser(2);
-//    // u.setPassWord("12345");
-//    //  boolean temp_2 = udao.removeUser(u);
-//    //System.out.println(temp_2);
-//    //u.setPassWord("12345");
-//    /* u= udao.isUserExist("David", "1245");
-//        if(u != null)
-//            System.out.println("exists" + u.getEmail());
-//        else
-//            System.out.println("Invalid");*/
-//    }
+    /* public static void main(String[] args) {
+        UserDAO udao = new UserDAO();
+        ArrayList<User> temp = udao.getAllUsers();
+        System.out.println(temp.size());
+        User u = new User();*/
+ /* u.setUserName("David");
+        u.setPassWord("123");
+        u.setJob("Web developer");
+        u.setIsAdmin(true);
+        u.setInterests("Movies");
+        u.setEmail("David@gmail.com");
+        u.setCreditLimit(2000);
+        Date date = new Date(2018-01-23);
+        u.setBirthDay(date);
+        u.setAddress("Haram");
+        boolean added = udao.addUser(u);
+        System.out.println(added);*/
+    // test update
+    //u = udao.getUser(2);
+    // u.setPassWord("12345");
+    //  boolean temp_2 = udao.removeUser(u);
+    //System.out.println(temp_2);
+    //u.setPassWord("12345");
+    /* u= udao.isUserExist("David", "1245");
+        if(u != null)
+            System.out.println("exists" + u.getEmail());
+        else
+            System.out.println("Invalid");*/
+    //}
 }

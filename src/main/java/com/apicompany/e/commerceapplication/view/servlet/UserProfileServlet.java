@@ -8,6 +8,8 @@ package com.apicompany.e.commerceapplication.view.servlet;
 import com.apicompany.e.commerceapplication.business.UserProfileController;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.UserDAO;
 import com.apicompany.e.commerceapplication.dal.models.User;
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -24,7 +26,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
  * @author Vargos
  */
 @WebServlet(name = "UserProfileServlet", urlPatterns = {"/UserProfileServlet"})
@@ -37,7 +38,7 @@ public class UserProfileServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserProfileServlet</title>");            
+            out.println("<title>Servlet UserProfileServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet UserProfileServlet at " + request.getContextPath() + "</h1>");
@@ -45,21 +46,29 @@ public class UserProfileServlet extends HttpServlet {
             out.println("</html>");
         }
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession usersession=request.getSession(false);
-       // int UserId= (int) usersession.getAttribute("userid");
-       int UserId=1;
-        UserProfileController myuserconController=new UserProfileController();
-        User mycurrentUserData=myuserconController.getuserdata(UserId);
-       HttpSession userDatasession=request.getSession(true);
-       String creadit=mycurrentUserData.getCreditLimit()+"";
-       String job= mycurrentUserData.getJob();
-       usersession.setAttribute("theCredit",creadit);
-       usersession.setAttribute("thejob",job);
-       userDatasession.setAttribute("userObj",mycurrentUserData);
+        HttpSession usersession = request.getSession(false);
+        // int UserId= (int) usersession.getAttribute("userid");
+        int UserId = 1;
+        PrintWriter out= response.getWriter();
+        UserProfileController myuserconController = new UserProfileController();
+        User mycurrentUserData = myuserconController.getuserdata(UserId);
+        HttpSession userDatasession = request.getSession(true);
+        String creadit = mycurrentUserData.getCreditLimit() + "";
+        String job = mycurrentUserData.getJob();
+        usersession.setAttribute("theCredit", creadit);
+        usersession.setAttribute("thejob", job);
+        userDatasession.setAttribute("userObj", mycurrentUserData);
+        response.setContentType("application/json");
+        Gson mygson=new Gson();
+       out.write(mygson.toJson(mycurrentUserData));
+       out.close();
+        
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -68,7 +77,8 @@ public class UserProfileServlet extends HttpServlet {
        int UserId=1;
         
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-       
+     
+        String userName = request.getParameter("UserName");
 
         Date birthDay = null;
         try {
@@ -82,7 +92,7 @@ public class UserProfileServlet extends HttpServlet {
        int credit= Integer.parseInt(request.getParameter("Credit"));
         String interests=request.getParameter("interests");
         UserDAO myDao = new UserDAO();
-         User myuser=myDao.getUser(UserId);
+         User myuser=myDao.getUserById(UserId);
          myuser.setPassWord(password);
          myuser.setBirthdate(birthDay);
          myuser.setAddress(address);

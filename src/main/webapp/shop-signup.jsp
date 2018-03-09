@@ -235,64 +235,74 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 col-md-offset-2">
                     <div class="featured-boxes">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-8">
                                 <div class="featured-box featured-box-primary align-left mt-xlg" style="height: 521px;">
                                     <div class="box-content">
                                         <h4 class="heading-primary text-uppercase mb-md">Register New Account</h4>
 
-                                        <form action="AccessServlet" id="signupForm" method="post">
+                                        <form action="/RegistrationServlet" id="signupForm" method="post">
                                             <div class="row">
                                                 <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label>User Name</label>
-                                                        <input type="text" value="" class="form-control">
+                                                    <div class="col-md-6 col-md-offset-2">
+                                                        <label>Full Name</label>
+                                                        <input type="text" name="name" value="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 col-md-offset-2">
                                                         <label>Password</label>
-                                                        <input type="password" value="" class="form-control">
+                                                        <input type="password" name="password" value=""
+                                                               class="form-control">
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label>Confirm</label>
-                                                        <input type="password" value="" class="form-control">
+                                                    <div class="col-md-6 col-md-offset-2">
+                                                        <label>Confirm Password</label>
+                                                        <input type="password" name="repassword" value=""
+                                                               class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group">
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-6 col-md-offset-2">
                                                         <label>E-mail</label>
-                                                        <input type="text" value="" class="form-control">
+                                                        <input type="text" name="email" value="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group">
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-6 col-md-offset-2">
                                                         <label>Address </label>
-                                                        <input type="text" value="" class="form-control">
+                                                        <input type="text" name="address" value="" class="form-control">
+                                                    </div>
+                                                    <div class="col-md-6 col-md-offset-2">
+                                                        <label>Birthdate </label>
+                                                        <input type="date" max="2002-12-31" name="birthdate" value="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 col-md-offset-2">
                                                         <label>Job</label>
-                                                        <input type="text" value="" class="form-control">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label>Credit</label>
-                                                        <input type="number" value="" class="form-control">
+                                                        <input type="text" name="job" value="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <div class="col-md-6 col-md-offset-2">
+                                                        <label>Credit</label>
+                                                        <input type="number" min="0" name="credit" value=""
+                                                               class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col-md-12">
                                                 <input type="submit" value="SignUp"
                                                        class="col-md-3 btn btn-primary pull-right mb-xl"
@@ -436,6 +446,6 @@
         ga('send', 'pageview');
     </script>
      -->
-
+</div>
 </body>
 </html>

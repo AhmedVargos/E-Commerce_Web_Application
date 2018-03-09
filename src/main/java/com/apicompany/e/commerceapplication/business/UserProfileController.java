@@ -8,7 +8,7 @@ public class UserProfileController {
   public User getuserdata(int userid)
   {
       UserDAO myUserDao = new UserDAO();
-      User myuser=myUserDao.getUser(userid);
+      User myuser=myUserDao.getUserById(userid);
       return myuser;
   }
   public boolean updateUserData(User user)

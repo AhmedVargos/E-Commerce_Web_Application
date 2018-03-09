@@ -164,7 +164,7 @@
 
                                             </li>
                                             <li class="dropdown dropdown-mega dropdown-mega-shop" id="headerShop">
-                                                <a class="dropdown-toggle" href="page-login.jsp">
+                                                <a class="dropdown-toggle" href="shop-login.jsp">
                                                     <i class="fa fa-user"></i> Cart (1) - $299
                                                 </a>
                                                 <ul class="dropdown-menu">
@@ -270,7 +270,7 @@
 										</span>
 									</a>
 									<span class="product-thumb-info-content">
-										<a href=""HomeServlet?id=${product.productId}">
+										<a href="HomeServlet?id=${product.productId}">
 											<h4>${product.productName}</h4>
 											<span class="price">
 												<span class="amount">${product.productPrice}</span>
