@@ -37,7 +37,7 @@ public class AdminOrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AllOrders = orderController.calculateOrderPrice();
+        AllOrders = orderController.getAllOrders();
         request.setAttribute("Orders", AllOrders);
         response.sendRedirect("Admin/orders.jsp");
     }
