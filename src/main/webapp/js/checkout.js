@@ -18,3 +18,15 @@ function checkData()
     });  
 }
 
+function updateDatab()
+{
+    $.ajax({
+        url: 'CheckoutServlet',
+        type: 'GET',
+        contentType: 'application/json',
+        success: function (data) { 
+            
+        }     
+    });         
+}
+

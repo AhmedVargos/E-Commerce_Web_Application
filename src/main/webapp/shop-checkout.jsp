@@ -48,9 +48,11 @@
 
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.js"></script>
+    <!-- checkout  page -->
+    <script src="js/checkout.js"></script>
 
 </head>
-<body>
+<body onload="updateDatab()">
 
 <div class="body">
     <header id="header"
@@ -160,14 +162,9 @@
                                             </li>
                                             <li class="dropdown">
                                                 <a class="dropdown-toggle" href="shop-user-profile.jsp">
-                                                    Edit profile
+                                                    Profile
                                                 </a>
 
-                                            </li>
-                                            <li class="dropdown">
-                                                <a class="dropdown-toggle" href="#">
-                                                    Contact Us
-                                                </a>
                                             </li>
                                             <li class="dropdown dropdown-mega dropdown-mega-shop" id="headerShop">
                                                 <a class="dropdown-toggle" href="page-login.jsp">
@@ -450,8 +447,7 @@
 <script src="js/custom.js"></script>
 <!-- Theme Initialization Files -->
 <script src="js/theme.init.js"></script>
-<!-- checkout  page -->
-<script src="js/checkout.js"></script>
+
 
 
 

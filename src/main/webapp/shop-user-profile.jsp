@@ -158,14 +158,9 @@
                                             </li>
                                             <li class="dropdown">
                                                 <a class="dropdown-toggle" href="shop-user-profile.jsp">
-                                                    Edit profile
+                                                    Profile
                                                 </a>
 
-                                            </li>
-                                            <li class="dropdown">
-                                                <a class="dropdown-toggle" href="#">
-                                                    Contact Us
-                                                </a>
                                             </li>
                                             <li class="dropdown dropdown-mega dropdown-mega-shop" id="headerShop">
                                                 <a class="dropdown-toggle" href="page-login.jsp">
@@ -255,11 +250,11 @@
                                                 <div class="form-group">
                                                     <div class="col-md-6">
                                                         <label>User Name</label>
-                                                        <input id="Uuser" name="UserName" type="text" value=${sessionScope.userObj.userName} class="form-control">
+                                                        <input id="Uuser" name="userNameNewU" type="text" value="" class="form-control">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label>Birth Day </label>
-                                                        <input id="Ubirth" type="date" name="BirthDay" value=${sessionScope.userObj.birthdate}  class="form-control">
+                                                        <input id="Ubirth" type="text" name="BirthDay" value=""  class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -267,11 +262,11 @@
                                                 <div class="form-group">
                                                     <div class="col-md-6">
                                                         <label>Password</label>
-                                                        <input id="Upass" type="password" name="Password" value=${sessionScope.userObj.passWord} class="form-control">
+                                                        <input id="Upass" type="password" name="PasswordNew" value="" class="form-control">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label>E-mail</label>
-                                                        <input id="Uemail" type="text" name="Email" value=${sessionScope.userObj.email} class="form-control">
+                                                        <input id="Uemail" type="text" name="emailNewU" value="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -280,11 +275,11 @@
                                                 <div class="form-group">
                                                     <div class="col-md-6">
                                                         <label>Address </label>
-                                                        <input id="Uaddres" type="text" name="Address" value=${sessionScope.userObj.address} class="form-control">
+                                                        <input id="Uaddres" type="text" name="Address" value="" class="form-control">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label>Job</label>
-                                                        <input id="Ujob" type="text" name="Job" value='${sessionScope.thejob}' class="form-control">
+                                                        <input id="Ujob" type="text" name="Job" value="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -292,11 +287,11 @@
                                                 <div class="form-group">
                                                     <div class="col-md-6">
                                                         <label>Credit</label>
-                                                        <input id="Ucreadit" type="number" name="Credit" value=${sessionScope.theCredit} class="form-control">
+                                                        <input id="UcreaditE" type="number" name="Credit" value="" class="form-control">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label>interests </label>
-                                                        <input  id="Uinterests" type="text" name="interests" value=${sessionScope.userObj.interests} class="form-control">
+                                                        <input  id="Uinterests" type="text" name="interests" value="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
