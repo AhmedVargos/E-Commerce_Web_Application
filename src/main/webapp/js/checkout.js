@@ -25,7 +25,10 @@ function updateDatab()
         type: 'GET',
         contentType: 'application/json',
         success: function (data) { 
-            
+           $("#totalUpdated").html(data.totalPrice);
+           $("#UserTotoal").html(data.userCurrent);
+           $("#AddressTotal").html(data.userAddress);
+           
         }     
     });         
 }
