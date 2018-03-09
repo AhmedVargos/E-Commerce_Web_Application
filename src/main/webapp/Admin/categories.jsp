@@ -28,20 +28,30 @@
 
         <script>
             function addNew() {
+                document.getElementById("addBtn").style.display = "none";
                 document.getElementById("catTable").style.display = "none";
                 document.getElementById("newCatDiv").style.display = "block";
             }
 
             function backToTable() {
+                document.getElementById("addBtn").style.display = "block";
                 document.getElementById("catTable").style.display = "block";
                 document.getElementById("newCatDiv").style.display = "none";
+                document.getElementById("ditCatDiv").style.display = "none";
             }
 
-            function startEdit(catId) {
+            function startEdit(catId, catName) {
+                document.getElementById("addBtn").style.display = "none";
                 document.getElementById("catTable").style.display = "none";
                 document.getElementById("editCatDiv").style.display = "block";
+                document.getElementById("cID").value = catId;
+                document.getElementById("cID_2").value = catId;
+                document.getElementById("cName").value = catName;
             }
         </script>
+
+        <jsp:include page="/AdminCategoryServlet"/>
+
     </head>
 
     <body class="nav-md">
@@ -168,19 +178,6 @@
                                         <ul class="nav navbar-right panel_toolbox">
 
                                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                            </li>
-                                            <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                                   aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="#">Settings 1</a>
-                                                    </li>
-                                                    <li><a href="#">Settings 2</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                            </li>
                                         </ul>
                                         <div class="clearfix"></div>
                                     </div>
@@ -193,20 +190,24 @@
 
                                             <div id="newCatDiv">
                                                 <form method="post" action="${pageContext.request.contextPath}/AdminCategoryServlet">
-                                                    <h3>Add New Category</h3>
+                                                    <button type="button" data-inline="true"  value="Back" class="btn btn-dark btn-xs" onclick="backToTable()">Back</button><br>
                                                     <label for="catnm" class="ui-hidden-accessible">Name</label>
                                                     <input type="text" name="name" id="name" placeholder="Category name">
-                                                    <button type="submit" data-inline="true"  value="Add" class="btn btn-warning btn-xs" onclick="backToTable()">Add</button>
+                                                    <button type="submit" data-inline="true"  value="Add" class="btn btn-dark btn-xs" onclick="backToTable()">Add</button>
                                                 </form>
                                             </div>
 
                                             <div id="editCatDiv">
                                                 <h3> Edit Category </h3>
-                                                <label for="Category ID " class="ui-hidden-accessible">ID</label>
-                                                <input type="text" name="cID"  placeholder="Category ID" disabled>
-                                                <label for="Category Name " class="ui-hidden-accessible">Name</label>
-                                                <input type="text" name="cName"  placeholder="Category Name" >
-
+                                                <form method="post" action="${pageContext.request.contextPath}/AdminCategoryServlet">
+                                                    <label for="cID" >Category ID</label>
+                                                    <input type="text" name="cID" id="cID" disabled>
+                                                    <input type="hidden" name="cID_2" id="cID_2">
+                                                    <br>
+                                                    <label for="cName">Name</label>
+                                                    <input type="text" id="cName" name="cName">
+                                                    <button type="submit" class="btn btn-danger btn-xs" onclick="backToTable()"> Update</button>
+                                                </form>
                                             </div>
                                         </div>
 
@@ -216,25 +217,23 @@
                                                 <tr>
                                                     <th style="width: 10%">#Category ID</th>
                                                     <th style="width: 20%">Category Name</th>
-                                                    <th style="width: 21%">#Edit</th>
+                                                    <th style="width: 21%">Edit</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:if test="${not empty sessionScope.Categories}">
-                                                    <c:forEach items="${sessionScope.Categories}" var="category"> 
+                                                <c:forEach items="${Categories}" var="category"> 
 
-                                                        <tr>
-                                                            <td>${category.categoryId}</td>
-                                                            <td>
-                                                                <a>${category.categoryName}</a>
-                                                            </td>
-                                                            <td>
-                                                                <button href="#" class="btn btn-info btn-xs" onclick="startEdit(${category.categoryId})"><i class="fa fa-pencil"></i> Edit </button>
-                                                                <a href="${pageContext.request.contextPath}/AdminCategoryServlet?id=${category.categoryId}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                                                            </td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                </c:if> 
+                                                    <tr>
+                                                        <td>${category.categoryId}</td>
+                                                        <td>
+                                                            <a>${category.categoryName}</a>
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-info btn-xs" onclick="startEdit(${category.categoryId}, '${category.categoryName}')"><i class="fa fa-pencil"></i> Edit </button>
+                                                            <a href="${pageContext.request.contextPath}/AdminCategoryServlet?delete=1&id=${category.categoryId}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
 

@@ -5,9 +5,7 @@
  */
 package com.apicompany.e.commerceapplication.business;
 
-import com.apicompany.e.commerceapplication.dal.dao.daoimpl.CategoryDAO;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.ProductDAO;
-import com.apicompany.e.commerceapplication.dal.models.Category;
 import com.apicompany.e.commerceapplication.dal.models.Product;
 
 import java.util.ArrayList;
@@ -25,21 +23,24 @@ public class HomeController {
     public Product getProductById(int id){
         //TODO get the product from the DB by id
 
-        Product product = new Product("Item 1",
+        ProductDAO productDAO = new ProductDAO();
+        Product product = productDAO.getSpecificProduct(id);
+/*        Product product = new Product("Item 1",
                 "The item description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus",
                 "",
                 101.00,
                 50);
-
+*/
         return product;
     }
 
     //returns a list of all products in the DB
     public List<Product> getListOfProducts(){
         //TODO use the PRODUCT DAO to get a list of all products general without a specific category
+        ProductDAO productDAO = new ProductDAO();
 
-        List<Product> productList = new ArrayList<>();
-        productList.add(new Product("Item 1",
+        List<Product> productList = productDAO.getAllProducts();
+       /* productList.add(new Product("Item 1",
                 "The item description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus",
                 "",
                 101.00,
@@ -63,20 +64,24 @@ public class HomeController {
                 "",
                 65.00,
                 100));
-        /*CategoryDAO categoryDAO = new CategoryDAO();
-        Category category = new Category();
-        category.setCategoryName("test");
-        categoryDAO.insertCategory(category);
-        ProductDAO productDAO = new ProductDAO();
-        productDAO.insertProduct(productList.get(0));*/
+
+        productList.add(new Product("Item 5",
+                "The item description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus",
+                "",
+                35.00,
+                101));
+                */
         return productList;
     }
 
     //returns a list of all products in a category takes category id
     public List<Product> getListOfProductsWithCategory(int categoryNum){
         //TODO use the PRODUCT DAO to get a list of all products in a specific category
+        ProductDAO productDAO = new ProductDAO();
 
-        List<Product> productList = new ArrayList<>();
+        List<Product> productList = productDAO.getProductByCatagory(categoryNum);
+
+/*
         productList.add(new Product("Item 1",
                 "The item description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus",
                 "",
@@ -89,7 +94,7 @@ public class HomeController {
                 22.00,
                 10));
 
-/*        productList.add(new Product("Item 3",
+        productList.add(new Product("Item 3",
                 "The item description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus",
                 "",
                 17.00,

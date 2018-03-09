@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.apicompany.e.commerceapplication.admincontroller;
+package com.apicompany.e.commerceapplication.business;
 
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.CategoryDAO;
 import com.apicompany.e.commerceapplication.dal.dao.daoint.CategoryDAOInt;
@@ -19,23 +19,31 @@ public class CategoryController {
 
     CategoryDAOInt catDao;
 
+    public CategoryController() {
+        catDao = new CategoryDAO();
+    }
+
+    
     public void addCategory(String name) {
         Category newCategory = new Category();
         newCategory.setCategoryName(name);
-        catDao = new CategoryDAO();
         catDao.insertCategory(newCategory);
     }
 
     public List<Category> getAllCategories() {
-        catDao = new CategoryDAO();
         return catDao.getAllCatagory();
     }
 
     public void deleteCategory(int id) {
-        catDao = new CategoryDAO();
         catDao.deleteCategory(id);
     }
-
+    
+    public void updateCategory(int id, String name){
+        Category category = new Category();
+        category.setCategoryId(id);
+        category.setCategoryName(name);
+       catDao.updateCategory(category);
+    }
     /*public void updateCategory(int id) {
         catDao = new CategoryDAO();
         Category currentCategory = new Category();

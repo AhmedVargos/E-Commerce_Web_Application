@@ -5,6 +5,7 @@
  */
 package com.apicompany.e.commerceapplication.business;
 
+import com.apicompany.e.commerceapplication.dal.dao.daoimpl.CartDAO;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.ProductDAO;
 import com.apicompany.e.commerceapplication.dal.models.Cart;
 import com.apicompany.e.commerceapplication.dal.models.CartItem;
@@ -18,13 +19,25 @@ import java.util.ArrayList;
 public class CartController {
 
     Product product;
-    ProductDAO productDAO = new ProductDAO();
+    private ProductDAO productDAO;
+    private CartDAO cartDAO;
     Cart cart = new Cart();
     CartItem cartItem;
     ArrayList<CartItem> cartList = new ArrayList<>();
 
-    public CartController() {
+    boolean isNewCartCreated;
 
+    public boolean isNewCartCreated() {
+        return isNewCartCreated;
+    }
+
+    private void setNewCartCreated(boolean newCartCreated) {
+        isNewCartCreated = newCartCreated;
+    }
+
+    public CartController() {
+        productDAO = new ProductDAO();
+        cartDAO = new CartDAO();
     }
 
     public Cart addToCart(int id, int quantity) {
@@ -60,7 +73,7 @@ public class CartController {
                 isFound = true;
             }
         }*/
-        if(!isFound){
+        if (!isFound) {
             CartItem newCartItem = new CartItem();
             product = productDAO.getSpecificProduct(id);
             newCartItem.setQuantity(resQ);
@@ -75,7 +88,23 @@ public class CartController {
         return cart;
     }
 
-    public void addCart(Cart cart) {
+    public void createNewCart(int userId) {
+        boolean cartCreated = cartDAO.createEmptyCart(userId);
 
+        if (cartCreated) {
+            setNewCartCreated(true);
+        }
+    }
+
+    public void addProductsToCart(Cart cart) {
+        ArrayList<CartItem> cartItems = cart.getCartItems();
+        for (int i = 0; i < cartItems.size(); i++) {
+            cartDAO.addNewProductToExistingCart(cart.getCartId(), cartItems.get(i).getProduct().getProductId(), cartItems.get(i).getQuantity());
+        }
+    }
+
+    public Cart getCurrentCart(int userId) {
+        Cart cart = cartDAO.getCartByUserID(userId);
+        return cart;
     }
 }

@@ -1,6 +1,8 @@
 package com.apicompany.e.commerceapplication.view.servlet;
 
 import com.apicompany.e.commerceapplication.business.AuthController;
+import com.apicompany.e.commerceapplication.business.CartController;
+import com.apicompany.e.commerceapplication.dal.models.Cart;
 import com.apicompany.e.commerceapplication.view.utility.Validation;
 
 import javax.servlet.ServletConfig;
@@ -19,6 +21,7 @@ import java.util.Date;
 public class RegistrationServlet extends HttpServlet {
     private Validation validation;
     private AuthController authController;
+    private CartController cartController;
 
     @Override
     public void init() throws ServletException {
@@ -34,7 +37,7 @@ public class RegistrationServlet extends HttpServlet {
         String address = request.getParameter("address");
         String job = request.getParameter("job");
         String credit = request.getParameter("credit");
-        Date birthdate;
+        Date birthdate = null;
         boolean isValidDate = false;
         try {
             birthdate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("birthdate"));
@@ -54,10 +57,13 @@ public class RegistrationServlet extends HttpServlet {
 
         if (isValidDate && isValidName && isValidPassword && isValidPasswordMatches && isValidEmail && isValidAddress && isValidJob && isValidCredit) {
             authController = new AuthController();
-            authController.registerNewUser(name, password, email, address, job, Integer.parseInt(credit));
+            authController.registerNewUser(name, password, email, address, job, Integer.parseInt(credit), birthdate);
             boolean registered = authController.isRegistered();
             if (registered) {
-                response.sendRedirect(/*"shop-full-width.jsp"*/"shop-login.jsp");
+                cartController = new CartController();
+                int userId = authController.getRegisteredUsedId();
+                cartController.createNewCart(userId);
+                response.sendRedirect("shop-login.jsp");
             } else {
                 response.sendRedirect("shop-signup.jsp");
             }
