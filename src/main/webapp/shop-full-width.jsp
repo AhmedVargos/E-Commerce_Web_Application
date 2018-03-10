@@ -69,7 +69,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <h1 class="mb-none"><strong>${sessionScope.SHOP_TAG}</strong></h1>
+                    <h1 class="mb-none"><strong>${SHOP_TAG}</strong></h1>
                     <p>Showing results.</p>
                 </div>
             </div>
