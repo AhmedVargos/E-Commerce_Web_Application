@@ -51,8 +51,8 @@ public class UserProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession usersession = request.getSession(false);
-        // int UserId= (int) usersession.getAttribute("userid");
-        int UserId = 3;
+        User User=  (User) usersession.getAttribute("userObj");
+        int UserId = User.getUserId();
 
         PrintWriter out= response.getWriter();
         UserProfileController myuserconController = new UserProfileController();
@@ -60,9 +60,9 @@ public class UserProfileServlet extends HttpServlet {
         HttpSession userDatasession = request.getSession(true);
         String creadit = mycurrentUserData.getCreditLimit() + "";
         String job = mycurrentUserData.getJob();
-        usersession.setAttribute("theCredit", creadit);
-        usersession.setAttribute("thejob", job);
-        userDatasession.setAttribute("userObj", mycurrentUserData);
+//        usersession.setAttribute("theCredit", creadit);
+//        usersession.setAttribute("thejob", job);
+//        userDatasession.setAttribute("userObj", mycurrentUserData);
         response.setContentType("application/json");
         
         Gson mygson=new Gson();
@@ -74,10 +74,9 @@ public class UserProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         int UserId=3;
-        
-       HttpSession usersession=request.getSession(false);
-     // int UserId= (int) usersession.getAttribute("userid");
+        HttpSession usersession = request.getSession(false);
+        User User=  (User) usersession.getAttribute("userObj");
+        int UserId = User.getUserId();
  
         
         String password=request.getParameter("PasswordNew");

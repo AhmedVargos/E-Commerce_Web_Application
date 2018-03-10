@@ -13,7 +13,7 @@ function getUserData()
 //            var t = data.birthdate.split(/[- :]/);
 //           // Apply each element to the Date function
 //            var d = new Date(Date.UTC(t[0], t[1] - 1, t[2], t[3], t[4], t[5]));
-            $("#Ubirth").val(data.birthdate+"");
+            $("#Ubirth").val(data.birthdate+" ");
             $("#Ubirth").prop('disabled', true);
             $("#Upass").val(data.passWord);
             $("#Upass").prop('disabled', true);

@@ -18,4 +18,9 @@ public class UsersController {
         allUsers = userDAO.getAllUsers();
         return allUsers;
     }
+
+
+    public User getUserById(int userId) {
+        return userDAO.getUserById(userId);
+    }
 }
