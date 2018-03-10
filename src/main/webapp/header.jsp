@@ -64,7 +64,7 @@
             <div class="header-row">
                 <div class="header-column">
                     <div class="header-logo">
-                        <a href="AllProductsServlet">
+                        <a href="shop-full-width.jsp">
                             <img alt="Porto" width="111" height="54" data-sticky-width="82" data-sticky-height="40"
                                  data-sticky-top="33" src="img/logo.png">
                         </a>
@@ -83,8 +83,8 @@
                             <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
                                 <nav>
                                     <ul class="nav nav-pills" id="mainNav">
-                                        <li class="active">
-                                            <a  href="AllProductsServlet">
+                                        <li>
+                                            <a  href="shop-full-width.jsp">
                                                 Shop Home
                                             </a>
 
@@ -126,7 +126,7 @@
                                         <li  id="headerShop">
                                             <%--class="dropdown-toggle"--%>
                                             <a  href="shop-cart.jsp">
-                                                <i ></i> Cart
+                                                <i ></i> Cart (1)
                                             </a>
                                         </li>
                                         <%----%>

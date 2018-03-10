@@ -49,6 +49,8 @@
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.js"></script>
 
+    <jsp:include page="/ProductsListServlet?catId=-1"/>
+
 </head>
 <body>
 
@@ -81,9 +83,9 @@
             </div>
 
             <div class="row">
-                <c:if test="${not empty sessionScope.PRODUCTS_LIST}">
+                <c:if test="${not empty PRODUCTS_LIST}">
                     <ul class="products product-thumb-info-list" id="list_of_products" style="height: auto;" data-plugin-masonry>
-                        <c:forEach items="${sessionScope.PRODUCTS_LIST}" var="product">
+                        <c:forEach items="${PRODUCTS_LIST}" var="product">
                             <li class="col-md-3 col-sm-6 col-xs-12 product">
 								<span class="product-thumb-info">
                                     <input id="myProduct" type="hidden" value="${product.productId}"/>

@@ -25,6 +25,8 @@ import static com.apicompany.e.commerceapplication.view.servlet.AccessServlet.PR
 @WebServlet(name = "CategoryServlet", urlPatterns = {"/CategoryServlet"})
 public class CategoryServlet extends HttpServlet {
 
+    public static final String CAT_ID = "CAT_ID";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -70,7 +72,9 @@ public class CategoryServlet extends HttpServlet {
         HomeController homeController = new HomeController();
         //TODO MAKE A CONSTANT FOR CATEGORIES NAMES TRANSLATING FROM AND TO INT
         session.setAttribute(AccessServlet.SHOP_TAG,"" + id);
-        session.setAttribute(AccessServlet.PRODUCTS_LIST,homeController.getListOfProductsWithCategory(id));
+        session.setAttribute(CAT_ID, id);
+
+        // session.setAttribute(AccessServlet.PRODUCTS_LIST,homeController.getListOfProductsWithCategory(id));
         response.sendRedirect("shop-category-full-width.jsp");
 
     }
