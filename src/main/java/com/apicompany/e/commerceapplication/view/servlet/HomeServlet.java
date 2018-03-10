@@ -5,7 +5,9 @@
  */
 package com.apicompany.e.commerceapplication.view.servlet;
 
+import com.apicompany.e.commerceapplication.business.CategoryController;
 import com.apicompany.e.commerceapplication.business.HomeController;
+import com.apicompany.e.commerceapplication.dal.models.Product;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -52,9 +54,13 @@ public class HomeServlet extends HttpServlet {
             throws ServletException, IOException {
         //Open the selected product in the product detail jsp
         int id = Integer.valueOf(request.getParameter("id"));
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(true);
         HomeController homeController = new HomeController();
-        session.setAttribute(PRODUCT_DETAIL,homeController.getProductById(id));
+        Product myProduct = homeController.getProductById(id);
+        session.setAttribute(PRODUCT_DETAIL,myProduct);
+        CategoryController categoryController = new CategoryController();
+        String cat_name = categoryController.getCategoryName(myProduct.getCatagory_catogeryId());
+        session.setAttribute("PRODUCT_DETAILS_CAT", cat_name);
         response.sendRedirect("shop-product-full-width.jsp");
     }
 
