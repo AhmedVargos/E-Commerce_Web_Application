@@ -269,7 +269,7 @@
                                                     <strong>Cart Subtotal</strong>
                                                 </th>
                                                 <td>
-                                                    <strong><span class="amount">$${TotalPrice}</span></strong>
+                                                    <strong><span class="amount">$<label id="totalUpdated"></label></span></strong>
                                                 </td>
                                             </tr>
                                             <tr class="shipping">
@@ -317,7 +317,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-12">
                                                     <label>User Name</label>
-                                                    <input type="text" value=${userName} class="form-control">
+                                                    <input type="text" value="" id="UserTotoal" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -325,7 +325,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-12">
                                                     <label>Address </label>
-                                                    <input type="text" value=${adress} class="form-control">
+                                                    <input type="text" value="" id="AddressTotal" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
