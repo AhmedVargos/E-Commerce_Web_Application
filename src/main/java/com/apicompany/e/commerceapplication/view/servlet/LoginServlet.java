@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
 
                 HomeController homeController = new HomeController();
                 session.setAttribute(SHOP_TAG, "Shop");
-                session.setAttribute(PRODUCTS_LIST, homeController.getListOfProducts());
+                //session.setAttribute(PRODUCTS_LIST, homeController.getListOfProducts());
 
                 response.sendRedirect("shop-full-width.jsp");
             } else {
