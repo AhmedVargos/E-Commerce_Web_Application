@@ -83,7 +83,7 @@
                             <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
                                 <nav>
                                     <ul class="nav nav-pills" id="mainNav">
-                                        <li>
+                                        <li class="active">
                                             <a  href="AllProductsServlet">
                                                 Shop Home
                                             </a>
@@ -126,7 +126,7 @@
                                         <li  id="headerShop">
                                             <%--class="dropdown-toggle"--%>
                                             <a  href="shop-cart.jsp">
-                                                <i ></i> Cart (1)
+                                                <i ></i> Cart
                                             </a>
                                         </li>
                                         <%----%>
