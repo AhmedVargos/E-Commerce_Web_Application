@@ -189,7 +189,7 @@
                                                     <tr>
                                                         <td class="actions" colspan="6">
                                                             <div class="actions-continue">
-                                                                <input type="submit" value="Update Cart"
+                                                                <input type="button" value="Update Cart"
                                                                        name="update_cart"
                                                                        class="btn btn-default"
                                                                        onclick="updateCart(this)">

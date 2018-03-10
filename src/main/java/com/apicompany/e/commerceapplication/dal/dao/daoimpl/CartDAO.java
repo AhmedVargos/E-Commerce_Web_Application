@@ -136,24 +136,44 @@ public class CartDAO implements CartDAOInt {
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------//
-    //tested
+    //tested // ADDED BY AHMED
     @Override
     public Boolean addNewProductToExistingCart(int cartId, int productId, int Quantity) {
         ProductDAO productDAO = new ProductDAO();
         PreparedStatement insertStatement;
+        PreparedStatement updateStatement;
         Boolean isAdded = false;
         if (productDAO.getSpecificProduct(productId) != null) {
-            try {
+            if (isProductExistInCart(cartId, productId)) {
+                try {
+                    int oldQuantity = getProductQuantityInCart(cartId,productId);
+                    updateStatement = dbHandler.getCon().prepareStatement("UPDATE EcommerceDB.product_cart"
+                            + " SET product_quantity = ?"
+                            + " WHERE cart_cartId = ?"
+                            + " AND product_productId = ?");
 
-                insertStatement = dbHandler.getCon().prepareStatement("INSERT INTO EcommerceDB.product_cart"
-                        + " (product_productId, cart_cartId, product_quantity) VALUES(?,?,?)");
-                insertStatement.setInt(1, productId);
-                insertStatement.setInt(2, cartId);
-                insertStatement.setInt(3, Quantity);
-                insertStatement.executeUpdate();
+                updateStatement.setInt(1,oldQuantity + Quantity);
+                updateStatement.setInt(2, cartId);
+                updateStatement.setInt(3, productId);
+                updateStatement.executeUpdate();
                 isAdded = true;
-            } catch (SQLException ex) {
-                Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+            } else {
+                try {
+
+                    insertStatement = dbHandler.getCon().prepareStatement("INSERT INTO EcommerceDB.product_cart"
+                            + " (product_productId, cart_cartId, product_quantity) VALUES(?,?,?)");
+                    insertStatement.setInt(1, productId);
+                    insertStatement.setInt(2, cartId);
+                    insertStatement.setInt(3, Quantity);
+                    insertStatement.executeUpdate();
+                    isAdded = true;
+                } catch (SQLException ex) {
+                    Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         return isAdded;
@@ -213,10 +233,6 @@ public class CartDAO implements CartDAOInt {
             if (cart != null) {
                 deleteStatement = dbHandler.getCon().prepareStatement("DELETE FROM EcommerceDB.product_cart WHERE cart_cartId = ?");
                 deleteStatement.setInt(1, cart.getCartId());
-                deleteStatement.executeUpdate();
-
-                deleteStatement = dbHandler.getCon().prepareStatement("DELETE FROM EcommerceDB.cart WHERE user_userId = ?");
-                deleteStatement.setInt(1, userId);
                 deleteStatement.executeUpdate();
                 isRemoved = true;
             }
