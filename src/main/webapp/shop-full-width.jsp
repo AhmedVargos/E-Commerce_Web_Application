@@ -55,7 +55,9 @@
 <body>
 
 <div class="body">
-
+<script>
+    var catId = -1;
+</script>
 <jsp:include page="header.jsp"></jsp:include>
     <div role="main" class="main shop">
 

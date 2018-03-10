@@ -55,6 +55,9 @@
 <body>
 
 <div class="body">
+    <script>
+        var catId = ${sessionScope.CAT_ID};
+    </script>
     <jsp:include page="header.jsp"></jsp:include>
 
 
