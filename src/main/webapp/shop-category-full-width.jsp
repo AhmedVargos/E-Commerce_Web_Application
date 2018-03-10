@@ -49,6 +49,8 @@
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.js"></script>
 
+    <jsp:include page="/ProductsListServlet?catId=-${sessionScope.CAT_ID}"/>
+
 </head>
 <body>
 
