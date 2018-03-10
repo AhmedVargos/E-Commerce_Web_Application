@@ -49,11 +49,28 @@
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.js"></script>
     <!-- checkout  page -->
-    <script src="js/checkout.js"></script>
+
+
+<!-- Vendor -->
+<script src="vendor/jquery/jquery.js"></script>
+<script src="vendor/jquery.appear/jquery.appear.js"></script>
+<script src="vendor/jquery.easing/jquery.easing.js"></script>
+<script src="vendor/jquery-cookie/jquery-cookie.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.js"></script>
+<script src="vendor/common/common.js"></script>
+<script src="vendor/jquery.validation/jquery.validation.js"></script>
+<script src="vendor/jquery.stellar/jquery.stellar.js"></script>
+<script src="vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
+<script src="vendor/jquery.gmap/jquery.gmap.js"></script>
+<script src="vendor/jquery.lazyload/jquery.lazyload.js"></script>
+<script src="vendor/isotope/jquery.isotope.js"></script>
+<script src="vendor/owl.carousel/owl.carousel.js"></script>
+<script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
+<script src="vendor/vide/vide.js"></script>
+<script src=http://code.jquery.com/jquery-latest.min.js ></script>
 
 </head>
-<body onload="updateDatab()">
-
+<body onload="updateDataEdit()">
 <div class="body">
     <header id="header"
             data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": true}'>
@@ -252,7 +269,7 @@
                                                     <strong>Cart Subtotal</strong>
                                                 </th>
                                                 <td>
-                                                    <strong><span class="amount">$${TotalPrice}</span></strong>
+                                                    <strong><span class="amount">$<label id="totalUpdated"></label></span></strong>
                                                 </td>
                                             </tr>
                                             <tr class="shipping">
@@ -269,7 +286,7 @@
                                                     <strong>Order Total</strong>
                                                 </th>
                                                 <td>
-                                                    <strong><span class="amount">$${TotalPrice}</span></strong>
+                                                    <strong><span class="amount">$<label id="totalUpdated2"></label></span></strong>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -277,7 +294,7 @@
                                     </div>
                                 </div>
                             </div>
-            
+
 
             <div class="row">
                 <div class="col-md-9">
@@ -295,12 +312,12 @@
                             <div id="collapseOne" class="accordion-body collapse in">
                                 <div class="panel-body">
                                     <form action="/" id="frmBillingAddress" method="post">
-                                       
+
                                         <div class="row">
                                             <div class="form-group">
                                                 <div class="col-md-12">
                                                     <label>User Name</label>
-                                                    <input type="text" value=${userName} class="form-control">
+                                                    <input type="text" value="" id="UserTotoal" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -308,7 +325,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-12">
                                                     <label>Address </label>
-                                                    <input type="text" value=${adress} class="form-control">
+                                                    <input type="text" value="" id="AddressTotal" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -316,17 +333,17 @@
                                 </div>
                             </div>
                         </div>
-                      
+
                     </div>
-                     <div id="response">
-                                                  
-                     </div>                           
+                     <div id="responseE">
+
+                     </div>
                     <div class="actions-continue">
-                        <input type="submit" value="Place Order" name="proceed" class="btn btn-lg btn-primary mt-xl" onclick="checkData()" id="order">
+                        <input type="submit" value="Place Order" name="proceed" class="btn btn-lg btn-primary mt-xl" onclick="checkData()" id="orderE">
                     </div>
 
                 </div>
-    
+
             </div>
 
         </div>
@@ -447,6 +464,8 @@
 <script src="js/custom.js"></script>
 <!-- Theme Initialization Files -->
 <script src="js/theme.init.js"></script>
+
+  <script src="js/checkout.js"></script>
 
 
 

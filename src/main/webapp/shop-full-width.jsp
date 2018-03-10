@@ -49,180 +49,14 @@
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.js"></script>
 
+    <jsp:include page="/ProductsListServlet?catId=-1"/>
+
 </head>
 <body>
 
 <div class="body">
-    <header id="header"
-            data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": true}'>
-        <div class="header-body">
-            <div class="header-container container">
-                <div class="header-row">
-                    <div class="header-column">
-                        <div class="header-logo">
-                            <a href="AllProductsServlet">
-                                <img alt="Porto" width="111" height="54" data-sticky-width="82" data-sticky-height="40"
-                                     data-sticky-top="33" src="img/logo.png">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="header-column">
-                        <div class="header-row">
-                            <div class="header-search hidden-xs">
-                                <form id="searchForm" action="#" method="get">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="q" id="q" placeholder="Search..."
-                                               required>
-                                        <span class="input-group-btn">
-													<button class="btn btn-default" type="submit"><i
-                                                            class="fa fa-search"></i></button>
-												</span>
-                                    </div>
-                                </form>
-                            </div>
-                            <nav class="header-nav-top">
-                                <ul class="nav nav-pills">
-                                    <li class="hidden-xs">
-                                        <a href="#"><i class="fa fa-angle-right"></i> About Us</a>
-                                    </li>
-                                    <li class="hidden-xs">
-                                        <a href="#"><i class="fa fa-angle-right"></i> Contact Us</a>
-                                    </li>
-                                    <li>
-                                        <span class="ws-nowrap"><i class="fa fa-phone"></i> (123) 456-789</span>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <div class="header-row">
-                            <div class="header-nav">
-                                <button class="btn header-btn-collapse-nav" data-toggle="collapse"
-                                        data-target=".header-nav-main">
-                                    <i class="fa fa-bars"></i>
-                                </button>
-                                <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
-                                    <nav>
-                                        <ul class="nav nav-pills" id="mainNav">
-                                            <li class="dropdown active">
-                                                <a class="dropdown-toggle" href="AllProductsServlet">
-                                                    Shop Home
-                                                </a>
 
-                                            </li>
-                                            <li class="dropdown dropdown-mega">
-                                                <a class="dropdown-toggle" href="shop-login.jsp">
-                                                    Login
-                                                </a>
-
-                                            </li>
-                                            <li class="dropdown">
-                                                <a class="dropdown-toggle" href="#">
-                                                    Categories
-                                                </a>
-                                                <ul class="dropdown-menu">
-                                                    <li>
-                                                        <a href="CategoryServlet?category=1">
-                                                            Women Clothes
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="CategoryServlet?category=2">
-                                                            Men Clothes
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="CategoryServlet?category=3">
-                                                            Casual Clothes
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="CategoryServlet?category=4">
-                                                            Sport Clothes
-                                                        </a>
-                                                    </li>
-
-                                                </ul>
-                                            </li>
-                                            <li class="dropdown">
-                                                <a class="dropdown-toggle" href="shop-cart.jsp">
-                                                    Cart
-                                                </a>
-
-                                            </li>
-                                            <li class="dropdown">
-                                                <a class="dropdown-toggle" href="shop-checkout.jsp">
-                                                    Checkout
-                                                </a>
-
-                                            </li>
-                                            <li class="dropdown">
-                                                <a class="dropdown-toggle" href="shop-user-profile.jsp">
-                                                    Profile
-                                                </a>
-
-                                            </li>
-                                            <li class="dropdown dropdown-mega dropdown-mega-shop" id="headerShop">
-                                                <a class="dropdown-toggle" href="shop-login.jsp">
-                                                    <i class="fa fa-user"></i> Cart (1) - $299
-                                                </a>
-                                                <ul class="dropdown-menu">
-                                                    <li>
-                                                        <div class="dropdown-mega-content">
-                                                            <table class="cart">
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td class="product-thumbnail">
-                                                                        <a href="shop-product-full-width.jsp?id=${product.id}">
-                                                                            <img width="100" height="100" alt=""
-                                                                                 class="img-responsive"
-                                                                                 src="img/products/product-1.jpg">
-                                                                        </a>
-                                                                    </td>
-                                                                    <td class="product-name">
-                                                                        <a href="shop-product-full-width.jsp">Photo
-                                                                            Camera<br><span
-                                                                                    class="amount"><strong>$299</strong></span></a>
-                                                                    </td>
-                                                                    <td class="product-actions">
-                                                                        <a title="Remove this item" class="remove"
-                                                                           href="#">
-                                                                            <i class="fa fa-times"></i>
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="actions" colspan="6">
-                                                                        <div class="actions-continue">
-                                                                            <button type="submit"
-                                                                                    class="btn btn-default">View All
-                                                                            </button>
-                                                                            <button type="submit"
-                                                                                    class="btn pull-right btn-primary">
-                                                                                Proceed to Checkout <i
-                                                                                    class="fa fa-angle-right ml-xs"></i>
-                                                                            </button>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
+<jsp:include page="header.jsp"></jsp:include>
     <div role="main" class="main shop">
 
         <div class="container" id="products_container">
@@ -249,9 +83,9 @@
             </div>
 
             <div class="row">
-                <c:if test="${not empty sessionScope.PRODUCTS_LIST}">
+                <c:if test="${not empty PRODUCTS_LIST}">
                     <ul class="products product-thumb-info-list" id="list_of_products" style="height: auto;" data-plugin-masonry>
-                        <c:forEach items="${sessionScope.PRODUCTS_LIST}" var="product">
+                        <c:forEach items="${PRODUCTS_LIST}" var="product">
                             <li class="col-md-3 col-sm-6 col-xs-12 product">
 								<span class="product-thumb-info">
                                     <input id="myProduct" type="hidden" value="${product.productId}"/>
@@ -304,91 +138,9 @@
 
     </div>
 
-    <footer id="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-ribbon">
-                    <span>Get in Touch</span>
-                </div>
-                <div class="col-md-3">
-                    <div class="newsletter">
-                        <h4>Newsletter</h4>
-                        <p>Keep up on our always evolving product features and technology. Enter your e-mail and
-                            subscribe to our newsletter.</p>
+        <jsp:include page="footer.jsp"></jsp:include>
 
-                        <div class="alert alert-success hidden" id="newsletterSuccess">
-                            <strong>Success!</strong> You've been added to our email list.
-                        </div>
 
-                        <div class="alert alert-danger hidden" id="newsletterError"></div>
-
-                        <form id="newsletterForm" action="php/newsletter-subscribe.php" method="POST">
-                            <div class="input-group">
-                                <input class="form-control" placeholder="Email Address" name="newsletterEmail"
-                                       id="newsletterEmail" type="text">
-                                <span class="input-group-btn">
-											<button class="btn btn-default" type="submit">Go!</button>
-										</span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <h4>Latest Tweets</h4>
-                    <div id="tweet" class="twitter" data-plugin-tweets
-                         data-plugin-options='{"username": "", "count": 2}'>
-                        <p>Please wait...</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="contact-details">
-                        <h4>Contact Us</h4>
-                        <ul class="contact">
-                            <li><p><i class="fa fa-map-marker"></i> <strong>Address:</strong> 1234 Street Name, City
-                                Name, United States</p></li>
-                            <li><p><i class="fa fa-phone"></i> <strong>Phone:</strong> (123) 456-789</p></li>
-                            <li><p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a
-                                    href="mailto:mail@example.com">mail@example.com</a></p></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <h4>Follow Us</h4>
-                    <ul class="social-icons">
-                        <li class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank"
-                                                             title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank"
-                                                            title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li class="social-icons-linkedin"><a href="http://www.linkedin.com/" target="_blank"
-                                                             title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-1">
-                        <a href="index.html" class="logo">
-                            <img alt="Porto Website Template" class="img-responsive" src="img/logo-footer.png">
-                        </a>
-                    </div>
-                    <div class="col-md-7">
-                        <p>© Copyright 2015. All Rights Reserved.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <nav id="sub-menu">
-                            <ul>
-                                <li><a href="#">FAQ's</a></li>
-                                <li><a href="#">Sitemap</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
 </div>
 
 <!-- Vendor -->

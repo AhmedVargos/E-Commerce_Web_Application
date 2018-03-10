@@ -282,7 +282,7 @@ public class OrderDAO implements OrderDAOInt {
                     insertStatement_2 = dbHandler.getCon().prepareStatement("INSERT INTO EcommerceDB.product_order (product_productId,order_orderId,product_quantityl) VALUES (?,?,?)");                  
                     insertStatement_2.setInt(1, I.getProduct().getProductId());
                     insertStatement_2.setInt(2, orderId);
-                    insertStatement_2.setInt(3, I.getProduct().getQuantity());
+                    insertStatement_2.setInt(3, I.getQuantity());
                     insertStatement_2.executeUpdate();
                 }
             }
@@ -323,6 +323,11 @@ public class OrderDAO implements OrderDAOInt {
         return addNewOrder(currentUser, products.);
     }*/
 
+    public static void main(String[] args) {
+        OrderDAO odao = new OrderDAO();
+        ArrayList<Order> orders = new ArrayList<>();
+        orders = odao.getAllOrders();
+    }
  /*  public static void main(String[] args) {
         OrderDAO o = new OrderDAO();
 //    o.getOrderByOrderId(1); 
