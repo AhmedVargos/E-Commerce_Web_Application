@@ -8,6 +8,10 @@
         <servlet-name>AdminOrderServlet</servlet-name>
         <servlet-class>com.apicompany.e.commerceapplication.view.servlet.AdminOrderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminPaginationServlet</servlet-name>
+        <servlet-class>com.apicompany.e.commerceapplication.view.servlet.AdminPaginationServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Category</servlet-name>
         <url-pattern>/Category</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>AdminOrderServlet</servlet-name>
         <url-pattern>/AdminOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminPaginationServlet</servlet-name>
+        <url-pattern>/AdminPaginationServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -24,7 +32,7 @@
     <welcome-file-list>
         <welcome-file>shop-login.jsp</welcome-file>
     </welcome-file-list>
-<!--    <filter>
+    <!--    <filter>
         <filter-name>Login Filter</filter-name>
         <filter-class>com.apicompany.e.commerceapplication.view.filter.LoginFilter</filter-class>
     </filter>
@@ -40,5 +48,4 @@
         <filter-name>Admin Filter</filter-name>
         <url-pattern>/Admin/*</url-pattern>
     </filter-mapping>-->
-
 </web-app>
