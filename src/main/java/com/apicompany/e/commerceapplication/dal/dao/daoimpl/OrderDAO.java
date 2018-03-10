@@ -302,9 +302,6 @@ public class OrderDAO implements OrderDAOInt {
             deleteStatement.setInt(1, orderId);
             deleteStatement.executeUpdate();
 
-            deleteStatement = dbHandler.getCon().prepareStatement("DELETE FROM EcommerceDB.order WHERE orderId = ?");
-            deleteStatement.setInt(1, orderId);
-            deleteStatement.executeUpdate();
             isRemoved = true;
         } catch (SQLException ex) {
             isRemoved = false;
