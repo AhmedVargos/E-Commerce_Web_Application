@@ -84,7 +84,7 @@
                                 <nav>
                                     <ul class="nav nav-pills" id="mainNav">
                                         <li>
-                                            <a  href="shop-full-width.jsp">
+                                            <a  href="UpdateIdServlet?idPage=1">
                                                 Shop Home
                                             </a>
 

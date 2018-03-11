@@ -1,6 +1,8 @@
 package com.apicompany.e.commerceapplication.view.servlet;
 
 import com.apicompany.e.commerceapplication.business.HomeController;
+import com.apicompany.e.commerceapplication.dal.dao.daoimpl.ProductDAO;
+import com.apicompany.e.commerceapplication.dal.models.Product;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static com.apicompany.e.commerceapplication.view.servlet.LoginServlet.PRODUCTS_LIST;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "ProductsListServlet", urlPatterns = {"/ProductsListServlet"})
 public class ProductsListServlet extends HttpServlet {
@@ -21,7 +25,40 @@ public class ProductsListServlet extends HttpServlet {
         int categoryId = Integer.valueOf(request.getParameter("catId"));
         HomeController homeController = new HomeController();
         if( categoryId== -1){
-            request.setAttribute(PRODUCTS_LIST, homeController.getListOfProducts());
+             int pageKey;
+            if(!(request.getParameter("page").equals("")))
+            {
+                pageKey = Integer.parseInt(request.getParameter("page"));
+            }
+            else
+            {
+               pageKey=1;
+            }
+            ProductDAO productDAO=new ProductDAO();
+            ArrayList<Product> Allproduct= productDAO.getAllProducts();
+            int NumberOfProductInPage;
+            if(Allproduct.size()<=8)
+            {
+               NumberOfProductInPage=Allproduct.size();
+            }
+            else
+            {
+               NumberOfProductInPage=Allproduct.size()/3;
+            }
+            int startPoint=NumberOfProductInPage*(pageKey-1);
+            List<Product> newList =new ArrayList<>();
+            if((startPoint+NumberOfProductInPage)<=Allproduct.size())
+            {
+                if(pageKey==3)
+                    {
+                      newList=Allproduct.subList(startPoint,Allproduct.size());
+                    }
+                    else
+                    {
+                      newList=Allproduct.subList(startPoint,(startPoint+NumberOfProductInPage));
+                    }
+            }
+            request.setAttribute(PRODUCTS_LIST,newList);
         }else {
             request.setAttribute(PRODUCTS_LIST, homeController.getListOfProductsWithCategory(categoryId));
         }
