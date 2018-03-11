@@ -36,6 +36,7 @@ function viewProduct(productId) {
         {id: productId},
         function (data) {
             $("#table").toggle("slow");
+            $("#productImg").attr('src','/ImagesServlet?id=' + data.product.productId);
             $("#productId").val(data.product.productId);
             $("#productCategories").empty();
             for (var i = 0; i < data.categories.length; i++) {
