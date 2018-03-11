@@ -19,6 +19,8 @@ function closeForm() {
     $("#viewForm").toggle("slow");
     $("#table").fadeIn("slow");
     $("#btnAdd").show();
+    $("#pagination").show();
+    $("#path").text('');
 }
 
 function deleteProduct(productId) {
@@ -38,6 +40,7 @@ function viewProduct(productId) {
         function (data) {
             $("#table").toggle("slow");
             $("#btnAdd").hide();
+            $("#pagination").hide();
             $("#idDiv").show();
             $("#btnSubmit").text("Update");
             $("#productImg").attr('src', '/ImagesServlet?id=' + data.product.productId);
@@ -60,6 +63,7 @@ function addProduct() {
         {id: -1},
         function (data) {
             $("#table").hide("slow");
+            $("#pagination").hide();
             $("#productImg").attr('src', '');
             $("#btnSubmit").text("Add");
             $("#productId").val(-1);

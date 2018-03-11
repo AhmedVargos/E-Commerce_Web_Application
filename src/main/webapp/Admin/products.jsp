@@ -324,7 +324,7 @@
                                 </table>
                                 <!-- end project list -->
                             </div>
-                            <div class="col-md-12">
+                            <div id="pagination" class="col-md-12">
                                 <div class="pagination col-md-offset-6" >
                                     <a href="${pageContext.request.contextPath}/AdminPaginationServlet?product=1&page=1" id="p1" onclick="changeLayout(1)">1</a>
                                     <a href="${pageContext.request.contextPath}/AdminPaginationServlet?product=1&page=2" id="p2" onclick="changeLayout(2)">2</a>
