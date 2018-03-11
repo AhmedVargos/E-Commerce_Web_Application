@@ -48,15 +48,16 @@
 
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.js"></script>
-
-    <jsp:include page="/ProductsListServlet?catId=${sessionScope.CAT_ID}"/>
-
+    
+        <script src="js/changePagination.js"></script>
+    <jsp:include page="/ProductsListServlet?catId=${sessionScope.CAT_ID}&pagCat=${pageCatKey}"/>
+  
 </head>
-<body>
+<body onload="updateCatd(${pageCatKey})" >
 
 <div class="body">
     <script>
-        var catId = ${sessionScope.CAT_ID};
+       var catId = ${sessionScope.CAT_ID};
     </script>
     <jsp:include page="header.jsp"></jsp:include>
 
@@ -130,9 +131,9 @@
                 <div class="col-md-12">
                     <ul class="pagination pull-right">
                         <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
+                        <li id="pagecat1" class="active"><a href="UpdateCatIdPage?idPagecat=1">1</a></li>
+                        <li id="pagecat2"><a href="UpdateCatIdPage?idPagecat=2">2</a></li>
+                        <li id="pagecat3"><a href="UpdateCatIdPage?idPagecat=3">3</a></li>
                         <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
                     </ul>
                 </div>
