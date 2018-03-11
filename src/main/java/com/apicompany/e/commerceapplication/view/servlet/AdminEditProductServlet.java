@@ -102,10 +102,13 @@ public class AdminEditProductServlet extends HttpServlet {
                 }
 //                    InputStream fileContent = item.getInputStream();
             }
-
             ProductsController productsController = new ProductsController();
-            productsController.updateProduct(productId, categoryId, name, desc, productPrice, quantity, fileName);
 
+            if (productId == -1) {
+                productsController.addProduct(categoryId, name, desc, productPrice, quantity, fileName);
+            } else {
+                productsController.updateProduct(productId, categoryId, name, desc, productPrice, quantity, fileName);
+            }
             response.sendRedirect("Admin/products.jsp");
 
         } catch (FileUploadException e) {
@@ -115,25 +118,34 @@ public class AdminEditProductServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int productId = Integer.parseInt(request.getParameter("id"));
-        ProductsController productsController = new ProductsController();
-        CategoryController categoryController = new CategoryController();
-        Product product = productsController.getProductDetails(productId);
-        List<Category> allCategories = categoryController.getAllCategories();
+        if (productId != -1) {
+            ProductsController productsController = new ProductsController();
+            CategoryController categoryController = new CategoryController();
+            Product product = productsController.getProductDetails(productId);
+            List<Category> allCategories = categoryController.getAllCategories();
 
-        for (int i = 0; i < allCategories.size(); i++) {
-            if (allCategories.get(i).getCategoryId() == product.getCatagory_catogeryId()) {
-                Collections.swap(allCategories, i, 0);
+            for (int i = 0; i < allCategories.size(); i++) {
+                if (allCategories.get(i).getCategoryId() == product.getCatagory_catogeryId()) {
+                    Collections.swap(allCategories, i, 0);
+                }
             }
+
+            response.setContentType("application/json");
+            Gson gson = new Gson();
+
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("product", product);
+            hashMap.put("categories", allCategories);
+
+            response.getWriter().write(gson.toJson(hashMap));
+            response.getWriter().close();
+        } else {
+            CategoryController categoryController = new CategoryController();
+            List<Category> allCategories = categoryController.getAllCategories();
+            response.setContentType("application/json");
+            Gson gson = new Gson();
+            response.getWriter().write(gson.toJson(allCategories));
+            response.getWriter().close();
         }
-
-        response.setContentType("application/json");
-        Gson gson = new Gson();
-
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("product", product);
-        hashMap.put("categories", allCategories);
-
-        response.getWriter().write(gson.toJson(hashMap));
-        response.getWriter().close();
     }
 }

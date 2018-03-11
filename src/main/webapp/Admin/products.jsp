@@ -151,24 +151,6 @@
         <!-- page content -->
         <div class="right_col" role="main">
             <div class="">
-                <div class="page-title">
-                    <div class="title_left">
-                        <h3>Products
-                            <small>Listing products</small>
-                        </h3>
-                    </div>
-
-                    <div class="title_right">
-                        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for...">
-                                <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="clearfix"></div>
 
@@ -177,6 +159,11 @@
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>Products</h2>
+                                <br/>
+                                <button type="button" id="btnAdd" class="btn btn-success pull-right"
+                                        onclick="addProduct();">Add
+                                    Product
+                                </button>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
@@ -203,9 +190,11 @@
                                             <div class="profile_img pull-right">
                                                 <div id="crop-avatar">
                                                     <!-- Current avatar -->
-                                                    <img id="productImg" style="width: 320px; height: 320px" class="img-responsive avatar-view"
+                                                    <img id="productImg" style="width: 320px; height: 320px"
+                                                         class="img-responsive avatar-view"
                                                          src=""
-                                                         alt="Avatar" title="Change the avatar">
+                                                         alt=""
+                                                         title="Change the avatar">
                                                 </div>
                                             </div>
 
@@ -214,11 +203,12 @@
                                                   method="POST"
                                                   enctype="multipart/form-data">
 
-                                                <div class="form-group">
+                                                <div id="idDiv" class="form-group">
                                                     <label>Product
                                                         ID</label>
                                                     <div>
-                                                        <input id="productId" name="productId" type="text" class="form-control"
+                                                        <input id="productId" name="productId" type="text"
+                                                               class="form-control"
                                                                readonly="readonly"/>
                                                     </div>
                                                 </div>
@@ -242,8 +232,8 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label>Product
-                                                        Description <span class="required">*</span>
+                                                    <label>
+                                                        ProductDescription
                                                     </label>
                                                     <div>
                                                         <textarea id="productDescription" name="productDescription"
@@ -257,6 +247,7 @@
                                                         Price</label>
                                                     <div>
                                                         <input id="productPrice" name="productPrice" type="number"
+                                                               step="0.01"
                                                                min="1"
                                                                class="form-control"/>
                                                     </div>
@@ -273,7 +264,7 @@
 
                                                 <div class="form-group">
                                                     <br/>
-                                                    <label class="btn btn-info btn-file">
+                                                    <label id="lblImage" class="btn btn-info btn-file">
                                                         Change image... <input type="file" name="imageFile"
                                                                                style="display: none;">
                                                     </label>
@@ -283,7 +274,7 @@
                                                     <br/>
                                                 </div>
 
-                                                <button type="submit" class="btn btn-primary">Update</button>
+                                                <button id="btnSubmit" type="submit" class="btn btn-primary">Update</button>
                                             </form>
 
                                         </div>

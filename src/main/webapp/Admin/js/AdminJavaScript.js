@@ -18,6 +18,7 @@ function viewDetails(id) {
 function closeForm() {
     $("#viewForm").toggle("slow");
     $("#table").fadeIn("slow");
+    $("#btnAdd").show();
 }
 
 function deleteProduct(productId) {
@@ -36,7 +37,10 @@ function viewProduct(productId) {
         {id: productId},
         function (data) {
             $("#table").toggle("slow");
-            $("#productImg").attr('src','/ImagesServlet?id=' + data.product.productId);
+            $("#btnAdd").hide();
+            $("#idDiv").show();
+            $("#btnSubmit").text("Update");
+            $("#productImg").attr('src', '/ImagesServlet?id=' + data.product.productId);
             $("#productId").val(data.product.productId);
             $("#productCategories").empty();
             for (var i = 0; i < data.categories.length; i++) {
@@ -48,4 +52,30 @@ function viewProduct(productId) {
             $("#productQuantity").val(data.product.quantity);
             $("#viewForm").fadeIn("slow");
         });
+}
+
+function addProduct() {
+    $.get(
+        "/AdminEditProductServlet",
+        {id: -1},
+        function (data) {
+            $("#table").hide("slow");
+            $("#productImg").attr('src', '');
+            $("#btnSubmit").text("Add");
+            $("#productId").val(-1);
+            $("#idDiv").hide();
+            $("#btnAdd").hide();
+            $("#lblImage").text("Choose image...")
+            $("#productCategories").empty();
+            $("#productCategories").append('<option selected="true" disabled="disabled">Choose Category... </option>');
+            for (var i = 0; i < data.length; i++) {
+                $("#productCategories").append('<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>');
+            }
+            $("#productName").val("");
+            $("#productDescription").val("");
+            $("#productPrice").val("");
+            $("#productQuantity").val("");
+            $("#viewForm").fadeIn("slow");
+        });
+
 }
