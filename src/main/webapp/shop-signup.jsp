@@ -53,6 +53,8 @@
             var pass2 = $("#password2").val();
             if(pass1!=pass2){
                 $("#errorlbl").text("passwords Does not match");
+            }else{
+                $("#errorlbl").text("");
             }
         }
     </script>
@@ -100,7 +102,7 @@
                                                     </div>
                                                     <div class="col-md-6 col-md-offset-2">
                                                         <label>Confirm Password</label>
-                                                        <input required="true" type="password" id="password2" name="repassword" value=""
+                                                        <input onblur="validatePassword()" required="true" type="password" id="password2" name="repassword" value=""
                                                                class="form-control">
                                                     </div>
                                                 </div>
@@ -151,7 +153,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
-                                                <input type="submit" value="SignUp" onclick="validatePassword()"
+                                                <input type="submit" value="SignUp"
                                                        class="col-md-3 btn btn-primary pull-right mb-xl"
                                                        data-loading-text="Loading...">
                                             </div>
