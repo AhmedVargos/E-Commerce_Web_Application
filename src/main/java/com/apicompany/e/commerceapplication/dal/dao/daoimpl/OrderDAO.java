@@ -250,7 +250,6 @@ public class OrderDAO implements OrderDAOInt {
         return orders;
     }
 
-    
     @Override
     public Boolean addNewOrder(User user, ArrayList<CartItem> items) {
         Boolean added = false;
@@ -281,7 +280,7 @@ public class OrderDAO implements OrderDAOInt {
                 }
 
                 for (CartItem I : items) {
-                    insertStatement_2 = dbHandler.getCon().prepareStatement("INSERT INTO EcommerceDB.product_order (product_productId,order_orderId,product_quantityl) VALUES (?,?,?)");                  
+                    insertStatement_2 = dbHandler.getCon().prepareStatement("INSERT INTO EcommerceDB.product_order (product_productId,order_orderId,product_quantityl) VALUES (?,?,?)");
                     insertStatement_2.setInt(1, I.getProduct().getProductId());
                     insertStatement_2.setInt(2, orderId);
                     insertStatement_2.setInt(3, I.getQuantity());
@@ -311,7 +310,28 @@ public class OrderDAO implements OrderDAOInt {
         }
         return isRemoved;
     }
-    
+
+    @Override
+    public int getProductQuantityInOrder(int productId) {
+        PreparedStatement selectStatement;
+        ResultSet rs;
+        int Quantity = -1;
+        try {
+            selectStatement = dbHandler.getCon().prepareStatement("SELECT product_quantityl"
+                    + " FROM EcommerceDB.product_order"
+                    + " WHERE product_productId = ?");
+            selectStatement.setInt(1, productId);
+            rs = selectStatement.executeQuery();
+            if (rs.next()) {
+                Quantity = rs.getInt("product_quantityl");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return Quantity;
+    }
+
     /*@Override
     public Boolean updateExistingOrder(Order order) {
         
@@ -321,13 +341,12 @@ public class OrderDAO implements OrderDAOInt {
         deleteOrder(orderId);
         return addNewOrder(currentUser, products.);
     }*/
-
     public static void main(String[] args) {
         OrderDAO odao = new OrderDAO();
         ArrayList<Order> orders = new ArrayList<>();
         orders = odao.getAllOrders();
     }
- /*  public static void main(String[] args) {
+    /*  public static void main(String[] args) {
         OrderDAO o = new OrderDAO();
 //    o.getOrderByOrderId(1); 
 //     o.getOrderByUserId(1);
@@ -351,5 +370,5 @@ public class OrderDAO implements OrderDAOInt {
         ProductDAO pDao = new ProductDAO();
         pDao.insertProduct(p);
         o.addNewOrder(user, ps);
-}*/ 
+}*/
 }

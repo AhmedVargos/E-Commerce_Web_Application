@@ -35,12 +35,15 @@ public class AdminPaginationServlet extends HttpServlet {
             session.setAttribute("OrderPageNo", pageNumber);
             response.sendRedirect("Admin/orders.jsp");
 
-        } else if (request.getParameter("category") != null &&!request.getParameter("category").equals("")) {
+        } else if (request.getParameter("category") != null && !request.getParameter("category").equals("")) {
             session.setAttribute("CategoryPageNo", pageNumber);
             response.sendRedirect("Admin/categories.jsp");
         } else if (request.getParameter("user") != null && !request.getParameter("user").equals("")) {
             session.setAttribute("UserPageNo", pageNumber);
             response.sendRedirect("Admin/users.jsp");
+        } else if (request.getParameter("product") != null && !request.getParameter("product").equals("")) {
+            session.setAttribute("ProductPageNo", pageNumber);
+            response.sendRedirect("Admin/products.jsp");
         }
 
     }

@@ -57,9 +57,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("cart", cartController.getCurrentCart(user.getUserId()));
                 }
 
-                if (user.isIsAdmin()) {
-                    session.setAttribute("isAdmin", true);
-                }
+
 
                 session.setAttribute("userObj", user);
                 session.setAttribute("loggedin", true);
@@ -67,8 +65,12 @@ public class LoginServlet extends HttpServlet {
                 HomeController homeController = new HomeController();
                 session.setAttribute(SHOP_TAG, "Shop");
                 //session.setAttribute(PRODUCTS_LIST, homeController.getListOfProducts());
-
-                response.sendRedirect("shop-full-width.jsp");
+                if (user.isIsAdmin()) {
+                    session.setAttribute("isAdmin", true);
+                    response.sendRedirect("Admin/users.jsp");
+                }else {
+                    response.sendRedirect("shop-full-width.jsp");
+                }
             } else {
                 response.sendRedirect("shop-login.jsp");
             }

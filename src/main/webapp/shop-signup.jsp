@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Shop | Porto - Responsive HTML5 Template 4.3.1</title>
+    <title>Shop | Register</title>
 
     <meta name="keywords" content="HTML5 Template"/>
     <meta name="description" content="Porto - Responsive HTML5 Template">
