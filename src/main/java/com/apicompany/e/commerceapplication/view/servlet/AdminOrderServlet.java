@@ -8,6 +8,7 @@ package com.apicompany.e.commerceapplication.view.servlet;
 import com.apicompany.e.commerceapplication.business.OrderController;
 import com.apicompany.e.commerceapplication.dal.models.Category;
 import com.apicompany.e.commerceapplication.dal.models.Order;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.AbstractList;
@@ -21,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
  * @author gehad
  */
 @WebServlet(name = "AdminOrderServlet", urlPatterns = {"/AdminOrderServlet"})
@@ -43,43 +43,47 @@ public class AdminOrderServlet extends HttpServlet {
         List<Order> subOrders;
         AllOrders = orderController.getAllOrders();
         if (AllOrders != null) {
-            if (AllOrders.size() < 5) {
-                pageSize = 1;
-            } else {
-                pageSize = AllOrders.size() / 5;
-            }
+            if (AllOrders.size() > 0) {
 
-            if (request.getParameter("page").equals("")) {
-                subOrders = AllOrders.subList(0, pageSize);
-                request.setAttribute("Orders", subOrders);
-            } else {
-                pageNumber = Integer.parseInt(request.getParameter("page"));
-                switch (pageNumber) {
-                    case 1:
-                        subOrders = AllOrders.subList(0, pageSize);
-                        request.setAttribute("Orders", subOrders);
-                        break;
-                    case 5:
-                        if ((pageNumber - 1) * pageSize < AllOrders.size()) {
-                            subOrders = AllOrders.subList((pageNumber - 1) * pageSize, AllOrders.size());
-                            request.setAttribute("Orders", subOrders);
-                        }
-                        break;
-                    default:
-                        if ((pageNumber - 1) * pageSize < AllOrders.size()) {
-                            if (((pageNumber - 1) * pageSize) + pageSize < AllOrders.size()) {
-                                subOrders = AllOrders.subList((pageNumber - 1) * pageSize, ((pageNumber - 1) * pageSize) + pageSize);
-                            } else {
-                                subOrders = AllOrders.subList((pageNumber - 1) * pageSize, AllOrders.size());
-                            }
-                            request.setAttribute("Orders", subOrders);
-                        }
-                        break;
+
+                if (AllOrders.size() < 5) {
+                    pageSize = 1;
+                } else {
+                    pageSize = AllOrders.size() / 5;
                 }
 
+                if (request.getParameter("page").equals("")) {
+                    subOrders = AllOrders.subList(0, pageSize);
+                    request.setAttribute("Orders", subOrders);
+                } else {
+                    pageNumber = Integer.parseInt(request.getParameter("page"));
+                    switch (pageNumber) {
+                        case 1:
+                            subOrders = AllOrders.subList(0, pageSize);
+                            request.setAttribute("Orders", subOrders);
+                            break;
+                        case 5:
+                            if ((pageNumber - 1) * pageSize < AllOrders.size()) {
+                                subOrders = AllOrders.subList((pageNumber - 1) * pageSize, AllOrders.size());
+                                request.setAttribute("Orders", subOrders);
+                            }
+                            break;
+                        default:
+                            if ((pageNumber - 1) * pageSize < AllOrders.size()) {
+                                if (((pageNumber - 1) * pageSize) + pageSize < AllOrders.size()) {
+                                    subOrders = AllOrders.subList((pageNumber - 1) * pageSize, ((pageNumber - 1) * pageSize) + pageSize);
+                                } else {
+                                    subOrders = AllOrders.subList((pageNumber - 1) * pageSize, AllOrders.size());
+                                }
+                                request.setAttribute("Orders", subOrders);
+                            }
+                            break;
+                    }
+
+                }
             }
+            response.sendRedirect("Admin/orders.jsp");
         }
-        response.sendRedirect("Admin/orders.jsp");
     }
 
 }

@@ -33,7 +33,7 @@ public class OrderController {
             products.clear();
             products= orders.get(i).getProducts();
             for (Product product : products) {
-                sum+= (product.getProductPrice()*orderDAO.getProductQuantityInOrder(product.getProductId()));
+                sum+= (product.getProductPrice()*orderDAO.getProductQuantityInOrder(product.getProductId(),orders.get(i).getOrder_id()));
             }
             orders.get(i).setTotalPrice(sum);
         }
