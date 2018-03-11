@@ -355,53 +355,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-                                <!-- start project list -->
-                                <table class="table table-striped projects" id="table">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 10%">#User ID</th>
-                                        <th>Image</th>
-                                        <th style="width: 25%">Customer Name</th>
-                                        <th>Email</th>
-                                        <th>Credit Limit</th>
-                                        <th style="width: 11%">#Edit</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach items="${users}" var="user">
-                                        <tr>
-                                            <td>#${user.userId}</td>
-                                            <td>
-                                                <ul class="list-inline">
-                                                    <li>
-                                                        <img src="images/user.png" class="avatar" alt="Avatar">
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <a>${user.userName}</a>
-                                            </td>
-                                            <td>
-                                                <a>${user.email}</a>
-                                            </td>
-                                            <td>
-                                                <a>${user.creditLimit}</a>
-                                            </td>
-                                            <td>
-                                                <button type="button" onclick="viewDetails(${user.userId})"
-                                                        class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>
-                                                    View
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                                <!-- end project list -->
-
-                            </div>
+                             </div>
                         </div>
                     </div>
                 </div>
