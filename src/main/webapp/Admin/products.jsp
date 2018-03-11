@@ -63,22 +63,11 @@
     <div class="main_container">
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
-                <div class="navbar nav_title" style="border: 0;">
-                    <a href="index.jsp" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
-                </div>
+
 
                 <div class="clearfix"></div>
 
                 <!-- menu profile quick info -->
-                <div class="profile clearfix">
-                    <div class="profile_pic">
-                        <img src="images/img.jpg" alt="..." class="img-circle profile_img">
-                    </div>
-                    <div class="profile_info">
-                        <span>Welcome,</span>
-                        <h2>John Doe</h2>
-                    </div>
-                </div>
                 <!-- /menu profile quick info -->
 
                 <br/>
@@ -89,19 +78,19 @@
                         <h3>Admin Panel</h3>
                         <ul class="nav side-menu">
 
-                            <li>
+                            <li style="width:230px">
                                 <a href="users.jsp"><i class="fa fa-users"></i> Users </a>
                             </li>
 
-                            <li>
+                            <li style="width:230px">
                                 <a href="products.jsp"><i class="fa fa-shopping-bag"></i> Products </a>
                             </li>
 
-                            <li>
+                            <li style="width:230px">
                                 <a href="categories.jsp"><i class="fa fa-list"></i> Categories </a>
                             </li>
 
-                            <li>
+                            <li style="width:230px">
                                 <a href="orders.jsp"><i class="fa fa-info"></i> Orders </a>
                             </li>
 
@@ -124,24 +113,15 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
-                            <a href="javascript:" class="user-profile dropdown-toggle" data-toggle="dropdown"
-                               aria-expanded="false">
-                                <img src="images/img.jpg" alt="">John Doe
+                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                               -                               aria-expanded="false">
+                                <img src="images/img.jpg" alt="">System Admin
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                <li><a href="javascript:"> Profile</a></li>
-                                <li>
-                                    <a href="javascript:">
-                                        <span class="badge bg-red pull-right">50%</span>
-                                        <span>Settings</span>
-                                    </a>
-                                </li>
-                                <li><a href="javascript:">Help</a></li>
-                                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                <li><a href="../LogoutServlet"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                             </ul>
                         </li>
-
                     </ul>
                 </nav>
             </div>
@@ -151,24 +131,6 @@
         <!-- page content -->
         <div class="right_col" role="main">
             <div class="">
-                <div class="page-title">
-                    <div class="title_left">
-                        <h3>Products
-                            <small>Listing products</small>
-                        </h3>
-                    </div>
-
-                    <div class="title_right">
-                        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for...">
-                                <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="clearfix"></div>
 
@@ -177,6 +139,11 @@
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>Products</h2>
+                                <br/>
+                                <button type="button" id="btnAdd" class="btn btn-success pull-right"
+                                        onclick="addProduct();">Add
+                                    Product
+                                </button>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
@@ -203,9 +170,11 @@
                                             <div class="profile_img pull-right">
                                                 <div id="crop-avatar">
                                                     <!-- Current avatar -->
-                                                    <img id="productImg" style="width: 320px; height: 320px" class="img-responsive avatar-view"
+                                                    <img id="productImg" style="width: 320px; height: 320px"
+                                                         class="img-responsive avatar-view"
                                                          src=""
-                                                         alt="Avatar" title="Change the avatar">
+                                                         alt=""
+                                                         title="Change the avatar">
                                                 </div>
                                             </div>
 
@@ -214,11 +183,12 @@
                                                   method="POST"
                                                   enctype="multipart/form-data">
 
-                                                <div class="form-group">
+                                                <div id="idDiv" class="form-group">
                                                     <label>Product
                                                         ID</label>
                                                     <div>
-                                                        <input id="productId" name="productId" type="text" class="form-control"
+                                                        <input id="productId" name="productId" type="text"
+                                                               class="form-control"
                                                                readonly="readonly"/>
                                                     </div>
                                                 </div>
@@ -242,8 +212,8 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label>Product
-                                                        Description <span class="required">*</span>
+                                                    <label>
+                                                        ProductDescription
                                                     </label>
                                                     <div>
                                                         <textarea id="productDescription" name="productDescription"
@@ -257,6 +227,7 @@
                                                         Price</label>
                                                     <div>
                                                         <input id="productPrice" name="productPrice" type="number"
+                                                               step="0.01"
                                                                min="1"
                                                                class="form-control"/>
                                                     </div>
@@ -273,8 +244,8 @@
 
                                                 <div class="form-group">
                                                     <br/>
-                                                    <label class="btn btn-info btn-file">
-                                                        Change image... <input type="file" name="imageFile"
+                                                    <label id="lblImage" class="btn btn-info btn-file">
+                                                        Choose image... <input type="file" name="imageFile"
                                                                                style="display: none;">
                                                     </label>
 
@@ -283,7 +254,7 @@
                                                     <br/>
                                                 </div>
 
-                                                <button type="submit" class="btn btn-primary">Update</button>
+                                                <button id="btnSubmit" type="submit" class="btn btn-primary">Update</button>
                                             </form>
 
                                         </div>
@@ -333,7 +304,7 @@
                                 </table>
                                 <!-- end project list -->
                             </div>
-                            <div class="col-md-12">
+                            <div id="pagination" class="col-md-12">
                                 <div class="pagination col-md-offset-6" >
                                     <a href="${pageContext.request.contextPath}/AdminPaginationServlet?product=1&page=1" id="p1" onclick="changeLayout(1)">1</a>
                                     <a href="${pageContext.request.contextPath}/AdminPaginationServlet?product=1&page=2" id="p2" onclick="changeLayout(2)">2</a>
@@ -374,7 +345,6 @@
 <!-- Custom Theme Scripts -->
 <script src="build/js/custom.min.js"></script>
 <script src="js/AdminJavaScript.js"></script>
-<script src="js/jquery.form.js"></script>
 
 <script>
     $(document).on('change', ':file', function () {
@@ -384,20 +354,8 @@
         input.trigger('fileselect', [numFiles, label]);
     });
 
-    // $(function () {
-    //     $('#upload-form').ajaxForm({
-    //         success: function (msg) {
-    //             alert("File has been uploaded successfully");
-    //         },
-    //         error: function (msg) {
-    //             $("#upload-error").text("Couldn't upload file");
-    //         }
-    //     });
-    // });
-
     $(document).ready(function () {
         $(':file').on('fileselect', function (event, numFiles, label) {
-            //console.log(numFiles);
             $("#path").text(label);
 
         });

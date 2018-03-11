@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Shop | Porto - Responsive HTML5 Template 4.3.1</title>
+    <title>Shop | Details</title>
 
     <meta name="keywords" content="HTML5 Template"/>
     <meta name="description" content="Porto - Responsive HTML5 Template">
@@ -93,7 +93,7 @@
                     <div class="owl-carousel owl-theme" data-plugin-options='{"items": 1}'>
                         <div>
                             <div class="thumbnail">
-                                <img alt="" class="img-responsive img-rounded" src="/ImagesServlet?id=${sessionScope.PRODUCT_DETAIL.productId}">
+                                <img alt="" class="img-responsive img-rounded" src="/ImagesServlet?id=${sessionScope.PRODUCT_DETAIL.productId}" style="width:540px;height: 400px;">
                             </div>
                         </div>
 

@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Shop | Porto - Responsive HTML5 Template 4.3.1</title>
+    <title>Shop | Main</title>
 
     <meta name="keywords" content="HTML5 Template"/>
     <meta name="description" content="Porto - Responsive HTML5 Template">
@@ -103,7 +103,7 @@
 												<span class="product-thumb-info-act-right"><em><i
                                                         class="fa fa-plus"></i> Details</em></span>
 											</span>
-											<img alt="" class="img-responsive" src="/ImagesServlet?id=${product.productId}" style="width: 320px; height: 320px">
+											<img alt="" class="img-responsive" src="/ImagesServlet?id=${product.productId}" style="width: 320px; height: 270px">
 										</span>
 									</a>
 									<span class="product-thumb-info-content">

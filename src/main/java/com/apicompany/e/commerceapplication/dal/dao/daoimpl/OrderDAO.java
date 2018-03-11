@@ -311,16 +311,18 @@ public class OrderDAO implements OrderDAOInt {
         return isRemoved;
     }
 
+    //Ahmed Edit
     @Override
-    public int getProductQuantityInOrder(int productId) {
+    public int getProductQuantityInOrder(int productId,int orderId) {
         PreparedStatement selectStatement;
         ResultSet rs;
         int Quantity = -1;
         try {
             selectStatement = dbHandler.getCon().prepareStatement("SELECT product_quantityl"
                     + " FROM EcommerceDB.product_order"
-                    + " WHERE product_productId = ?");
+                    + " WHERE product_productId = ? AND order_orderId = ?");
             selectStatement.setInt(1, productId);
+            selectStatement.setInt(2, orderId);
             rs = selectStatement.executeQuery();
             if (rs.next()) {
                 Quantity = rs.getInt("product_quantityl");
