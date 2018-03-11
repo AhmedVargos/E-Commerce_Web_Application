@@ -36,4 +36,6 @@ public class ProductsController {
         Product product = new Product(name, desc, fileName, price, quantity, categoryId);
         productDAO.updateProduct(product);
     }
+
+
 }

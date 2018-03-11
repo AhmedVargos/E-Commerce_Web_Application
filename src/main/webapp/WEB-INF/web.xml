@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+
+    <context-param>
+        <description>Location to store images</description>
+        <param-name>path</param-name>
+        <param-value>C:/Images</param-value>
+    </context-param>
     <servlet>
         <servlet-name>Category</servlet-name>
         <servlet-class>com.apicompany.e.commerceapplication.view.servlet.AdminCategoryServlet</servlet-class>
@@ -32,14 +39,7 @@
     <welcome-file-list>
         <welcome-file>shop-login.jsp</welcome-file>
     </welcome-file-list>
-    <filter>
-        <filter-name>Login Filter</filter-name>
-        <filter-class>com.apicompany.e.commerceapplication.view.filter.LoginFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>Login Filter</filter-name>
-        <url-pattern>/shop-checkout.jsp</url-pattern>
-    </filter-mapping>
+
     <filter>
         <filter-name>Category Filter</filter-name>
         <filter-class>com.apicompany.e.commerceapplication.view.filter.LoadCategoriesFilter</filter-class>
@@ -49,12 +49,12 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <!--<filter>-->
-        <!--<filter-name>Admin Filter</filter-name>-->
-        <!--<filter-class>com.apicompany.e.commerceapplication.view.filter.AdminFilter</filter-class>-->
+    <!--<filter-name>Admin Filter</filter-name>-->
+    <!--<filter-class>com.apicompany.e.commerceapplication.view.filter.AdminFilter</filter-class>-->
     <!--</filter>-->
     <!--<filter-mapping>-->
-        <!--<filter-name>Admin Filter</filter-name>-->
-        <!--<url-pattern>/Admin/*</url-pattern>-->
+    <!--<filter-name>Admin Filter</filter-name>-->
+    <!--<url-pattern>/Admin/*</url-pattern>-->
     <!--</filter-mapping>-->
 
 </web-app>
