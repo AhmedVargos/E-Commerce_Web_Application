@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +22,7 @@
 
     <!-- Custom Theme Style -->
     <link href="build/css/custom.min.css" rel="stylesheet">
+    <jsp:include page="/AdminProductsServlet"/>
 </head>
 
 <body class="nav-md">
@@ -89,20 +91,20 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
-                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                            <a href="javascript:" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false">
                                 <img src="images/img.jpg" alt="">John Doe
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                <li><a href="javascript:;"> Profile</a></li>
+                                <li><a href="javascript:"> Profile</a></li>
                                 <li>
-                                    <a href="javascript:;">
+                                    <a href="javascript:">
                                         <span class="badge bg-red pull-right">50%</span>
                                         <span>Settings</span>
                                     </a>
                                 </li>
-                                <li><a href="javascript:;">Help</a></li>
+                                <li><a href="javascript:">Help</a></li>
                                 <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                             </ul>
                         </li>
@@ -142,63 +144,139 @@
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>Products</h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                           aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Settings 1</a>
-                                            </li>
-                                            <li><a href="#">Settings 2</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
 
 
+                                <div id="viewForm" class="col-md-12 col-xs-12" style="display: none;">
+                                    <div class="x_panel">
+                                        <div class="x_title">
+                                            <h2>Form Basic Elements
+                                                <small>different form elements</small>
+                                            </h2>
+                                            <ul class="nav navbar-right panel_toolbox">
+                                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                </li>
+                                                <li><a onclick="closeForm();"><i
+                                                        class="fa fa-close"></i></a>
+                                                </li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                            <br/>
+
+                                            <div class="profile_img alignright">
+                                                <div id="crop-avatar">
+                                                    <!-- Current avatar -->
+                                                    <img class="img-responsive avatar-view" src="images/picture.jpg"
+                                                         alt="Avatar" title="Change the avatar">
+                                                </div>
+                                                <br/>
+                                                <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Choose
+                                                    Image</a>
+
+                                            </div>
+                                            <form class="form-horizontal form-label-left col-md-6">
+
+                                                <div class="form-group">
+                                                    <label>Product
+                                                        ID</label>
+                                                    <div>
+                                                        <input id="productId" type="text" class="form-control"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Category</label>
+                                                    <div>
+                                                        <select id="productCategories" class="form-control">
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <label>Product
+                                                        Name</label>
+                                                    <div>
+                                                        <input id="productName" type="text" class="form-control"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Product
+                                                        Description <span class="required">*</span>
+                                                    </label>
+                                                    <div>
+                                                        <textarea id="productDescription" class="form-control"
+                                                                  rows="3"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Product
+                                                        Price</label>
+                                                    <div>
+                                                        <input id="productPrice" type="number" min="1"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Quantity</label>
+                                                    <div>
+                                                        <input id="productQuantity" type="number" min="0"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary">Update</button>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
                                 <!-- start project list -->
-                                <table class="table table-striped projects">
+                                <table id="table" class="table table-striped projects">
                                     <thead>
                                     <tr>
                                         <th style="width: 10%">#Product ID</th>
-                                        <th style="width: 20%">Category</th>
-                                        <th style="width: 20%">Product Name</th>
+                                        <th style="width: 25%">Product Name</th>
                                         <th>Product Price</th>
                                         <th>Quantity</th>
                                         <th style="width: 21%">#Edit</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>#350</td>
-                                        <td>
-                                            <a>Men Clothes</a>
-                                        </td>
-                                        <td>
-                                            <a>Adidas</a>
-                                        </td>
-                                        <td>
-                                            <a>800$</a>
-                                        </td>
-                                        <td>
-                                            <a>50</a>
-                                        </td>
-                                        <td>
-                                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View
-                                            </a>
-                                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit
-                                            </a>
-                                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
-                                                Delete </a>
-                                        </td>
-                                    </tr>
+                                    <c:forEach items="${products}" var="product">
+                                        <tr id="${product.productId}">
+                                            <td>#${product.productId}</td>
+                                            <td>
+                                                <a>${product.productName}</a>
+                                            </td>
+                                            <td>
+                                                <a>${product.productPrice} EG</a>
+                                            </td>
+                                            <td>
+                                                <a>${product.quantity}</a>
+                                            </td>
+                                            <td>
+                                                <button onclick="viewProduct(${product.productId})" type="button"
+                                                        class="btn btn-info btn-xs"><i
+                                                        class="fa fa-pencil"></i>
+                                                    Edit
+                                                </button>
+                                                <button onclick="deleteProduct(${product.productId})" type="button"
+                                                        class="btn btn-danger btn-xs"><i
+                                                        class="fa fa-trash-o"></i>
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                                 <!-- end project list -->
@@ -235,5 +313,6 @@
 
 <!-- Custom Theme Scripts -->
 <script src="build/js/custom.min.js"></script>
+<script src="js/AdminJavaScript.js"></script>
 </body>
 </html>

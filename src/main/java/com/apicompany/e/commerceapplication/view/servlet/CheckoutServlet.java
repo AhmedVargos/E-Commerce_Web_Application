@@ -1,19 +1,25 @@
 package com.apicompany.e.commerceapplication.view.servlet;
 
 import com.apicompany.e.commerceapplication.business.CheckoutController;
+import com.apicompany.e.commerceapplication.dal.dao.daoimpl.CartDAO;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.UserDAO;
+import com.apicompany.e.commerceapplication.dal.dao.daoint.CartDAOInt;
+import com.apicompany.e.commerceapplication.dal.models.Cart;
+import com.apicompany.e.commerceapplication.dal.models.CartItem;
 import com.apicompany.e.commerceapplication.dal.models.CheckoutModel;
 import com.apicompany.e.commerceapplication.dal.models.User;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.smartcardio.Card;
 
 @WebServlet(name = "CheckoutServlet", urlPatterns = {"/CheckoutServlet"})
 public class CheckoutServlet extends HttpServlet {
@@ -40,8 +46,8 @@ public class CheckoutServlet extends HttpServlet {
             throws ServletException, IOException {
            HttpSession usersession = request.getSession(false);
         User User=  (User) usersession.getAttribute("userObj");
-       int UserId = User.getUserId();
-     //  int UserId = 2;
+      // int UserId = User.getUserId();
+      int UserId = 1;
         PrintWriter out = response.getWriter();
         CheckoutController mycontroller = new CheckoutController();
         if (mycontroller.checkUserFound(UserId)) {
@@ -82,8 +88,11 @@ public class CheckoutServlet extends HttpServlet {
             throws ServletException, IOException {
           HttpSession usersession = request.getSession(false);
         User User=  (User) usersession.getAttribute("userObj");
-       int UserId = User.getUserId();
-       // int UserId = 1;
+      // int UserId = User.getUserId();
+      int UserId = 1;
+        CartDAOInt card=new CartDAO();
+        Cart currentCart= card.getCartByUserID(UserId);
+        
         PrintWriter out = response.getWriter();
         CheckoutController mycontroller = new CheckoutController();
         int totalPrice = mycontroller.CalaulatetotalPrice(UserId);
@@ -91,19 +100,34 @@ public class CheckoutServlet extends HttpServlet {
             boolean checkResult = mycontroller.checkLimitRange(UserId, totalPrice);
 
             if (checkResult) {
-                boolean CreatOrder = mycontroller.MakeOrder(UserId);
+                int CreatOrder = mycontroller.MakeOrder(UserId);
 
-                if (CreatOrder) {
+                if (CreatOrder==1) {
                     boolean check = mycontroller.clearCard(UserId);
-                    out.write("You create order successfuly and contact with you for payment");
+                    //Ahmed Edit
+                    usersession.setAttribute("cart", null);
+                    out.write("You create order successfully and contact with you for payment");
                 }
+                else if(CreatOrder==-1){
+                     ArrayList<CartItem> totalItemsOfCards = currentCart.getCartItems();
+                     for(int i=0;i<totalItemsOfCards.size();i++)
+                     {
+                        if(totalItemsOfCards.get(i).getProduct().getQuantity()<totalItemsOfCards.get(i).getQuantity())
+                        {
+                          out.println("the product "+totalItemsOfCards.get(i).getProduct().getProductName()+" is out of stoke ");  
+                        }
+                     }
+                    
+                  
+                } 
+                
 
             } else {
-                out.write(" the total price more than your credit  Limit sorry :( increase your creadit ");
+                out.write(" the total price more than your credit  Limit");
 
             }
         } else {
-            out.write("your card is Empty ");
+            out.write("your cart is Empty ");
         }
     }
 

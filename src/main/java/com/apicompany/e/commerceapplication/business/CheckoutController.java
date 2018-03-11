@@ -72,16 +72,25 @@ public class CheckoutController {
         return user;
     }
 
-    public boolean MakeOrder(int userId) {
+    public int MakeOrder(int userId) {
         CartDAO myCartDao = new CartDAO();
         Cart currentCart = myCartDao.getCartByUserID(userId);
         OrderDAO newOrderDAO = new OrderDAO();
         UserDAO userDao = new UserDAO();
         User currentUser = getUser(userId);
+        //check if quantity found or not
+        ArrayList<CartItem> totalItemsOfCards = currentCart.getCartItems();
+        for(int i=0;i<totalItemsOfCards.size();i++)
+        {
+           if(totalItemsOfCards.get(i).getProduct().getQuantity()<totalItemsOfCards.get(i).getQuantity())
+           {
+              return -1;
+           }
+        }
         currentUser.setCreditLimit(currentUser.getCreditLimit() - CalaulatetotalPrice(userId));
         boolean resultUpdate = userDao.updateUser(currentUser);
         if (resultUpdate) {
-            ArrayList<CartItem> totalItemsOfCards = currentCart.getCartItems();
+            
             boolean addSuccess = newOrderDAO.addNewOrder(currentUser, totalItemsOfCards);
             if (addSuccess) {
                 for (int i = 0; i < totalItemsOfCards.size(); i++) {
@@ -93,15 +102,15 @@ public class CheckoutController {
                     ProductDAO newProductDao = new ProductDAO();
                     newProductDao.updateProduct(newproductValue);
                 }
-                return true;
+                return 1;
             }
             else
             {
-              return  false;
+              return  -2;
             }
             
         } else {
-            return false;
+            return -3;
         }
         
     }

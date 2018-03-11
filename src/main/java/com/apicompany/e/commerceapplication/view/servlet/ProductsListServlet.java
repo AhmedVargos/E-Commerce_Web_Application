@@ -1,5 +1,6 @@
 package com.apicompany.e.commerceapplication.view.servlet;
 
+import com.apicompany.e.commerceapplication.business.CategoryController;
 import com.apicompany.e.commerceapplication.business.HomeController;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.ProductDAO;
 import com.apicompany.e.commerceapplication.dal.models.Product;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.apicompany.e.commerceapplication.view.servlet.AccessServlet.SHOP_TAG;
 import static com.apicompany.e.commerceapplication.view.servlet.LoginServlet.PRODUCTS_LIST;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +63,10 @@ public class ProductsListServlet extends HttpServlet {
             request.setAttribute(PRODUCTS_LIST,newList);
         }else {
             request.setAttribute(PRODUCTS_LIST, homeController.getListOfProductsWithCategory(categoryId));
+            CategoryController categoryController = new CategoryController();
+            String name = categoryController.getCategoryName(categoryId);
+            request.setAttribute(SHOP_TAG,name);
+
         }
     }
 }

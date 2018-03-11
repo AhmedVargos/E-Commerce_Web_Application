@@ -56,7 +56,9 @@
 <body onload="updatePagination(${PageKey})">
 
 <div class="body">
-
+<script>
+    var catId = -1;
+</script>
 <jsp:include page="header.jsp"></jsp:include>
     <div role="main" class="main shop">
 
@@ -70,7 +72,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <h1 class="mb-none"><strong>${sessionScope.SHOP_TAG}</strong></h1>
+                    <h1 class="mb-none"><strong>${SHOP_TAG}</strong></h1>
                     <p>Showing results.</p>
                 </div>
             </div>

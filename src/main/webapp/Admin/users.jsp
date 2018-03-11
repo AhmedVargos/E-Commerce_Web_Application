@@ -183,7 +183,7 @@
                                                         </li>
                                                     </ul>
                                                 </li>
-                                                <li><a class="close-link" onclick="closeForm();"><i
+                                                <li><a onclick="closeForm();"><i
                                                         class="fa fa-close"></i></a>
                                                 </li>
                                             </ul>
@@ -261,7 +261,7 @@
 
 
                                 <!-- start project list -->
-                                <table class="table table-striped projects" id="userTable">
+                                <table class="table table-striped projects" id="table">
                                     <thead>
                                     <tr>
                                         <th style="width: 10%">#User ID</th>
@@ -336,6 +336,6 @@
 
 <!-- Custom Theme Scripts -->
 <script src="build/js/custom.min.js"></script>
-<script src="js/AdminUsers.js"></script>
+<script src="js/AdminJavaScript.js"></script>
 </body>
 </html>

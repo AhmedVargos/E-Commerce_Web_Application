@@ -70,8 +70,8 @@
                     <div class="featured-boxes">
                         <div class="row">
                             <div class="col-sm-8">
-                                <div class="featured-box featured-box-primary align-left mt-xlg" style="height: 521px;">
-                                    <div class="box-content">
+                                <div class="featured-box featured-box-primary align-left mt-xlg" style="height: 800px;">
+                                    <div class="box-content" style="height: 80%">
                                         <h4 class="heading-primary text-uppercase mb-md">Register New Account</h4>
 
                                         <form action="/RegistrationServlet" id="signupForm" method="post">
@@ -79,7 +79,7 @@
                                                 <div class="form-group">
                                                     <div class="col-md-6 col-md-offset-2">
                                                         <label>Full Name</label>
-                                                        <input type="text" name="name" value="" class="form-control">
+                                                        <input required="true" type="text" name="name" value="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -87,12 +87,12 @@
                                                 <div class="form-group">
                                                     <div class="col-md-6 col-md-offset-2">
                                                         <label>Password</label>
-                                                        <input type="password" name="password" value=""
+                                                        <input required="true" type="password" name="password" value=""
                                                                class="form-control">
                                                     </div>
                                                     <div class="col-md-6 col-md-offset-2">
                                                         <label>Confirm Password</label>
-                                                        <input type="password" name="repassword" value=""
+                                                        <input required="true" type="password" name="repassword" value=""
                                                                class="form-control">
                                                     </div>
                                                 </div>
@@ -101,7 +101,7 @@
                                                 <div class="form-group">
                                                     <div class="col-md-6 col-md-offset-2">
                                                         <label>E-mail</label>
-                                                        <input type="text" name="email" value="" class="form-control">
+                                                        <input required="true" type="email" name="email" value="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -109,11 +109,11 @@
                                                 <div class="form-group">
                                                     <div class="col-md-6 col-md-offset-2">
                                                         <label>Address </label>
-                                                        <input type="text" name="address" value="" class="form-control">
+                                                        <input required="true" type="text" name="address" value="" class="form-control">
                                                     </div>
                                                     <div class="col-md-6 col-md-offset-2">
                                                         <label>Birthdate </label>
-                                                        <input type="date" max="2002-12-31" name="birthdate" value="" class="form-control">
+                                                        <input required="true" type="date" max="2002-12-31" name="birthdate" value="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,7 +121,15 @@
                                                 <div class="form-group">
                                                     <div class="col-md-6 col-md-offset-2">
                                                         <label>Job</label>
-                                                        <input type="text" name="job" value="" class="form-control">
+                                                        <input required="true" type="text" name="job" value="" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <div class="col-md-6 col-md-offset-2">
+                                                        <label>Interests</label>
+                                                        <input required="true" type="text" name="interests" value="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -129,7 +137,7 @@
                                                 <div class="form-group">
                                                     <div class="col-md-6 col-md-offset-2">
                                                         <label>Credit</label>
-                                                        <input type="number" min="0" name="credit" value=""
+                                                        <input required="true" type="number" min="0" name="credit" value=""
                                                                class="form-control">
                                                     </div>
                                                 </div>
