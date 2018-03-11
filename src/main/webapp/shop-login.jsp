@@ -77,7 +77,7 @@
                                                 <div class="form-group">
                                                     <div class="col-md-12">
                                                         <label>E-mail Address</label>
-                                                        <input type="text" name="email" value=""
+                                                        <input required="true" type="text" name="email" value=""
                                                                class="form-control input-lg">
                                                     </div>
                                                 </div>
@@ -86,7 +86,7 @@
                                                 <div class="form-group">
                                                     <div class="col-md-12">
                                                         <label>Password</label>
-                                                        <input type="password" name="password" value=""
+                                                        <input required="true" type="password" name="password" value=""
                                                                class="form-control input-lg">
                                                     </div>
                                                 </div>

@@ -48,11 +48,12 @@
 
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.js"></script>
+    <script src="js/changePagination.js"></script>
 
-    <jsp:include page="/ProductsListServlet?catId=-1"/>
+    <jsp:include page="/ProductsListServlet?catId=-1&page=${PageKey}"/>
 
 </head>
-<body>
+<body onload="updatePagination(${PageKey})">
 
 <div class="body">
 <script>
@@ -102,7 +103,7 @@
 												<span class="product-thumb-info-act-right"><em><i
                                                         class="fa fa-plus"></i> Details</em></span>
 											</span>
-											<img alt="" class="img-responsive" src="img/products/product-2.jpg">
+											<img alt="" class="img-responsive" src="/ImagesServlet?id=${product.productId}">
 										</span>
 									</a>
 									<span class="product-thumb-info-content">
@@ -123,19 +124,30 @@
                 </c:if>
 
             </div>
-
+         
             <div class="row" id="page_footer">
                 <div class="col-md-12">
                     <ul class="pagination pull-right">
-                        <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+                       <!-- <li><a href="#"><i class="fa fa-chevron-left"></i></a></li> -->
+                        <li class="active" id="pagePag1"><a href="UpdateIdServlet?idPage=1">1</a></li>
+                        <li id="pagePag2"><a href="UpdateIdServlet?idPage=2" >2</a></li>
+                        <li id="pagePag3"><a href="UpdateIdServlet?idPage=3" >3</a></li>
+                       <!-- <li><a href="#"><i class="fa fa-chevron-right"></i></a></li> -->
                     </ul>
                 </div>
             </div>
-
+<!--            <c:if test="${ not empty PRODUCTS_LIST}">
+             <script>
+                 var s="pagePag${PageKey}";
+                 var par1;
+                 var par2=document.getElementById(s);
+                 for (i = 1; i <= 3; i++) {
+                      par1=document.getElementById("pagePag"+i);
+                        if (par1!==par2)
+                            par1.children[0].style.display = "none";
+                        }
+             </script>
+             </c:if> -->
         </div>
 
     </div>
