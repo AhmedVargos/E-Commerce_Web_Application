@@ -8,17 +8,13 @@ package com.apicompany.e.commerceapplication.view.servlet;
 import com.apicompany.e.commerceapplication.business.CategoryController;
 import com.apicompany.e.commerceapplication.dal.models.Category;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,6 +26,7 @@ public class AdminCategoryServlet extends HttpServlet {
 
     CategoryController categoryController;
     List<Category> allCategories;
+    int pageSize;
 
     public AdminCategoryServlet() {
         categoryController = new CategoryController();
@@ -39,14 +36,52 @@ public class AdminCategoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        int pageNumber;
+        List<Category> subCategorys;
         allCategories = categoryController.getAllCategories();
-        request.setAttribute("Categories", allCategories);
-        if ((request.getParameter("delete") != null) && (Integer.parseInt(request.getParameter("delete")) == 1)) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            categoryController.deleteCategory(id);
+
+        if (allCategories != null) {
+            if (allCategories.size() < 5) {
+                pageSize = 1;
+            } else {
+                pageSize = allCategories.size() / 5;
+            }
+
+            if (request.getParameter("page").equals("")) {
+                subCategorys = allCategories.subList(0, pageSize);
+                request.setAttribute("Categories", subCategorys);
+            } else {
+                pageNumber = Integer.parseInt(request.getParameter("page"));
+                switch (pageNumber) {
+                    case 1:
+                        subCategorys = allCategories.subList(0, pageSize);
+                        request.setAttribute("Categories", subCategorys);
+                        break;
+                    case 5:
+                        if ((pageNumber - 1) * pageSize < allCategories.size()) {
+                            subCategorys = allCategories.subList((pageNumber - 1) * pageSize, allCategories.size());
+                            request.setAttribute("Categories", subCategorys);
+                        }
+                        break;
+                    default:
+                        if ((pageNumber - 1) * pageSize < allCategories.size()) {
+                            if (((pageNumber - 1) * pageSize) + pageSize < allCategories.size()) {
+                                subCategorys = allCategories.subList((pageNumber - 1) * pageSize, ((pageNumber - 1) * pageSize) + pageSize);
+                            } else {
+                                subCategorys = allCategories.subList((pageNumber - 1) * pageSize, allCategories.size());
+                            }
+                            request.setAttribute("Categories", subCategorys);
+                        }
+                        break;
+                }
+
+            }
+            if ((request.getParameter("delete") != null) && (Integer.parseInt(request.getParameter("delete")) == 1)) {
+                int id = Integer.parseInt(request.getParameter("id"));
+                categoryController.deleteCategory(id);
+            }
         }
-       response.sendRedirect("Admin/categories.jsp");
+        response.sendRedirect("Admin/categories.jsp");
 
     }
 
@@ -67,15 +102,4 @@ public class AdminCategoryServlet extends HttpServlet {
         }
         response.sendRedirect("Admin/categories.jsp");
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

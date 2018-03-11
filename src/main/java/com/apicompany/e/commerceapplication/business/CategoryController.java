@@ -53,4 +53,13 @@ public class CategoryController {
 
     }*/
 
+
+    public String getCategoryName(int id){
+        CategoryDAO categoryDAO = new CategoryDAO();
+        Category category = new Category();
+
+        category = categoryDAO.getSpecieficCategory(id);
+
+        return category.getCategoryName();
+    }
 }

@@ -1,7 +1,7 @@
 
 function searchProducts() {
     var name = $("#search_text").val();
-    var objSearch = { "name": name};
+    var objSearch = { "name": name,"category": catId};
     $.ajax({
         url: 'SearchServlet',
         type: 'GET',

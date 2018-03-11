@@ -23,10 +23,42 @@
 
         <!-- Custom Theme Style -->
         <link href="build/css/custom.min.css" rel="stylesheet">
-        <jsp:include page="/AdminOrderServlet"/>
+        <script>
+            function changeLayout(id) {
+                var i;
+                if (id !== null) {
+                    for (i = 1; i <= 5; i++) {
+                        if (document.getElementById("p"+i).classList.contains("active"))
+                            document.getElementById("p"+i).classList.remove("active");
+                    }
+                    document.getElementById("p"+id).classList.add("active");
+                }else {
+                    document.getElementById("p1").classList.add("active");
+                }
+            }
+        </script>
+        <style>
+            .pagination a {
+                color: black;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+                transition: background-color .3s;
+                margin: auto;
+                align-items: center;
+            }
+
+            .pagination a.active {
+                background-color: dodgerblue;
+                color: white;
+            }
+
+            .pagination a:hover:not(.active) {background-color: #ddd;}
+        </style>
+        <jsp:include page="/AdminOrderServlet?order=1&page=${OrderPageNo}"/>
     </head>
 
-    <body class="nav-md">
+    <body class="nav-md" onload="changeLayout(${OrderPageNo})">
         <div class="container body">
             <div class="main_container">
                 <div class="col-md-3 left_col">
@@ -157,7 +189,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                             
+
                                                 <c:forEach items="${Orders}" var="order"> 
                                                     <tr>
                                                         <td>${order.order_id}</td>
@@ -166,39 +198,49 @@
                                                         <td>${order.totalPrice}</td>
                                                     </tr>
                                                 </c:forEach>
-                                                </tbody>
-                                            </table>
-                                            <!-- end project list -->
+                                            </tbody>
+                                        </table>
+                                        <!-- end project list -->
 
+                                    </div>
+                                    <div class="col-md-12">
+
+                                        <div class="pagination col-md-offset-6" >
+                                            <a href="${pageContext.request.contextPath}/AdminPaginationServlet?order=1&page=1" id="p1" onclick="changeLayout(1)">1</a>
+                                            <a href="${pageContext.request.contextPath}/AdminPaginationServlet?order=1&page=2" id="p2" onclick="changeLayout(2)">2</a>
+                                            <a href="${pageContext.request.contextPath}/AdminPaginationServlet?order=1&page=3" id="p3" onclick="changeLayout(3)">3</a>
+                                            <a href="${pageContext.request.contextPath}/AdminPaginationServlet?order=1&page=4" id="p4" onclick="changeLayout(4)">4</a>
+                                            <a href="${pageContext.request.contextPath}/AdminPaginationServlet?order=1&page=5" id="p5" onclick="changeLayout(5)">5</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- /page content -->
-
-                    <!-- footer content -->
-                    <footer>
-                        <div class="pull-right">
-                        </div>
-                        <div class="clearfix"></div>
-                    </footer>
-                    <!-- /footer content -->
                 </div>
+                <!-- /page content -->
+
+                <!-- footer content -->
+                <footer>
+                    <div class="pull-right">
+                    </div>
+                    <div class="clearfix"></div>
+                </footer>
+                <!-- /footer content -->
             </div>
+        </div>
 
-            <!-- jQuery -->
-            <!-- Bootstrap -->
-            <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-            <!-- FastClick -->
-            <script src="vendors/fastclick/lib/fastclick.js"></script>
-            <!-- NProgress -->
-            <script src="vendors/nprogress/nprogress.js"></script>
-            <!-- bootstrap-progressbar -->
-            <script src="vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+        <!-- jQuery -->
+        <!-- Bootstrap -->
+        <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- FastClick -->
+        <script src="vendors/fastclick/lib/fastclick.js"></script>
+        <!-- NProgress -->
+        <script src="vendors/nprogress/nprogress.js"></script>
+        <!-- bootstrap-progressbar -->
+        <script src="vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
 
-            <!-- Custom Theme Scripts -->
-            <script src="build/js/custom.min.js"></script>
-        </body>
-    </html>
+        <!-- Custom Theme Scripts -->
+        <script src="build/js/custom.min.js"></script>
+    </body>
+</html>

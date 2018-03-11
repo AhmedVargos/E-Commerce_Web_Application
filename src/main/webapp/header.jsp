@@ -107,7 +107,7 @@
                                             <ul class="dropdown-menu">
                                                 <c:forEach items="${sessionScope.categoryList}" var="category">
                                                     <li>
-                                                        <a href="CategoryServlet?category=${category.categoryId}">
+                                                        <a href="AllProductsServlet?catId=${category.categoryId}">
                                                             ${category.categoryName}
                                                         </a>
                                                     </li>

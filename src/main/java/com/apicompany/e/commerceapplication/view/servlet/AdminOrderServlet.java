@@ -6,6 +6,7 @@
 package com.apicompany.e.commerceapplication.view.servlet;
 
 import com.apicompany.e.commerceapplication.business.OrderController;
+import com.apicompany.e.commerceapplication.dal.models.Category;
 import com.apicompany.e.commerceapplication.dal.models.Order;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,6 +29,7 @@ public class AdminOrderServlet extends HttpServlet {
 
     OrderController orderController;
     List<Order> AllOrders;
+    int pageSize;
 
     public AdminOrderServlet() {
         orderController = new OrderController();
@@ -37,10 +39,47 @@ public class AdminOrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int pageNumber;
+        List<Order> subOrders;
         AllOrders = orderController.getAllOrders();
-        request.setAttribute("Orders", AllOrders);
+        if (AllOrders != null) {
+            if (AllOrders.size() < 5) {
+                pageSize = 1;
+            } else {
+                pageSize = AllOrders.size() / 5;
+            }
+
+            if (request.getParameter("page").equals("")) {
+                subOrders = AllOrders.subList(0, pageSize);
+                request.setAttribute("Orders", subOrders);
+            } else {
+                pageNumber = Integer.parseInt(request.getParameter("page"));
+                switch (pageNumber) {
+                    case 1:
+                        subOrders = AllOrders.subList(0, pageSize);
+                        request.setAttribute("Orders", subOrders);
+                        break;
+                    case 5:
+                        if ((pageNumber - 1) * pageSize < AllOrders.size()) {
+                            subOrders = AllOrders.subList((pageNumber - 1) * pageSize, AllOrders.size());
+                            request.setAttribute("Orders", subOrders);
+                        }
+                        break;
+                    default:
+                        if ((pageNumber - 1) * pageSize < AllOrders.size()) {
+                            if (((pageNumber - 1) * pageSize) + pageSize < AllOrders.size()) {
+                                subOrders = AllOrders.subList((pageNumber - 1) * pageSize, ((pageNumber - 1) * pageSize) + pageSize);
+                            } else {
+                                subOrders = AllOrders.subList((pageNumber - 1) * pageSize, AllOrders.size());
+                            }
+                            request.setAttribute("Orders", subOrders);
+                        }
+                        break;
+                }
+
+            }
+        }
         response.sendRedirect("Admin/orders.jsp");
     }
-
 
 }

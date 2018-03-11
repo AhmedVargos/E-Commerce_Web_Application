@@ -48,13 +48,44 @@
                 document.getElementById("cID_2").value = catId;
                 document.getElementById("cName").value = catName;
             }
+
+            function changeLayout(id) {
+                var i;
+                if (id !== undefined) {
+                    for (i = 1; i <= 5; i++) {
+                        if (document.getElementById("p" + i).classList.contains("active"))
+                            document.getElementById("p" + i).classList.remove("active");
+                    }
+                    document.getElementById("p" + id).classList.add("active");
+                } else {
+                    document.getElementById("p1").classList.add("active");
+                }
+            }
         </script>
 
-        <jsp:include page="/AdminCategoryServlet"/>
+        <style>
+            .pagination a {
+                color: black;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+                transition: background-color .3s;
+                margin: auto;
+                align-items: center;
+            }
+
+            .pagination a.active {
+                background-color: dodgerblue;
+                color: white;
+            }
+
+            .pagination a:hover:not(.active) {background-color: #ddd;}
+        </style>
+        <jsp:include page="/AdminCategoryServlet?category=1&page=${CategoryPageNo}"/>
 
     </head>
 
-    <body class="nav-md">
+    <body class="nav-md" onload="changeLayout(${CategoryPageNo})">
         <div class="container body">
             <div class="main_container">
                 <div class="col-md-3 left_col">
@@ -173,14 +204,14 @@
 
                                     <div class="x_content">
                                         <div data-role="main" class="ui-content">
-                                            <button type="button" id="addBtn" onclick="addNew()" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-plus"></i>Add New Category</button>
+                                            <button type="button" id="addBtn" onclick="addNew()" class="btn btn-warning btn-sm"><i class="glyphicon glyphicon-plus"></i>Add New Category</button>
 
                                             <div id="newCatDiv">
                                                 <form method="post" action="${pageContext.request.contextPath}/AdminCategoryServlet">
-                                                    <button type="button" data-inline="true"  value="Back" class="btn btn-dark btn-xs" onclick="backToTable()">Back</button><br>
+                                                    <button type="button" data-inline="true"  value="Back" class="btn btn-warning btn-sm" onclick="backToTable()">Back</button><br>
                                                     <label for="catnm" class="ui-hidden-accessible">Name</label>
-                                                    <input type="text" name="name" id="name" placeholder="Category name">
-                                                    <button type="submit" data-inline="true"  value="Add" class="btn btn-dark btn-xs" onclick="backToTable()">Add</button>
+                                                    <input type="text" name="name" id="name" placeholder="Category name"><br>
+                                                    <button type="submit" data-inline="true"  value="Add" class="btn btn-warning btn-sm" onclick="backToTable()">Add</button>
                                                 </form>
                                             </div>
 
@@ -217,7 +248,7 @@
                                                         </td>
                                                         <td>
                                                             <button class="btn btn-info btn-xs" onclick="startEdit(${category.categoryId}, '${category.categoryName}')"><i class="fa fa-pencil"></i> Edit </button>
-                                                            <a href="${pageContext.request.contextPath}/AdminCategoryServlet?delete=1&id=${category.categoryId}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                                                            <a href="${pageContext.request.contextPath}/AdminCategoryServlet?delete=1&id=${category.categoryId}&page=${pageNo}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -225,11 +256,22 @@
                                         </table>
 
                                     </div>
+                                    <div class="col-md-12" id="paginationDiv">
+
+                                        <div class="pagination col-md-offset-6" >
+                                            <a href="${pageContext.request.contextPath}/AdminPaginationServlet?category=1&page=1" id="p1" onclick="changeLayout(1)">1</a>
+                                            <a href="${pageContext.request.contextPath}/AdminPaginationServlet?category=1&page=2" id="p2" onclick="changeLayout(2)">2</a>
+                                            <a href="${pageContext.request.contextPath}/AdminPaginationServlet?category=1&page=3" id="p3" onclick="changeLayout(3)">3</a>
+                                            <a href="${pageContext.request.contextPath}/AdminPaginationServlet?category=1&page=4" id="p4" onclick="changeLayout(4)">4</a>
+                                            <a href="${pageContext.request.contextPath}/AdminPaginationServlet?category=1&page=5" id="p5" onclick="changeLayout(5)">5</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- /page content -->
 
                 <!-- footer content -->

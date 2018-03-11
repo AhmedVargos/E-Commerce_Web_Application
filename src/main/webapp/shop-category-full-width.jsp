@@ -49,12 +49,15 @@
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.js"></script>
 
-    <jsp:include page="/ProductsListServlet?catId=-${sessionScope.CAT_ID}"/>
+    <jsp:include page="/ProductsListServlet?catId=${sessionScope.CAT_ID}"/>
 
 </head>
 <body>
 
 <div class="body">
+    <script>
+        var catId = ${sessionScope.CAT_ID};
+    </script>
     <jsp:include page="header.jsp"></jsp:include>
 
 
@@ -70,7 +73,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <h1 class="mb-none"><strong>${sessionScope.SHOP_TAG}</strong></h1>
+                    <h1 class="mb-none"><strong>${SHOP_TAG}</strong></h1>
                     <p>Showing results.</p>
                 </div>
             </div>
@@ -84,9 +87,9 @@
             </div>
 
             <div class="row">
-                <c:if test="${not empty sessionScope.PRODUCTS_LIST}">
+                <c:if test="${not empty PRODUCTS_LIST}">
                     <ul class="products product-thumb-info-list" id="list_of_products" style="height: auto;" data-plugin-masonry>
-                        <c:forEach items="${sessionScope.PRODUCTS_LIST}" var="product">
+                        <c:forEach items="${PRODUCTS_LIST}" var="product">
                             <li class="col-md-3 col-sm-6 col-xs-12 product">
 								<span class="product-thumb-info">
                                                                     <input id="myProduct" type="hidden" value="${product.productId}"/>

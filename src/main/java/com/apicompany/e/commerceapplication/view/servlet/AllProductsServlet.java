@@ -1,5 +1,6 @@
 package com.apicompany.e.commerceapplication.view.servlet;
 
+import com.apicompany.e.commerceapplication.business.CategoryController;
 import com.apicompany.e.commerceapplication.business.HomeController;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import java.io.IOException;
 
 import static com.apicompany.e.commerceapplication.view.servlet.AccessServlet.PRODUCTS_LIST;
 import static com.apicompany.e.commerceapplication.view.servlet.AccessServlet.SHOP_TAG;
+import static com.apicompany.e.commerceapplication.view.servlet.CategoryServlet.CAT_ID;
 
 @WebServlet(name = "AllProductsServlet", urlPatterns = {"/AllProductsServlet"})
 public class AllProductsServlet extends HttpServlet {
@@ -22,10 +24,9 @@ public class AllProductsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Get the full list of products in the shop and open the shop home jsp
         HttpSession session = request.getSession();
-        HomeController homeController = new HomeController();
-        session.setAttribute(SHOP_TAG,"Shop");
-        session.setAttribute(PRODUCTS_LIST,homeController.getListOfProducts());
-        response.sendRedirect("shop-full-width.jsp");
+        int categoryId = Integer.valueOf(request.getParameter("catId"));
+        session.setAttribute(CAT_ID, categoryId);
+        response.sendRedirect("shop-category-full-width.jsp");
 
     }
 }
