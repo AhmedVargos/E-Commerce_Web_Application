@@ -38,4 +38,8 @@ public class ProductsController {
     }
 
 
+    public void addProduct(int categoryId, String name, String desc, double productPrice, int quantity, String fileName) {
+        Product product = new Product(name, desc, fileName, productPrice, quantity, categoryId);
+        productDAO.insertProduct(product);
+    }
 }
