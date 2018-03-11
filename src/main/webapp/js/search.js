@@ -40,7 +40,7 @@ function listProducts(val) {
             '\t\t\t\t\t\t\t\t\t\t\t\t<span class="product-thumb-info-act-right"><em><i\n' +
             '                                                        class="fa fa-plus"></i> Details</em></span>\n' +
             '\t\t\t\t\t\t\t\t\t\t\t</span>\n' +
-            '\t\t\t\t\t\t\t\t\t\t\t<img alt="" class="img-responsive" src="img/products/product-2.jpg">\n' +
+            '\t\t\t\t\t\t\t\t\t\t\t<img alt="" class="img-responsive" src="img/products/product-2.jpg" style="width: 320px; height: 320px">\n' +
             '\t\t\t\t\t\t\t\t\t\t</span>\n' +
             '\t\t\t\t\t\t\t\t\t</a>\n' +
             '\t\t\t\t\t\t\t\t\t<span class="product-thumb-info-content">\n' +

@@ -93,7 +93,7 @@
                     <div class="owl-carousel owl-theme" data-plugin-options='{"items": 1}'>
                         <div>
                             <div class="thumbnail">
-                                <img alt="" class="img-responsive img-rounded" src="img/products/product-7.jpg">
+                                <img alt="" class="img-responsive img-rounded" src="/ImagesServlet?id=${sessionScope.PRODUCT_DETAIL.productId}">
                             </div>
                         </div>
 
@@ -106,8 +106,6 @@
                     <div class="summary entry-summary">
 
                         <h1 class="mb-none"><strong>${sessionScope.PRODUCT_DETAIL.productName}</strong></h1>
-
-
 
                         <p class="price">
                             <span class="amount">${sessionScope.PRODUCT_DETAIL.productPrice}</span>
