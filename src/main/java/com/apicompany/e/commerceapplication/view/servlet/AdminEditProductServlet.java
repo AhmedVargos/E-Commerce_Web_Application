@@ -12,6 +12,8 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 
+import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,18 +27,27 @@ import java.util.List;
 import java.io.File;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import javax.servlet.annotation.WebInitParam;
 
-@WebServlet(name = "AdminEditProductServlet", urlPatterns = {"/AdminEditProductServlet"})
+@WebServlet(name = "AdminEditProductServlet", urlPatterns = {"/AdminEditProductServlet"},
+        initParams = {
+                @WebInitParam(name = "FILE_UPLOAD_PATH", value = "D:/Images")
+        })
 public class AdminEditProductServlet extends HttpServlet {
 
     private ProductsController productsController;
     private CategoryController categoryController;
+    private String fileUploadPath;
 
     public AdminEditProductServlet() {
         productsController = new ProductsController();
         categoryController = new CategoryController();
     }
 
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        fileUploadPath = config.getInitParameter("FILE_UPLOAD_PATH");
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -50,16 +61,27 @@ public class AdminEditProductServlet extends HttpServlet {
             List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
             for (FileItem item : items) {
                 if (item.isFormField()) {
-                    // Process regular form field (input type="text|radio|checkbox|etc", select, etc).
                     String fieldName = item.getFieldName();
                     String fieldValue = item.getString();
                     // ... (do your job here)
                 } else {
                     // Process form file field (input type="file").
-                    String fieldName = item.getFieldName();
-                    String fileName = FilenameUtils.getName(item.getName());
-                    InputStream fileContent = item.getInputStream();
-                    // ... (do your job here)
+                    File file = new File(fileUploadPath);
+                    if (!file.exists()) {
+                        if (file.mkdir()) {
+                            String fieldName = item.getFieldName();
+                            String fileName = FilenameUtils.getName(item.getName());
+                            File uploadedFile = new File(fileUploadPath, fileName);
+                            try {
+                                item.write(uploadedFile);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            System.out.println("Failed to create directory!");
+                        }
+                    }
+//                    InputStream fileContent = item.getInputStream();
                 }
             }
         } catch (FileUploadException e) {
