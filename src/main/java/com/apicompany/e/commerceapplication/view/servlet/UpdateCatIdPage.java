@@ -18,8 +18,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author body
  */
-@WebServlet(name = "UpdateIdServlet", urlPatterns = {"/UpdateIdServlet"})
-public class UpdateIdServlet extends HttpServlet {
+@WebServlet(name = "UpdateCatIdPage", urlPatterns = {"/UpdateCatIdPage"})
+public class UpdateCatIdPage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,23 +38,31 @@ public class UpdateIdServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdateIdServlet</title>");            
+            out.println("<title>Servlet UpdateCatIdPage</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UpdateIdServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateCatIdPage at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-         int pageId= Integer.parseInt( request.getParameter("idPage"));
+        int pageId= Integer.parseInt( request.getParameter("idPagecat"));
         HttpSession mysession= request.getSession(true);
-        mysession.setAttribute("PageKey", pageId);
-        response.sendRedirect("shop-full-width.jsp");
-
+        mysession.setAttribute("pageCatKey", pageId);
+        response.sendRedirect("shop-category-full-width.jsp");
     }
 
     /**
@@ -70,9 +78,15 @@ public class UpdateIdServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 
 }
