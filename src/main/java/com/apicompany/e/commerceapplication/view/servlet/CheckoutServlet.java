@@ -46,8 +46,8 @@ public class CheckoutServlet extends HttpServlet {
             throws ServletException, IOException {
            HttpSession usersession = request.getSession(false);
         User User=  (User) usersession.getAttribute("userObj");
-      // int UserId = User.getUserId();
-      int UserId = 1;
+       int UserId = User.getUserId();
+      //sint UserId = 1;
         PrintWriter out = response.getWriter();
         CheckoutController mycontroller = new CheckoutController();
         if (mycontroller.checkUserFound(UserId)) {
@@ -88,8 +88,8 @@ public class CheckoutServlet extends HttpServlet {
             throws ServletException, IOException {
           HttpSession usersession = request.getSession(false);
         User User=  (User) usersession.getAttribute("userObj");
-      // int UserId = User.getUserId();
-      int UserId = 1;
+       int UserId = User.getUserId();
+      //int UserId = 1;
         CartDAOInt card=new CartDAO();
         Cart currentCart= card.getCartByUserID(UserId);
         
