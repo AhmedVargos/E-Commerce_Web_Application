@@ -167,31 +167,41 @@
                                         <div class="x_content">
                                             <br/>
 
-                                            <div class="profile_img alignright">
-                                                <div id="crop-avatar">
-                                                    <!-- Current avatar -->
-                                                    <img class="img-responsive avatar-view" src="images/picture.jpg"
-                                                         alt="Avatar" title="Change the avatar">
-                                                </div>
-                                                <br/>
-                                                <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Choose
-                                                    Image</a>
+                                            <form class="form-horizontal form-label-left col-md-6"
+                                                  action="/AdminEditProductServlet"
+                                                  method="POST"
+                                                  enctype="multipart/form-data">
 
-                                            </div>
-                                            <form class="form-horizontal form-label-left col-md-6">
+                                                <div class="profile_img">
+                                                    <div id="crop-avatar">
+                                                        <!-- Current avatar -->
+                                                        <img class="img-responsive avatar-view"
+                                                             src="images/picture.jpg"
+                                                             alt="Avatar" title="Change the avatar">
+                                                    </div>
+                                                    <br/>
+
+                                                    <label class="btn btn-info btn-file">
+                                                        Browse... <input type="file" name="imageFile"
+                                                                         style="display: none;">
+                                                    </label>
+
+                                                    <label id="path"></label>
+                                                    <br/>
+                                                </div>
 
                                                 <div class="form-group">
                                                     <label>Product
                                                         ID</label>
                                                     <div>
-                                                        <input id="productId" type="text" class="form-control"/>
+                                                        <input id="productId" type="text" class="form-control" readonly="readonly"/>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Category</label>
                                                     <div>
-                                                        <select id="productCategories" class="form-control">
+                                                        <select id="productCategories" name="productCategory" class="form-control">
                                                         </select>
                                                     </div>
                                                 </div>
@@ -200,7 +210,7 @@
                                                     <label>Product
                                                         Name</label>
                                                     <div>
-                                                        <input id="productName" type="text" class="form-control"/>
+                                                        <input id="productName" name="productName" type="text" class="form-control"/>
                                                     </div>
                                                 </div>
 
@@ -209,7 +219,7 @@
                                                         Description <span class="required">*</span>
                                                     </label>
                                                     <div>
-                                                        <textarea id="productDescription" class="form-control"
+                                                        <textarea id="productDescription" name="productDescription" class="form-control"
                                                                   rows="3"></textarea>
                                                     </div>
                                                 </div>
@@ -218,7 +228,7 @@
                                                     <label>Product
                                                         Price</label>
                                                     <div>
-                                                        <input id="productPrice" type="number" min="1"
+                                                        <input id="productPrice" name="productPrice" type="number" min="1"
                                                                class="form-control"/>
                                                     </div>
                                                 </div>
@@ -226,7 +236,7 @@
                                                 <div class="form-group">
                                                     <label>Quantity</label>
                                                     <div>
-                                                        <input id="productQuantity" type="number" min="0"
+                                                        <input id="productQuantity" name="productQuantity" type="number" min="0"
                                                                class="form-control"/>
                                                     </div>
                                                 </div>
@@ -314,5 +324,34 @@
 <!-- Custom Theme Scripts -->
 <script src="build/js/custom.min.js"></script>
 <script src="js/AdminJavaScript.js"></script>
+<script src="js/jquery.form.js"></script>
+
+<script>
+    $(document).on('change', ':file', function () {
+        var input = $(this),
+            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [numFiles, label]);
+    });
+
+    // $(function () {
+    //     $('#upload-form').ajaxForm({
+    //         success: function (msg) {
+    //             alert("File has been uploaded successfully");
+    //         },
+    //         error: function (msg) {
+    //             $("#upload-error").text("Couldn't upload file");
+    //         }
+    //     });
+    // });
+
+    $(document).ready(function () {
+        $(':file').on('fileselect', function (event, numFiles, label) {
+            //console.log(numFiles);
+            $("#path").text(label);
+
+        });
+    });
+</script>
 </body>
 </html>
