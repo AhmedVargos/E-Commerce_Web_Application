@@ -65,7 +65,6 @@ function addProduct() {
             $("#productId").val(-1);
             $("#idDiv").hide();
             $("#btnAdd").hide();
-            $("#lblImage").text("Choose image...")
             $("#productCategories").empty();
             $("#productCategories").append('<option selected="true" disabled="disabled">Choose Category... </option>');
             for (var i = 0; i < data.length; i++) {
