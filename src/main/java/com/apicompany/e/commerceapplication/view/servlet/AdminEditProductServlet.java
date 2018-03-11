@@ -58,8 +58,9 @@ public class AdminEditProductServlet extends HttpServlet {
                     // Process form file field (input type="file").
                     String fieldName = item.getFieldName();
                     String fileName = FilenameUtils.getName(item.getName());
-                    InputStream fileContent = item.getInputStream();
-                    // ... (do your job here)
+                    if (fieldName.equals("imageFile")) {
+
+                    }
                 }
             }
         } catch (FileUploadException e) {
