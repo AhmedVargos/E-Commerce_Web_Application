@@ -16,5 +16,6 @@ public interface OrderDAOInt {
      ArrayList<Order> getAllOrders();
      Boolean addNewOrder(User user, ArrayList<CartItem> items);
      Boolean deleteOrder(int orderId);
+     int getProductQuantityInOrder(int productId);
     // Boolean updateExistingOrder(Order order);
 }
