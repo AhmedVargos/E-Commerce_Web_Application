@@ -194,14 +194,14 @@
                                                     <label>Product
                                                         ID</label>
                                                     <div>
-                                                        <input id="productId" type="text" class="form-control"/>
+                                                        <input id="productId" type="text" class="form-control" readonly="readonly"/>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Category</label>
                                                     <div>
-                                                        <select id="productCategories" class="form-control">
+                                                        <select id="productCategories" name="productCategory" class="form-control">
                                                         </select>
                                                     </div>
                                                 </div>
@@ -210,7 +210,7 @@
                                                     <label>Product
                                                         Name</label>
                                                     <div>
-                                                        <input id="productName" type="text" class="form-control"/>
+                                                        <input id="productName" name="productName" type="text" class="form-control"/>
                                                     </div>
                                                 </div>
 
@@ -219,7 +219,7 @@
                                                         Description <span class="required">*</span>
                                                     </label>
                                                     <div>
-                                                        <textarea id="productDescription" class="form-control"
+                                                        <textarea id="productDescription" name="productDescription" class="form-control"
                                                                   rows="3"></textarea>
                                                     </div>
                                                 </div>
@@ -228,7 +228,7 @@
                                                     <label>Product
                                                         Price</label>
                                                     <div>
-                                                        <input id="productPrice" type="number" min="1"
+                                                        <input id="productPrice" name="productPrice" type="number" min="1"
                                                                class="form-control"/>
                                                     </div>
                                                 </div>
@@ -236,7 +236,7 @@
                                                 <div class="form-group">
                                                     <label>Quantity</label>
                                                     <div>
-                                                        <input id="productQuantity" type="number" min="0"
+                                                        <input id="productQuantity" name="productQuantity" type="number" min="0"
                                                                class="form-control"/>
                                                     </div>
                                                 </div>
