@@ -93,7 +93,7 @@
                     <div class="owl-carousel owl-theme" data-plugin-options='{"items": 1}'>
                         <div>
                             <div class="thumbnail">
-                                <img alt="" class="img-responsive img-rounded" src="img/products/product-7.jpg">
+                                <img alt="" class="img-responsive img-rounded" src="/ImagesServlet?id=${sessionScope.PRODUCT_DETAIL.productId}">
                             </div>
                         </div>
 
@@ -106,8 +106,6 @@
                     <div class="summary entry-summary">
 
                         <h1 class="mb-none"><strong>${sessionScope.PRODUCT_DETAIL.productName}</strong></h1>
-
-
 
                         <p class="price">
                             <span class="amount">${sessionScope.PRODUCT_DETAIL.productPrice}</span>
@@ -162,40 +160,8 @@
         </div>
 
     </div>
+    <jsp:include page="footer.jsp"></jsp:include>
 
-    <footer id="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-ribbon">
-                    <span>Get in Touch</span>
-                </div>
-
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-1">
-                        <a href="index.html" class="logo">
-                            <img alt="Porto Website Template" class="img-responsive" src="img/logo-footer.png">
-                        </a>
-                    </div>
-                    <!--   <div class="col-md-7">
-                           <p>© Copyright 2015. All Rights Reserved.</p>
-                       </div>-->
-                    <!--      <div class="col-md-4">
-                           <nav id="sub-menu">
-                               <ul>
-                                   <li><a href="#">FAQ's</a></li>
-                                   <li><a href="#">Sitemap</a></li>
-                                   <li><a href="#">Contact</a></li>
-                               </ul>
-                           </nav>
-                       </div>-->
-                </div>
-            </div>
-        </div>
-    </footer>
 </div>
 <!-- Theme Base, Components and Settings -->
 <script src="js/theme.js"></script>

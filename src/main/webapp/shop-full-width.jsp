@@ -103,7 +103,7 @@
 												<span class="product-thumb-info-act-right"><em><i
                                                         class="fa fa-plus"></i> Details</em></span>
 											</span>
-											<img alt="" class="img-responsive" src="/ImagesServlet?id=${product.productId}">
+											<img alt="" class="img-responsive" src="/ImagesServlet?id=${product.productId}" style="width: 320px; height: 320px">
 										</span>
 									</a>
 									<span class="product-thumb-info-content">
