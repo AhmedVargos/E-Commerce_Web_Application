@@ -53,7 +53,7 @@ public class UserProfileServlet extends HttpServlet {
         HttpSession usersession = request.getSession(false);
         User User=  (User) usersession.getAttribute("userObj");
         int UserId = User.getUserId();
-
+       //int UserId = 1;
         PrintWriter out= response.getWriter();
         UserProfileController myuserconController = new UserProfileController();
         User mycurrentUserData = myuserconController.getuserdata(UserId);
@@ -77,6 +77,7 @@ public class UserProfileServlet extends HttpServlet {
         HttpSession usersession = request.getSession(false);
         User User=  (User) usersession.getAttribute("userObj");
         int UserId = User.getUserId();
+       //  int UserId = 1;
  
         
         String password=request.getParameter("PasswordNew");

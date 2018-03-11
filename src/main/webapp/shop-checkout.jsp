@@ -49,8 +49,8 @@
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.js"></script>
     <!-- checkout  page -->
-    
-    
+
+
 <!-- Vendor -->
 <script src="vendor/jquery/jquery.js"></script>
 <script src="vendor/jquery.appear/jquery.appear.js"></script>
@@ -68,14 +68,181 @@
 <script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
 <script src="vendor/vide/vide.js"></script>
 <script src=http://code.jquery.com/jquery-latest.min.js ></script>
-  <script src="js/checkout.js"></script>
-
-  
 
 </head>
-<body>
+<body onload="updateDataEdit()">
 <div class="body">
-    <jsp:include page="header.jsp"></jsp:include>
+    <header id="header"
+            data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": true}'>
+        <div class="header-body">
+            <div class="header-container container">
+                <div class="header-row">
+                    <div class="header-column">
+                        <div class="header-logo">
+                            <a href="AllProductsServlet">
+                                <img alt="Porto" width="111" height="54" data-sticky-width="82" data-sticky-height="40"
+                                     data-sticky-top="33" src="img/logo.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="header-column">
+                        <div class="header-row">
+                            <div class="header-search hidden-xs">
+                                <form id="searchForm" action="#" method="get">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="q" id="q" placeholder="Search..."
+                                               required>
+                                        <span class="input-group-btn">
+													<button class="btn btn-default" type="submit"><i
+                                                            class="fa fa-search"></i></button>
+												</span>
+                                    </div>
+                                </form>
+                            </div>
+                            <nav class="header-nav-top">
+                                <ul class="nav nav-pills">
+                                    <li class="hidden-xs">
+                                        <a href="#"><i class="fa fa-angle-right"></i> About Us</a>
+                                    </li>
+                                    <li class="hidden-xs">
+                                        <a href="#"><i class="fa fa-angle-right"></i> Contact Us</a>
+                                    </li>
+                                    <li>
+                                        <span class="ws-nowrap"><i class="fa fa-phone"></i> (123) 456-789</span>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="header-row">
+                            <div class="header-nav">
+                                <button class="btn header-btn-collapse-nav" data-toggle="collapse"
+                                        data-target=".header-nav-main">
+                                    <i class="fa fa-bars"></i>
+                                </button>
+                                <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
+                                    <nav>
+                                        <ul class="nav nav-pills" id="mainNav">
+                                            <li class="dropdown ">
+                                                <a class="dropdown-toggle" href="AllProductsServlet">
+                                                    Shop Home
+                                                </a>
+
+                                            </li>
+                                            <li class="dropdown dropdown-mega">
+                                                <a class="dropdown-toggle" href="shop-login.jsp">
+                                                    Login
+                                                </a>
+
+                                            </li>
+                                            <li class="dropdown">
+                                                <a class="dropdown-toggle" href="#">
+                                                    Categories
+                                                </a>
+
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a href="CategoryServlet?category=1">
+                                                            Women Clothes
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="CategoryServlet?category=2">
+                                                            Men Clothes
+                                                        </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="CategoryServlet?category=3">
+                                                            Casual Clothes
+                                                        </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="CategoryServlet?category=4">
+                                                            Sport Clothes
+                                                        </a>
+                                                    </li>
+
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a class="dropdown-toggle" href="shop-cart.jsp">
+                                                    Cart
+                                                </a>
+
+                                            </li>
+                                            <li class="dropdown active">
+                                                <a class="dropdown-toggle" href="shop-checkout.jsp">
+                                                    Checkout
+                                                </a>
+
+                                            </li>
+                                            <li class="dropdown">
+                                                <a class="dropdown-toggle" href="shop-user-profile.jsp">
+                                                    Profile
+                                                </a>
+
+                                            </li>
+                                            <li class="dropdown dropdown-mega dropdown-mega-shop" id="headerShop">
+                                                <a class="dropdown-toggle" href="page-login.jsp">
+                                                    <i class="fa fa-user"></i> Cart (1) - $299
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <div class="dropdown-mega-content">
+                                                            <table class="cart">
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td class="product-thumbnail">
+                                                                        <a href="shop-product-sidebar.jsp">
+                                                                            <img width="100" height="100" alt=""
+                                                                                 class="img-responsive"
+                                                                                 src="img/products/product-1.jpg">
+                                                                        </a>
+                                                                    </td>
+                                                                    <td class="product-name">
+                                                                        <a href="shop-product-sidebar.jsp">Photo
+                                                                            Camera<br><span
+                                                                                    class="amount"><strong>$299</strong></span></a>
+                                                                    </td>
+                                                                    <td class="product-actions">
+                                                                        <a title="Remove this item" class="remove"
+                                                                           href="#">
+                                                                            <i class="fa fa-times"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="actions" colspan="6">
+                                                                        <div class="actions-continue">
+                                                                            <button type="submit"
+                                                                                    class="btn btn-default">View All
+                                                                            </button>
+                                                                            <button type="submit"
+                                                                                    class="btn pull-right btn-primary">
+                                                                                Proceed to Checkout <i
+                                                                                    class="fa fa-angle-right ml-xs"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
 
     <div role="main" class="main shop">
 
@@ -119,7 +286,7 @@
                                                     <strong>Order Total</strong>
                                                 </th>
                                                 <td>
-                                                    <strong><span class="amount">$<label id="totalUpdated"></label></span></strong>
+                                                    <strong><span class="amount">$<label id="totalUpdated2"></label></span></strong>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -127,7 +294,7 @@
                                     </div>
                                 </div>
                             </div>
-            
+
 
             <div class="row">
                 <div class="col-md-9">
@@ -145,7 +312,7 @@
                             <div id="collapseOne" class="accordion-body collapse in">
                                 <div class="panel-body">
                                     <form action="/" id="frmBillingAddress" method="post">
-                                       
+
                                         <div class="row">
                                             <div class="form-group">
                                                 <div class="col-md-12">
@@ -158,7 +325,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-12">
                                                     <label>Address </label>
-                                                    <input type="text" value=""  id="AddressTotal" class="form-control">
+                                                    <input type="text" value="" id="AddressTotal" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -166,17 +333,17 @@
                                 </div>
                             </div>
                         </div>
-                      
+
                     </div>
-                     <div id="response">
-                                                  
-                     </div>                           
+                     <div id="responseE">
+
+                     </div>
                     <div class="actions-continue">
-                        <input type="submit" value="Place Order" name="proceed" class="btn btn-lg btn-primary mt-xl" onclick="checkData()" id="order">
+                        <input type="submit" value="Place Order" name="proceed" class="btn btn-lg btn-primary mt-xl" onclick="checkData()" id="orderE">
                     </div>
 
                 </div>
-    
+
             </div>
 
         </div>
@@ -268,28 +435,26 @@
             </div>
         </div>
     </footer>
-    
-    
-    <script>
-        
-function updateDataE()
-{
-    $.ajax({
-        url: 'CheckoutServlet',
-        type: 'GET',
-        dataType: 'json',
-        success: function (data) { 
-           $("#totalUpdated").val(data.totalPrice);
-           $("#UserTotoal").val(data.userCurrent);
-           $("#AddressTotal").val(data.userAddress);
-           
-        }     
-    });         
-}
-updateDataE();
-
-    </script>
 </div>
+
+<!-- Vendor -->
+<script src="vendor/jquery/jquery.js"></script>
+<script src="vendor/jquery.appear/jquery.appear.js"></script>
+<script src="vendor/jquery.easing/jquery.easing.js"></script>
+<script src="vendor/jquery-cookie/jquery-cookie.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.js"></script>
+<script src="vendor/common/common.js"></script>
+<script src="vendor/jquery.validation/jquery.validation.js"></script>
+<script src="vendor/jquery.stellar/jquery.stellar.js"></script>
+<script src="vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
+<script src="vendor/jquery.gmap/jquery.gmap.js"></script>
+<script src="vendor/jquery.lazyload/jquery.lazyload.js"></script>
+<script src="vendor/isotope/jquery.isotope.js"></script>
+<script src="vendor/owl.carousel/owl.carousel.js"></script>
+<script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
+<script src="vendor/vide/vide.js"></script>
+<script src=http://code.jquery.com/jquery-latest.min.js ></script>
+
 
 
 <!-- Theme Base, Components and Settings -->
@@ -299,6 +464,8 @@ updateDataE();
 <script src="js/custom.js"></script>
 <!-- Theme Initialization Files -->
 <script src="js/theme.init.js"></script>
+
+  <script src="js/checkout.js"></script>
 
 
 

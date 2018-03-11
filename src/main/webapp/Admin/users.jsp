@@ -220,6 +220,12 @@
                                                                     class="fa fa-close"></i></a>
                                                         </li>
                                                     </ul>
+                                                </li>
+                                                <li><a onclick="closeForm();"><i
+                                                        class="fa fa-close"></i></a>
+                                                </li>
+                                            </ul>
+                                            <div class="clearfix"></div>
                                                     <div class="clearfix"></div>
                                                 </div>
                                                 <div class="x_content">
@@ -365,19 +371,19 @@
             </div>
         </div>
 
-        <!-- jQuery -->
-        <script src="vendors/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap -->
-        <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- FastClick -->
-        <script src="vendors/fastclick/lib/fastclick.js"></script>
-        <!-- NProgress -->
-        <script src="vendors/nprogress/nprogress.js"></script>
-        <!-- bootstrap-progressbar -->
-        <script src="vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+  
+<script src="vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="vendors/nprogress/nprogress.js"></script>
+<!-- bootstrap-progressbar -->
+<script src="vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
 
-        <!-- Custom Theme Scripts -->
-        <script src="build/js/custom.min.js"></script>
-        <script src="js/AdminUsers.js"></script>
-    </body>
+<!-- Custom Theme Scripts -->
+<script src="build/js/custom.min.js"></script>
+<script src="js/AdminJavaScript.js"></script>
+</body>
 </html>

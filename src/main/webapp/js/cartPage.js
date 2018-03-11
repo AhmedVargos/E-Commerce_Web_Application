@@ -105,14 +105,16 @@ function updateCart(val) {
             cart: JSON.stringify(userCart) // look here!
         },
         dataType: 'json',
-        success: function (val) {
-            if(val.status == 1){
-                //window.location.href = "shop-cart.jsp";
-                window.location.reload(true);
-            }else{
-                alert("Cart failed to be updated");
-            }
-        }
+        success: refreshPage
     });
+}
+
+function refreshPage(val) {
+    if(val.status == 1){
+        window.location.href = "shop-cart.jsp";
+        //window.location.reload(true);
+    }else{
+        alert("Cart failed to be updated");
+    }
 }
 

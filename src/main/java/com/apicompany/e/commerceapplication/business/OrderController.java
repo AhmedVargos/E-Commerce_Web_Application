@@ -8,8 +8,8 @@ package com.apicompany.e.commerceapplication.business;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.OrderDAO;
 import com.apicompany.e.commerceapplication.dal.models.Order;
 import com.apicompany.e.commerceapplication.dal.models.Product;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,7 +17,7 @@ import java.util.List;
  * @author Vargos
  */
 public class OrderController {
-    
+
     OrderDAO orderDAO;
 
     public OrderController() {

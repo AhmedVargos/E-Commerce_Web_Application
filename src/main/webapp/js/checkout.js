@@ -1,36 +1,28 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 function checkData()
 {
     $.ajax({
         url: 'CheckoutServlet',
         type: 'POST',
-        contentType: 'application/json',
-        dataType: 'json',
-        success: function (data) { 
-            $("#response").append("<label>"+data+"</label>");
-            $("#order").prop('disabled', true);
+        success: function (data) {
+            $("#responseE").append("<label>"+data+"</label>");
+            $("#orderE").prop('disabled', true);
         }
         
     });  
 }
-/*
-function updateDataE()
+function updateDataEdit()
 {
     $.ajax({
         url: 'CheckoutServlet',
         type: 'GET',
-        dataType: 'json',
+        contentType: 'application/json',
         success: function (data) { 
-           $("#totalUpdated").val(data.totalPrice);
+           $("#totalUpdated").html(data.totalPrice+"");
+           $("#totalUpdated2").html(data.totalPrice+"");
            $("#UserTotoal").val(data.userCurrent);
            $("#AddressTotal").val(data.userAddress);
-           
+           $("#UserTotoal").prop('disabled', true);
+           $("#AddressTotal").prop('disabled', true);
         }     
     });         
 }
-*/

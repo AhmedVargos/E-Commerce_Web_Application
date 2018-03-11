@@ -282,7 +282,7 @@ public class OrderDAO implements OrderDAOInt {
                     insertStatement_2 = dbHandler.getCon().prepareStatement("INSERT INTO EcommerceDB.product_order (product_productId,order_orderId,product_quantityl) VALUES (?,?,?)");                  
                     insertStatement_2.setInt(1, I.getProduct().getProductId());
                     insertStatement_2.setInt(2, orderId);
-                    insertStatement_2.setInt(3, I.getProduct().getQuantity());
+                    insertStatement_2.setInt(3, I.getQuantity());
                     insertStatement_2.executeUpdate();
                 }
             }
@@ -302,9 +302,6 @@ public class OrderDAO implements OrderDAOInt {
             deleteStatement.setInt(1, orderId);
             deleteStatement.executeUpdate();
 
-            deleteStatement = dbHandler.getCon().prepareStatement("DELETE FROM EcommerceDB.order WHERE orderId = ?");
-            deleteStatement.setInt(1, orderId);
-            deleteStatement.executeUpdate();
             isRemoved = true;
         } catch (SQLException ex) {
             isRemoved = false;

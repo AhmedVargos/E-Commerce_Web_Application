@@ -25,34 +25,40 @@ import static com.apicompany.e.commerceapplication.view.servlet.AccessServlet.PR
 public class CartPageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // 1. get received JSON data from request
-  /*      BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
-        String json = "";
-        if(br != null){
-            json = br.readLine();
-        }
-*/
         //First check if user is logged in or is a guest
         String json = request.getParameter("cart");
         HttpSession session = request.getSession(false);
-        CartPageController cartPageController = new CartPageController();
-        Cart userNewCart = cartPageController.updateUserCart(json);
-        if(userNewCart != null){
-            //Success in updating the cart
-            session.setAttribute("cart", userNewCart);
+        if (session.getAttribute("loggedin") != null) {
+            boolean logedIn = (boolean) session.getAttribute("loggedin");
 
-            //response to the JS to refresh the page
-            response.setContentType("application/json");
-            //Gson gson = new Gson();
-            response.getWriter().write("{status: 1}");
-            response.getWriter().close();
-        }else {
-            //Failed to update the cart
-            response.setContentType("application/json");
-            //Gson gson = new Gson();
-            response.getWriter().write("{status: 0}");
-            response.getWriter().close();
+            if (logedIn == true) {
+                CartPageController cartPageController = new CartPageController();
+                Cart userNewCart = cartPageController.updateUserCart(json);
+                if (userNewCart != null) {
+                    //Success in updating the cart
+                    session.setAttribute("cart", userNewCart);
+
+                    //response to the JS to refresh the page
+                    response.setContentType("application/json");
+                    //Gson gson = new Gson();
+                    response.getWriter().write("{status: 1}");
+                    response.getWriter().close();
+                } else {
+                    //Failed to update the cart
+                    response.setContentType("application/json");
+                    //Gson gson = new Gson();
+                    response.getWriter().write("{status: 0}");
+                    response.getWriter().close();
+                }
+            } else {
+                Cart userNewCart = new Gson().fromJson(json, Cart.class);
+                session.setAttribute("cart", userNewCart);
+            }
+        } else {
+            Cart userNewCart = new Gson().fromJson(json, Cart.class);
+            session.setAttribute("cart", userNewCart);
         }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

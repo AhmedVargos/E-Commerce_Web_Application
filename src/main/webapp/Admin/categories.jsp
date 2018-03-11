@@ -51,14 +51,14 @@
 
             function changeLayout(id) {
                 var i;
-                if (id !== undefined ) {
+                if (id !== undefined) {
                     for (i = 1; i <= 5; i++) {
-                        if (document.getElementById("p"+i).classList.contains("active"))
-                            document.getElementById("p"+i).classList.remove("active");
+                        if (document.getElementById("p" + i).classList.contains("active"))
+                            document.getElementById("p" + i).classList.remove("active");
                     }
-                    document.getElementById("p"+id).classList.add("active");
+                    document.getElementById("p" + id).classList.add("active");
                 } else {
-                    document.getElementById("p1").className.add("active");
+                    document.getElementById("p1").classList.add("active");
                 }
             }
         </script>

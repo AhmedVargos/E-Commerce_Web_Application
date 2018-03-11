@@ -49,7 +49,7 @@ public class AuthController {
         this.registeredUsedId = registeredUsedId;
     }
 
-    public void registerNewUser(String name, String password, String email, String address, String job, int credit, java.util.Date birthdate) {
+    public void registerNewUser(String name, String password, String email, String address, String job, int credit, java.util.Date birthdate, String interest) {
         User user = new User();
         user.setUserName(name);
         user.setPassWord(password);
@@ -58,7 +58,7 @@ public class AuthController {
         user.setJob(job);
         user.setCreditLimit(credit);
         user.setBirthdate(new Date(birthdate.getTime()));
-
+        user.setInterests(interest);
         boolean inserted = userDAO.addUser(user);
         setRegisteredUsedId(userDAO.getUserByEmail(email).getUserId());
 
