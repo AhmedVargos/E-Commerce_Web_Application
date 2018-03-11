@@ -29,17 +29,14 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebInitParam;
 
-@WebServlet(name = "AdminEditProductServlet", urlPatterns = {"/AdminEditProductServlet"},
-        initParams = {
-                @WebInitParam(name = "FILE_UPLOAD_PATH", value = "C:/Images")
-        })
+@WebServlet(name = "AdminEditProductServlet", urlPatterns = {"/AdminEditProductServlet"})
 public class AdminEditProductServlet extends HttpServlet {
 
     private String fileUploadPath;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        fileUploadPath = config.getInitParameter("FILE_UPLOAD_PATH");
+        fileUploadPath = config.getServletContext().getInitParameter("path");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
