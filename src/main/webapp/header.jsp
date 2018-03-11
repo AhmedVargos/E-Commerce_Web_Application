@@ -62,7 +62,7 @@
     <div class="header-body">
         <div class="header-container container">
             <div class="header-row">
-                <div class="header-column">
+                <div class="header-column" style="padding:30px">
                     <div class="header-logo">
                         <a href="shop-full-width.jsp">
                             <img alt="Porto" width="111" height="54" data-sticky-width="82" data-sticky-height="40"
@@ -89,6 +89,7 @@
                                             </a>
 
                                         </li>
+
                                         <c:if test="${not  sessionScope.loggedin}">
                                             <li>
                                                 <a href="shop-login.jsp">
@@ -106,7 +107,7 @@
                                             <ul class="dropdown-menu">
                                                 <c:forEach items="${sessionScope.categoryList}" var="category">
                                                     <li>
-                                                        <a href="CategoryServlet?category=${category.categoryId}">
+                                                        <a href="AllProductsServlet?catId=${category.categoryId}">
                                                             ${category.categoryName}
                                                         </a>
                                                     </li>
@@ -126,7 +127,7 @@
                                         <li  id="headerShop">
                                             <%--class="dropdown-toggle"--%>
                                             <a  href="shop-cart.jsp">
-                                                <i ></i> Cart (1)
+                                                <i ></i> Cart
                                             </a>
                                         </li>
                                         <%----%>

@@ -2,9 +2,12 @@
 
 function increaseQuantity() {
     var newQuantity =  parseInt($('#added_quantity').val());
-    newQuantity++;
-    $('#added_quantity').val(newQuantity);
-   }
+    var tempQ = newQuantity + 1;
+    if(tempQ <= productLimit){
+        newQuantity++;
+        $('#added_quantity').val(newQuantity);
+    }
+}
 
 function decreaseQuantity() {
     var newQuantity =  $('#added_quantity').val() - 1;
@@ -21,5 +24,5 @@ function updateCart(val) {
 
 function updateCartCounter() {
     //update cart counter
-    console.log("Success");
+    window.location.href = "shop-cart.jsp";
 }

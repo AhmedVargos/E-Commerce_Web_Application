@@ -49,9 +49,17 @@ public class SearchServlet extends HttpServlet {
         products.add(cartItem1);
         mCart.setCartItems(products);
         session.setAttribute("CART",mCart);*/
-        String productName = request.getParameter("name");
-        List<Product> productList = (List<Product>) session.getAttribute(PRODUCTS_LIST);
         HomeController homeController = new HomeController();
+        List<Product> productList = null;
+        String productName = request.getParameter("name");
+        int categoryNum = Integer.parseInt(request.getParameter("category"));
+
+        if(categoryNum == -1){
+            productList = homeController.getListOfProducts();
+        }else {
+            productList = homeController.getListOfProductsWithCategory(categoryNum);
+        }
+
         response.setContentType("application/json");
         Gson gson = new Gson();
         response.getWriter().write(gson.toJson(homeController.searchProductsByName(productList,productName)));

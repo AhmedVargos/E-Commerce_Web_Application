@@ -94,7 +94,9 @@ public class CheckoutServlet extends HttpServlet {
 
                 if (CreatOrder) {
                     boolean check = mycontroller.clearCard(UserId);
-                    out.write("You create order successfuly and contact with you for payment");
+                    //Ahmed Edit
+                    usersession.setAttribute("cart", null);
+                    out.write("You create order successfully and contact with you for payment");
                 }
 
             } else {
@@ -102,7 +104,7 @@ public class CheckoutServlet extends HttpServlet {
 
             }
         } else {
-            out.write("your card is Empty ");
+            out.write("your cart is Empty ");
         }
     }
 

@@ -73,6 +73,9 @@
 <body>
 
 <div class="body">
+    <script>
+        var productLimit = ${sessionScope.PRODUCT_DETAIL.quantity};
+    </script>
     <jsp:include page="header.jsp"></jsp:include>
     <div role="main" class="main shop">
 
@@ -123,7 +126,7 @@
                         </form>
 
                         <div class="product_meta">
-                            <span class="posted_in">Category: ${sessionScope.PRODUCT_DETAIL.catagory_catogeryId} .</span>
+                            <span class="posted_in">Category: ${sessionScope.PRODUCT_DETAILS_CAT}.</span>
                         </div>
 
                     </div>
