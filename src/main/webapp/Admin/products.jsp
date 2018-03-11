@@ -336,7 +336,6 @@
 <!-- Custom Theme Scripts -->
 <script src="build/js/custom.min.js"></script>
 <script src="js/AdminJavaScript.js"></script>
-<script src="js/jquery.form.js"></script>
 
 <script>
     $(document).on('change', ':file', function () {
@@ -346,20 +345,8 @@
         input.trigger('fileselect', [numFiles, label]);
     });
 
-    // $(function () {
-    //     $('#upload-form').ajaxForm({
-    //         success: function (msg) {
-    //             alert("File has been uploaded successfully");
-    //         },
-    //         error: function (msg) {
-    //             $("#upload-error").text("Couldn't upload file");
-    //         }
-    //     });
-    // });
-
     $(document).ready(function () {
         $(':file').on('fileselect', function (event, numFiles, label) {
-            //console.log(numFiles);
             $("#path").text(label);
 
         });

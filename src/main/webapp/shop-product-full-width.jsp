@@ -93,7 +93,7 @@
                     <div class="owl-carousel owl-theme" data-plugin-options='{"items": 1}'>
                         <div>
                             <div class="thumbnail">
-                                <img alt="" class="img-responsive img-rounded" src="/ImagesServlet?id=${sessionScope.PRODUCT_DETAIL.productId}">
+                                <img alt="" class="img-responsive img-rounded" src="/ImagesServlet?id=${sessionScope.PRODUCT_DETAIL.productId}" style="width:540px;height: 400px;">
                             </div>
                         </div>
 
