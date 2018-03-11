@@ -47,7 +47,15 @@
 
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.js"></script>
-
+    <script>
+        function validatePassword() {
+            var pass1 = $("#password").val();
+            var pass2 = $("#password2").val();
+            if(pass1!=pass2){
+                $("#errorlbl").text("passwords Does not match");
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -73,7 +81,7 @@
                                 <div class="featured-box featured-box-primary align-left mt-xlg" style="height: 800px;">
                                     <div class="box-content" style="height: 80%">
                                         <h4 class="heading-primary text-uppercase mb-md">Register New Account</h4>
-
+                                        <label id="errorlbl"></label>
                                         <form action="/RegistrationServlet" id="signupForm" method="post">
                                             <div class="row">
                                                 <div class="form-group">
@@ -87,12 +95,12 @@
                                                 <div class="form-group">
                                                     <div class="col-md-6 col-md-offset-2">
                                                         <label>Password</label>
-                                                        <input required="true" type="password" name="password" value=""
+                                                        <input required="true" type="password" id="password" name="password" value=""
                                                                class="form-control">
                                                     </div>
                                                     <div class="col-md-6 col-md-offset-2">
                                                         <label>Confirm Password</label>
-                                                        <input required="true" type="password" name="repassword" value=""
+                                                        <input required="true" type="password" id="password2" name="repassword" value=""
                                                                class="form-control">
                                                     </div>
                                                 </div>
@@ -143,7 +151,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
-                                                <input type="submit" value="SignUp"
+                                                <input type="submit" value="SignUp" onclick="validatePassword()"
                                                        class="col-md-3 btn btn-primary pull-right mb-xl"
                                                        data-loading-text="Loading...">
                                             </div>
