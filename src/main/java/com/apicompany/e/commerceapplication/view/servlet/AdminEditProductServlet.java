@@ -6,6 +6,11 @@ import com.apicompany.e.commerceapplication.dal.models.Category;
 import com.apicompany.e.commerceapplication.dal.models.Product;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FilenameUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +22,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.io.File;
+import java.io.InputStream;
+import java.io.PrintWriter;
 
 @WebServlet(name = "AdminEditProductServlet", urlPatterns = {"/AdminEditProductServlet"})
 public class AdminEditProductServlet extends HttpServlet {
@@ -29,8 +37,34 @@ public class AdminEditProductServlet extends HttpServlet {
         categoryController = new CategoryController();
     }
 
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        PrintWriter out = response.getWriter();
+        try {
+            if (!ServletFileUpload.isMultipartContent(request)) {
+                out.println("Nothing to upload");
+                return;
+            }
+
+            List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+            for (FileItem item : items) {
+                if (item.isFormField()) {
+                    // Process regular form field (input type="text|radio|checkbox|etc", select, etc).
+                    String fieldName = item.getFieldName();
+                    String fieldValue = item.getString();
+                    // ... (do your job here)
+                } else {
+                    // Process form file field (input type="file").
+                    String fieldName = item.getFieldName();
+                    String fileName = FilenameUtils.getName(item.getName());
+                    InputStream fileContent = item.getInputStream();
+                    // ... (do your job here)
+                }
+            }
+        } catch (FileUploadException e) {
+            throw new ServletException("Cannot parse multipart request.", e);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
