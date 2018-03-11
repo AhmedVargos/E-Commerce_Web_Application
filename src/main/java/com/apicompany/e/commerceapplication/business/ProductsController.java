@@ -32,8 +32,8 @@ public class ProductsController {
         return productDAO.getSpecificProduct(productId);
     }
 
-    public void updateProduct(int categoryId, String name, String desc, double price, int quantity, String fileName) {
-        Product product = new Product(name, desc, fileName, price, quantity, categoryId);
+    public void updateProduct(int productId, int categoryId, String name, String desc, double price, int quantity, String fileName) {
+        Product product = new Product(productId, name, desc, fileName, price, quantity, categoryId);
         productDAO.updateProduct(product);
     }
 

@@ -12,6 +12,8 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -51,7 +53,7 @@ public class AdminEditProductServlet extends HttpServlet {
             }
 
             String name = null, desc = null, fileName = null;
-            int categoryId = -1, quantity = -1;
+            int productId = -1, categoryId = -1, quantity = -1;
             double productPrice = -1;
 
             List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
@@ -61,6 +63,8 @@ public class AdminEditProductServlet extends HttpServlet {
                     String fieldValue = item.getString();
 
                     switch (fieldName) {
+                        case "productId":
+                            productId = Integer.parseInt(fieldValue);
                         case "productCategory":
                             categoryId = Integer.parseInt(fieldValue);
                             break;
@@ -87,7 +91,6 @@ public class AdminEditProductServlet extends HttpServlet {
                         isFolderExists = true;
                     }
 
-                    String fieldName = item.getFieldName();
                     fileName = FilenameUtils.getName(item.getName());
                     File uploadedFile = new File(fileUploadPath, fileName);
 
@@ -101,7 +104,9 @@ public class AdminEditProductServlet extends HttpServlet {
             }
 
             ProductsController productsController = new ProductsController();
-            productsController.updateProduct(categoryId, name, desc, productPrice, quantity, fileName);
+            productsController.updateProduct(productId, categoryId, name, desc, productPrice, quantity, fileName);
+
+            response.sendRedirect("Admin/products.jsp");
 
         } catch (FileUploadException e) {
             throw new ServletException("Cannot parse multipart request.", e);

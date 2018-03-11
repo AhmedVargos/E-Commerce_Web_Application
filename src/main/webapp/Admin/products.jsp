@@ -167,41 +167,34 @@
                                         <div class="x_content">
                                             <br/>
 
+                                            <div class="profile_img pull-right">
+                                                <div id="crop-avatar">
+                                                    <!-- Current avatar -->
+                                                    <img id="productImg" style="width: 320px; height: 320px" class="img-responsive avatar-view"
+                                                         src=""
+                                                         alt="Avatar" title="Change the avatar">
+                                                </div>
+                                            </div>
+
                                             <form class="form-horizontal form-label-left col-md-6"
                                                   action="/AdminEditProductServlet"
                                                   method="POST"
                                                   enctype="multipart/form-data">
 
-                                                <div class="profile_img">
-                                                    <div id="crop-avatar">
-                                                        <!-- Current avatar -->
-                                                        <img class="img-responsive avatar-view"
-                                                             src="images/picture.jpg"
-                                                             alt="Avatar" title="Change the avatar">
-                                                    </div>
-                                                    <br/>
-
-                                                    <label class="btn btn-info btn-file">
-                                                        Browse... <input type="file" name="imageFile"
-                                                                         style="display: none;">
-                                                    </label>
-
-                                                    <label id="path"></label>
-                                                    <br/>
-                                                </div>
-
                                                 <div class="form-group">
                                                     <label>Product
                                                         ID</label>
                                                     <div>
-                                                        <input id="productId" type="text" class="form-control" readonly="readonly"/>
+                                                        <input id="productId" name="productId" type="text" class="form-control"
+                                                               readonly="readonly"/>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Category</label>
                                                     <div>
-                                                        <select id="productCategories" name="productCategory" class="form-control">
+                                                        <select id="productCategories" name="productCategory"
+                                                                class="form-control">
                                                         </select>
                                                     </div>
                                                 </div>
@@ -210,7 +203,8 @@
                                                     <label>Product
                                                         Name</label>
                                                     <div>
-                                                        <input id="productName" name="productName" type="text" class="form-control"/>
+                                                        <input id="productName" name="productName" type="text"
+                                                               class="form-control"/>
                                                     </div>
                                                 </div>
 
@@ -219,7 +213,8 @@
                                                         Description <span class="required">*</span>
                                                     </label>
                                                     <div>
-                                                        <textarea id="productDescription" name="productDescription" class="form-control"
+                                                        <textarea id="productDescription" name="productDescription"
+                                                                  class="form-control"
                                                                   rows="3"></textarea>
                                                     </div>
                                                 </div>
@@ -228,7 +223,8 @@
                                                     <label>Product
                                                         Price</label>
                                                     <div>
-                                                        <input id="productPrice" name="productPrice" type="number" min="1"
+                                                        <input id="productPrice" name="productPrice" type="number"
+                                                               min="1"
                                                                class="form-control"/>
                                                     </div>
                                                 </div>
@@ -236,9 +232,22 @@
                                                 <div class="form-group">
                                                     <label>Quantity</label>
                                                     <div>
-                                                        <input id="productQuantity" name="productQuantity" type="number" min="0"
+                                                        <input id="productQuantity" name="productQuantity" type="number"
+                                                               min="0"
                                                                class="form-control"/>
                                                     </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <br/>
+                                                    <label class="btn btn-info btn-file">
+                                                        Change image... <input type="file" name="imageFile"
+                                                                               style="display: none;">
+                                                    </label>
+
+                                                    <label id="path"></label>
+                                                    <br/>
+                                                    <br/>
                                                 </div>
 
                                                 <button type="submit" class="btn btn-primary">Update</button>
