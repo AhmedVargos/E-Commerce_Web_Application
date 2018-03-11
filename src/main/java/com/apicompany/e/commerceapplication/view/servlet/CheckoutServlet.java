@@ -3,6 +3,7 @@ package com.apicompany.e.commerceapplication.view.servlet;
 import com.apicompany.e.commerceapplication.business.CheckoutController;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.CartDAO;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.UserDAO;
+
 import com.apicompany.e.commerceapplication.dal.dao.daoint.CartDAOInt;
 import com.apicompany.e.commerceapplication.dal.models.Cart;
 import com.apicompany.e.commerceapplication.dal.models.CartItem;
@@ -104,8 +105,10 @@ public class CheckoutServlet extends HttpServlet {
 
                 if (CreatOrder==1) {
                     boolean check = mycontroller.clearCard(UserId);
-                    //Ahmed Edit
-                    usersession.setAttribute("cart", null);
+                    //Ahmed Edit to empty the cart itmes
+                    Cart myCart = (Cart)usersession.getAttribute("cart");
+                    myCart.getCartItems().clear();
+                    usersession.setAttribute("cart", myCart);
                     out.write("You create order successfully and contact with you for payment");
                 }
                 else if(CreatOrder==-1){

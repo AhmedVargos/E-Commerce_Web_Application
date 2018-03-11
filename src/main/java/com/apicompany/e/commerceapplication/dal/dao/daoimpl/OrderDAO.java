@@ -260,7 +260,7 @@ public class OrderDAO implements OrderDAOInt {
 
         PreparedStatement selectStatement;
         ResultSet rs;
-        int orderId;
+        int orderId = 0;
         if (userDAO.getUserById(user.getUserId()) == null) {
             userDAO.addUser(user);
         }
@@ -276,7 +276,9 @@ public class OrderDAO implements OrderDAOInt {
             selectStatement.setInt(1, user.getUserId());
             rs = selectStatement.executeQuery();
             if (rs.next()) {
-                orderId = rs.getInt("orderId");
+                while(rs.next()){
+                    orderId = rs.getInt("orderId");
+                }
 
                 for (CartItem I : items) {
                     insertStatement_2 = dbHandler.getCon().prepareStatement("INSERT INTO EcommerceDB.product_order (product_productId,order_orderId,product_quantityl) VALUES (?,?,?)");                  
@@ -285,8 +287,8 @@ public class OrderDAO implements OrderDAOInt {
                     insertStatement_2.setInt(3, I.getQuantity());
                     insertStatement_2.executeUpdate();
                 }
+                added = true;
             }
-            added = true;
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

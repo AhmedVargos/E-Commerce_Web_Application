@@ -61,6 +61,8 @@ public class ProductsListServlet extends HttpServlet {
                     }
             }
             request.setAttribute(PRODUCTS_LIST,newList);
+            request.setAttribute(SHOP_TAG,"Shop");
+
         }else {
             request.setAttribute(PRODUCTS_LIST, homeController.getListOfProductsWithCategory(categoryId));
             CategoryController categoryController = new CategoryController();
