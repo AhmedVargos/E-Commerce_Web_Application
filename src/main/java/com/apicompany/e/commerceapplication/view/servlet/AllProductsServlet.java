@@ -26,6 +26,7 @@ public class AllProductsServlet extends HttpServlet {
         HttpSession session = request.getSession();
         int categoryId = Integer.valueOf(request.getParameter("catId"));
         session.setAttribute(CAT_ID, categoryId);
+        session.setAttribute("pageCatKey",1);
         response.sendRedirect("shop-category-full-width.jsp");
 
     }
