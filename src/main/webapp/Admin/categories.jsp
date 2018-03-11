@@ -106,19 +106,19 @@
                                 <h3>Admin Panel</h3>
                                 <ul class="nav side-menu">
 
-                                    <li>
+                                    <li style="width:230px">
                                         <a href="users.jsp"><i class="fa fa-users"></i> Users </a>
                                     </li>
 
-                                    <li>
+                                    <li style="width:230px">
                                         <a href="products.jsp"><i class="fa fa-shopping-bag"></i> Products </a>
                                     </li>
 
-                                    <li>
+                                    <li style="width:230px">
                                         <a href="categories.jsp"><i class="fa fa-list"></i> Categories </a>
                                     </li>
 
-                                    <li>
+                                    <li style="width:230px">
                                         <a href="orders.jsp"><i class="fa fa-info"></i> Orders </a>
                                     </li>
 
@@ -140,7 +140,16 @@
                             </div>
 
                             <ul class="nav navbar-nav navbar-right">
-
+                                <li class="">
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                                        -                               aria-expanded="false">
+                                        <img src="images/img.jpg" alt="">System Admin
+                                        <span class=" fa fa-angle-down"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                        <li><a href="../LogoutServlet"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    </ul>
+                                </li>
 
                             </ul>
                         </nav>
