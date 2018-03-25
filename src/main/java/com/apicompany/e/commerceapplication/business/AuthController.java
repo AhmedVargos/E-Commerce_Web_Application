@@ -1,18 +1,23 @@
 package com.apicompany.e.commerceapplication.business;
 
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.UserDAO;
+import com.apicompany.e.commerceapplication.dal.daos.UserJpaController;
+import com.apicompany.e.commerceapplication.dal.database.EntityManagerHandler;
 import com.apicompany.e.commerceapplication.dal.models.User;
 
+import javax.persistence.EntityManager;
 import java.sql.Date;
 
 public class AuthController {
     private UserDAO userDAO;
+    private UserJpaController userJpaController;
     private boolean isRegistered;
     private boolean isLoggedIn;
     private int registeredUsedId;
 
+
     public AuthController() {
-        this.userDAO = new UserDAO();
+        this.userJpaController = new UserJpaController(EntityManagerHandler.getEntityManagerHandler().getFactory());
     }
 
     public boolean isLoggedIn() {
@@ -50,18 +55,28 @@ public class AuthController {
     }
 
     public void registerNewUser(String name, String password, String email, String address, String job, int credit, java.util.Date birthdate, String interest) {
-        User user = new User();
-        user.setUserName(name);
-        user.setPassWord(password);
-        user.setEmail(email);
-        user.setAddress(address);
-        user.setJob(job);
-        user.setCreditLimit(credit);
-        user.setBirthdate(new Date(birthdate.getTime()));
-        user.setInterests(interest);
-        boolean inserted = userDAO.addUser(user);
-        setRegisteredUsedId(userDAO.getUserByEmail(email).getUserId());
+//        User user = new User();
+//        user.setUserName(name);
+//        user.setPassWord(password);
+//        user.setEmail(email);
+//        user.setAddress(address);
+//        user.setJob(job);
+//        user.setCreditLimit(credit);
+//        user.setBirthdate(new Date(birthdate.getTime()));
+//        user.setInterests(interest);
 
-        setRegistered(inserted);
+        com.apicompany.e.commerceapplication.dal.entities.User user1 = new com.apicompany.e.commerceapplication.dal.entities.User();
+        user1.setUserName(name);
+        user1.setPassword(password);
+        user1.setEmail(email);
+        user1.setAddress(address);
+        user1.setJob(job);
+        user1.setCreditLimit(credit);
+        user1.setBirthdate(new Date(birthdate.getTime()));
+        user1.setInterests(interest);
+
+        userJpaController.create(user1);
+        setRegisteredUsedId(user1.getUserId());
+        setRegistered(true);
     }
 }

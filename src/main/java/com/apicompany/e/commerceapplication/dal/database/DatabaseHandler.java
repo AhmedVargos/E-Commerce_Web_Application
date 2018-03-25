@@ -37,7 +37,7 @@ public class DatabaseHandler {
     private void connectToDB() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/EcommerceDB", "root", "1412");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/EcommerceDB", "root", "root");
 
             System.err.println("connectToDB");
         } catch (ClassNotFoundException | SQLException ex) {
