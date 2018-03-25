@@ -6,14 +6,15 @@
 package com.apicompany.e.commerceapplication.dal.dao.daoimpl;
 
 import com.apicompany.e.commerceapplication.dal.dao.daoint.UserDAOInt;
-import com.apicompany.e.commerceapplication.dal.database.DatabaseHandler;
-import com.apicompany.e.commerceapplication.dal.models.User;
+import com.apicompany.e.commerceapplication.dal.database.EntityManagerHandler;
+import com.apicompany.e.commerceapplication.dal.entities.User;
 
+import javax.persistence.Query;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,84 +23,30 @@ import java.util.logging.Logger;
  */
 public class UserDAO implements UserDAOInt {
 
-    DatabaseHandler dbHandler;
+    private EntityManagerHandler entityManagerHandler;
 
     public UserDAO() {
-
-        dbHandler = DatabaseHandler.getDBInstance();
-
+        entityManagerHandler = EntityManagerHandler.getEntityManagerHandler();
     }
 
     // this method returns all users
     //tested
     @Override
-    public ArrayList<User> getAllUsers() {
-        ArrayList<User> allUsers = new ArrayList<>();
-        User user;
-        PreparedStatement selectStatement;
-        ResultSet rs;
-        try {
-            selectStatement = dbHandler.getCon().prepareStatement("SELECT * FROM USER ");
-            rs = selectStatement.executeQuery();
-            while (rs.next()) {
-                user = new User();
-                user.setUserId(rs.getInt("userId"));
-                user.setUserName(rs.getString("userName"));
-                user.setPassWord(rs.getString("password"));
-                user.setEmail(rs.getString("email"));
-                user.setJob(rs.getString("job"));
-                user.setCreditLimit(rs.getInt("creditLimit"));
-                user.setAddress(rs.getString("address"));
-                user.setInterests(rs.getString("interests"));
-                user.setIsAdmin(rs.getBoolean("isAdmin"));
-                allUsers.add(user);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return allUsers;
-    }
+    public List<com.apicompany.e.commerceapplication.dal.entities.User> getAllUsers() {
 
-    private User getUser(PreparedStatement statement) {
-        User user = null;
-        PreparedStatement selectStatement;
-        ResultSet rs;
-        try {
-            selectStatement = statement;
-            rs = selectStatement.executeQuery();
-            if (rs.next()) {
-                user = new User();
-                user.setUserId(rs.getInt("userId"));
-                user.setUserName(rs.getString("userName"));
-                user.setPassWord(rs.getString("password"));
-                user.setEmail(rs.getString("email"));
-                user.setJob(rs.getString("job"));
-                user.setCreditLimit(rs.getInt("creditLimit"));
-                user.setAddress(rs.getString("address"));
-                user.setInterests(rs.getString("interests"));
-                user.setIsAdmin(rs.getBoolean("isAdmin"));
-                user.setBirthdate(rs.getDate("birthdate"));
-            }
-        } catch (SQLException ex) {
-            System.out.println("getUser()");
-            //Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return user;
+        String queryString = "select u from User u";
+        Query query = entityManagerHandler.getEntityManager().createQuery(queryString);
+        List<com.apicompany.e.commerceapplication.dal.entities.User> allUsers = query.getResultList();
+        return allUsers;
     }
 
     //this method finds user by his id, returns null if user isn't exist
     //tested
     @Override
     public User getUserById(int id) {
-        User user = null;
-        PreparedStatement selectStatement;
-        try {
-            selectStatement = dbHandler.getCon().prepareStatement("SELECT * FROM USER WHERE userId = ?");
-            selectStatement.setInt(1, id);
-            user = getUser(selectStatement);
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String queryString = "select u from User u where u.userId = :id";
+        Query query = entityManagerHandler.getEntityManager().createQuery(queryString).setParameter("id", id);
+        com.apicompany.e.commerceapplication.dal.entities.User user = (com.apicompany.e.commerceapplication.dal.entities.User)query.getSingleResult();
         return user;
     }
 
@@ -107,30 +54,17 @@ public class UserDAO implements UserDAOInt {
     //tested
     @Override
     public User getUserByName(String userName) {
-        User user = null;
-        PreparedStatement selectStatement;
-        try {
-            selectStatement = dbHandler.getCon().prepareStatement("SELECT * FROM USER WHERE userName LIKE ?");
-            selectStatement.setString(1, "%" + userName + "%");
-            user = getUser(selectStatement);
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String queryString = "select u from User u where u.userName = :name";
+        Query query = entityManagerHandler.getEntityManager().createQuery(queryString).setParameter("name", userName);
+        com.apicompany.e.commerceapplication.dal.entities.User user = (com.apicompany.e.commerceapplication.dal.entities.User)query.getSingleResult();
         return user;
     }
 
     @Override
     public User getUserByEmail(String email) {
-        User user = null;
-        PreparedStatement selectStatement;
-        try {
-            selectStatement = dbHandler.getCon().prepareStatement("SELECT * FROM USER WHERE email = ?");
-            selectStatement.setString(1, email);
-            user = getUser(selectStatement);
-        } catch (SQLException ex) {
-            System.out.println("getUserByEmail()");
-            //Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String queryString = "select u from User u where u.email = :email";
+        Query query = entityManagerHandler.getEntityManager().createQuery(queryString).setParameter("email", email);
+        com.apicompany.e.commerceapplication.dal.entities.User user = (com.apicompany.e.commerceapplication.dal.entities.User)query.getSingleResult();
         return user;
     }
 
@@ -139,7 +73,7 @@ public class UserDAO implements UserDAOInt {
     @Override
     public User isUserExist(String email, String password) {
         User user = getUserByEmail(email);
-        if (user == null || !user.getPassWord().equals(password)) {
+        if (user == null || !user.getPassword().equals(password)) {
             user = null;
         }
         return user;
@@ -150,27 +84,9 @@ public class UserDAO implements UserDAOInt {
     //tested
     @Override
     public boolean addUser(User user) {
-        PreparedStatement insertStatement;
-        boolean isAdded;
-        try {
-            insertStatement = dbHandler.getCon().prepareStatement("INSERT INTO USER (userName,birthdate,"
-                    + "password, email,job,creditLimit,address,interests,isAdmin) VALUES (?,?,?,?,?,?,?,?,?)");
-            insertStatement.setString(1, user.getUserName());
-            insertStatement.setDate(2, new Date(user.getBirthdate().getTime()));
-            insertStatement.setString(3, user.getPassWord());
-            insertStatement.setString(4, user.getEmail());
-            insertStatement.setString(5, user.getJob());
-            insertStatement.setInt(6, user.getCreditLimit());
-            insertStatement.setString(7, user.getAddress());
-            insertStatement.setString(8, user.getInterests());
-            insertStatement.setBoolean(9, user.isIsAdmin());
-            insertStatement.executeUpdate();
-            isAdded = true;
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-            isAdded = false;
-        }
-        return isAdded;
+        entityManagerHandler.getEntityManager().persist(user);
+        entityManagerHandler.getEntityManager().getTransaction().commit();
+        return true;
     }
 
     //tested
@@ -186,7 +102,7 @@ public class UserDAO implements UserDAOInt {
                     + "userId= ?");
             updateStatement.setString(1, user.getUserName());
             updateStatement.setDate(2, new Date(user.getBirthdate().getTime()));
-            updateStatement.setString(3, user.getPassWord());
+            updateStatement.setString(3, user.getPassword());
             updateStatement.setString(4, user.getEmail());
             updateStatement.setString(5, user.getJob());
 
