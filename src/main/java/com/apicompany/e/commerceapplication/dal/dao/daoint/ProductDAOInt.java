@@ -1,7 +1,7 @@
 package com.apicompany.e.commerceapplication.dal.dao.daoint;
 
-import com.apicompany.e.commerceapplication.dal.models.Product;
 
+import com.apicompany.e.commerceapplication.dal.entities.Product;
 import java.util.ArrayList;
 
 public interface ProductDAOInt {
