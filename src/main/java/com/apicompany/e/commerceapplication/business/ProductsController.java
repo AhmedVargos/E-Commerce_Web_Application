@@ -6,7 +6,7 @@
 package com.apicompany.e.commerceapplication.business;
 
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.ProductDAO;
-import com.apicompany.e.commerceapplication.dal.models.Product;
+import com.apicompany.e.commerceapplication.dal.entities.Product;
 
 import java.util.ArrayList;
 

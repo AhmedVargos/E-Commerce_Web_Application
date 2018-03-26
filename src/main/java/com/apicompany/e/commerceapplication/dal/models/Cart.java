@@ -5,6 +5,8 @@
  */
 package com.apicompany.e.commerceapplication.dal.models;
 
+import com.apicompany.e.commerceapplication.dal.entities.CartItem;
+
 import java.sql.Date;
 import java.util.ArrayList;
 //import java.util.Date;

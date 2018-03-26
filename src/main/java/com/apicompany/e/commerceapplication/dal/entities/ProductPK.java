@@ -76,7 +76,7 @@ public class ProductPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.apicompany.e.commerceapplication.dal.entities.ProductPK[ productId=" + productId + ", categorycategoryId=" + categorycategoryId + " ]";
+        return "com.apicompany.e.commerceapplication.dal.entites.ProductPK[ productId=" + productId + ", categorycategoryId=" + categorycategoryId + " ]";
     }
     
 }

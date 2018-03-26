@@ -1,23 +1,20 @@
 package com.apicompany.e.commerceapplication.business;
 
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.UserDAO;
-import com.apicompany.e.commerceapplication.dal.daos.UserJpaController;
-import com.apicompany.e.commerceapplication.dal.database.EntityManagerHandler;
-import com.apicompany.e.commerceapplication.dal.models.User;
+import com.apicompany.e.commerceapplication.dal.entities.User;
 
 import javax.persistence.EntityManager;
 import java.sql.Date;
 
 public class AuthController {
     private UserDAO userDAO;
-    private UserJpaController userJpaController;
     private boolean isRegistered;
     private boolean isLoggedIn;
     private int registeredUsedId;
 
 
     public AuthController() {
-        this.userJpaController = new UserJpaController(EntityManagerHandler.getEntityManagerHandler().getFactory());
+        this.userDAO = new UserDAO();
     }
 
     public boolean isLoggedIn() {
@@ -75,7 +72,7 @@ public class AuthController {
         user1.setBirthdate(new Date(birthdate.getTime()));
         user1.setInterests(interest);
 
-        userJpaController.create(user1);
+        userDAO.addUser(user1);
         setRegisteredUsedId(user1.getUserId());
         setRegistered(true);
     }

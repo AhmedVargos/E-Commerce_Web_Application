@@ -2,11 +2,10 @@ package com.apicompany.e.commerceapplication.view.servlet;
 
 import com.apicompany.e.commerceapplication.business.CheckoutController;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.CartDAO;
-import com.apicompany.e.commerceapplication.dal.dao.daoimpl.UserDAO;
 
 import com.apicompany.e.commerceapplication.dal.dao.daoint.CartDAOInt;
 import com.apicompany.e.commerceapplication.dal.models.Cart;
-import com.apicompany.e.commerceapplication.dal.models.CartItem;
+import com.apicompany.e.commerceapplication.dal.entities.CartItem;
 import com.apicompany.e.commerceapplication.dal.models.CheckoutModel;
 import com.apicompany.e.commerceapplication.dal.models.User;
 import com.google.gson.Gson;
@@ -20,7 +19,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.smartcardio.Card;
 
 @WebServlet(name = "CheckoutServlet", urlPatterns = {"/CheckoutServlet"})
 public class CheckoutServlet extends HttpServlet {

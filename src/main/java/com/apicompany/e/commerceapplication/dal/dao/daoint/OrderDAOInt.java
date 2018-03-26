@@ -1,8 +1,7 @@
 package com.apicompany.e.commerceapplication.dal.dao.daoint;
 
-import com.apicompany.e.commerceapplication.dal.models.CartItem;
+import com.apicompany.e.commerceapplication.dal.entities.CartItem;
 import com.apicompany.e.commerceapplication.dal.entities.Order1;
-import com.apicompany.e.commerceapplication.dal.models.Product;
 import com.apicompany.e.commerceapplication.dal.models.User;
 import java.util.ArrayList;
 import java.sql.Date;

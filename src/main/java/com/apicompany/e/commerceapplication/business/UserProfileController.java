@@ -2,7 +2,7 @@
 package com.apicompany.e.commerceapplication.business;
 
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.UserDAO;
-import com.apicompany.e.commerceapplication.dal.models.User;
+import com.apicompany.e.commerceapplication.dal.entities.User;
 
 public class UserProfileController {
   public User getuserdata(int userid)

@@ -6,7 +6,7 @@
 package com.apicompany.e.commerceapplication.dal.dao.daoimpl;
 
 import com.apicompany.e.commerceapplication.dal.database.EntityManagerHandler;
-import com.apicompany.e.commerceapplication.dal.models.CartItem;
+import com.apicompany.e.commerceapplication.dal.entities.CartItem;
 import com.apicompany.e.commerceapplication.dal.entities.Order1;
 import com.apicompany.e.commerceapplication.dal.entities.User;
 import java.sql.PreparedStatement;

@@ -109,7 +109,7 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "com.apicompany.e.commerceapplication.dal.entities.Category[ categoryId=" + categoryId + " ]";
+        return "com.apicompany.e.commerceapplication.dal.entites.Category[ categoryId=" + categoryId + " ]";
     }
     
 }

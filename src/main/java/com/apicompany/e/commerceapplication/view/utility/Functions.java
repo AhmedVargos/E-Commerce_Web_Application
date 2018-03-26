@@ -7,7 +7,7 @@ package com.apicompany.e.commerceapplication.view.utility;
 
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.CartDAO;
 import com.apicompany.e.commerceapplication.dal.models.Cart;
-import com.apicompany.e.commerceapplication.dal.models.CartItem;
+import com.apicompany.e.commerceapplication.dal.entities.CartItem;
 import java.util.ArrayList;
 
 /**

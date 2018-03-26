@@ -16,30 +16,30 @@ import javax.validation.constraints.NotNull;
  * @author szmoh
  */
 @Embeddable
-public class Order1PK implements Serializable {
+public class CartPK implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "orderId")
-    private int orderId;
+    @Column(name = "cartId")
+    private int cartId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "user_userId")
     private int useruserId;
 
-    public Order1PK() {
+    public CartPK() {
     }
 
-    public Order1PK(int orderId, int useruserId) {
-        this.orderId = orderId;
+    public CartPK(int cartId, int useruserId) {
+        this.cartId = cartId;
         this.useruserId = useruserId;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public int getCartId() {
+        return cartId;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
     }
 
     public int getUseruserId() {
@@ -53,7 +53,7 @@ public class Order1PK implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) orderId;
+        hash += (int) cartId;
         hash += (int) useruserId;
         return hash;
     }
@@ -61,11 +61,11 @@ public class Order1PK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Order1PK)) {
+        if (!(object instanceof CartPK)) {
             return false;
         }
-        Order1PK other = (Order1PK) object;
-        if (this.orderId != other.orderId) {
+        CartPK other = (CartPK) object;
+        if (this.cartId != other.cartId) {
             return false;
         }
         if (this.useruserId != other.useruserId) {
@@ -76,7 +76,7 @@ public class Order1PK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.apicompany.e.commerceapplication.dal.entites.Order1PK[ orderId=" + orderId + ", useruserId=" + useruserId + " ]";
+        return "com.apicompany.e.commerceapplication.dal.entites.CartPK[ cartId=" + cartId + ", useruserId=" + useruserId + " ]";
     }
     
 }

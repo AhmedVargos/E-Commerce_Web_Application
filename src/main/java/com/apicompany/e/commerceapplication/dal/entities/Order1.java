@@ -124,7 +124,7 @@ public class Order1 implements Serializable {
 
     @Override
     public String toString() {
-        return "com.apicompany.e.commerceapplication.dal.entities.Order1[ order1PK=" + order1PK + " ]";
+        return "com.apicompany.e.commerceapplication.dal.entites.Order1[ order1PK=" + order1PK + " ]";
     }
     
 }

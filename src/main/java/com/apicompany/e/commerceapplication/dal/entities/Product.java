@@ -191,7 +191,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "com.apicompany.e.commerceapplication.dal.entities.Product[ productPK=" + productPK + " ]";
+        return "com.apicompany.e.commerceapplication.dal.entites.Product[ productPK=" + productPK + " ]";
     }
     
 }

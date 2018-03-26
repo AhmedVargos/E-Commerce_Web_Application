@@ -1,10 +1,7 @@
 package com.apicompany.e.commerceapplication.view.servlet;
 
 import com.apicompany.e.commerceapplication.business.CartPageController;
-import com.apicompany.e.commerceapplication.business.HomeController;
 import com.apicompany.e.commerceapplication.dal.models.Cart;
-import com.apicompany.e.commerceapplication.dal.models.CartItem;
-import com.apicompany.e.commerceapplication.dal.models.Product;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -13,13 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.apicompany.e.commerceapplication.view.servlet.AccessServlet.PRODUCTS_LIST;
 
 @WebServlet(name = "CartPageServlet", urlPatterns = {"/CartPageServlet"})
 public class CartPageServlet extends HttpServlet {

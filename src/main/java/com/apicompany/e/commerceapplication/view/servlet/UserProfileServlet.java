@@ -7,7 +7,7 @@ package com.apicompany.e.commerceapplication.view.servlet;
 
 import com.apicompany.e.commerceapplication.business.UserProfileController;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.UserDAO;
-import com.apicompany.e.commerceapplication.dal.models.User;
+import com.apicompany.e.commerceapplication.dal.entities.User;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -87,7 +87,7 @@ public class UserProfileServlet extends HttpServlet {
         String interests=request.getParameter("interests");
         UserDAO myDao = new UserDAO();
          User myuser=myDao.getUserById(UserId);
-         myuser.setPassWord(password);
+         myuser.setPassword(password);
          myuser.setAddress(address);
          myuser.setJob(job);
          myuser.setCreditLimit(credit);

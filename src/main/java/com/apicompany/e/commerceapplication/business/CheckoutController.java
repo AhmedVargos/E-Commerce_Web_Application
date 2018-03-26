@@ -10,13 +10,10 @@ import com.apicompany.e.commerceapplication.dal.dao.daoimpl.OrderDAO;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.ProductDAO;
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.UserDAO;
 import com.apicompany.e.commerceapplication.dal.models.Cart;
-import com.apicompany.e.commerceapplication.dal.models.CartItem;
-import com.apicompany.e.commerceapplication.dal.models.Order;
+import com.apicompany.e.commerceapplication.dal.entities.CartItem;
 import com.apicompany.e.commerceapplication.dal.models.Product;
 import com.apicompany.e.commerceapplication.dal.models.User;
 import java.util.ArrayList;
-import java.util.Date;
-import javax.smartcardio.Card;
 
 /**
  *

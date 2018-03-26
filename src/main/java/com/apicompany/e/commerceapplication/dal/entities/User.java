@@ -93,7 +93,7 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "isAdmin")
     private short isAdmin;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "useruserId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Cart> cartList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Order1> order1List;
@@ -236,7 +236,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "com.apicompany.e.commerceapplication.dal.entities.User[ userId=" + userId + " ]";
+        return "com.apicompany.e.commerceapplication.dal.entites.User[ userId=" + userId + " ]";
     }
     
 }

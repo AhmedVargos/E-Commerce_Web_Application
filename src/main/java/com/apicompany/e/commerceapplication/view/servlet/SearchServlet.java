@@ -1,8 +1,6 @@
 package com.apicompany.e.commerceapplication.view.servlet;
 
 import com.apicompany.e.commerceapplication.business.HomeController;
-import com.apicompany.e.commerceapplication.dal.models.Cart;
-import com.apicompany.e.commerceapplication.dal.models.CartItem;
 import com.apicompany.e.commerceapplication.dal.models.Product;
 import com.google.gson.Gson;
 
@@ -14,10 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.apicompany.e.commerceapplication.view.servlet.AccessServlet.PRODUCTS_LIST;
 
 @WebServlet(name = "SearchServlet",urlPatterns = {"/SearchServlet"})
 public class SearchServlet extends HttpServlet {

@@ -3,8 +3,8 @@ package com.apicompany.e.commerceapplication.view.servlet;
 import com.apicompany.e.commerceapplication.business.AuthController;
 import com.apicompany.e.commerceapplication.business.CartController;
 import com.apicompany.e.commerceapplication.business.HomeController;
-import com.apicompany.e.commerceapplication.dal.models.Cart;
-import com.apicompany.e.commerceapplication.dal.models.User;
+import com.apicompany.e.commerceapplication.dal.entities.Cart;
+import com.apicompany.e.commerceapplication.dal.entities.User;
 import com.apicompany.e.commerceapplication.view.utility.Validation;
 
 import javax.servlet.ServletException;

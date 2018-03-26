@@ -1,7 +1,7 @@
 package com.apicompany.e.commerceapplication.business;
 
 import com.apicompany.e.commerceapplication.dal.dao.daoimpl.UserDAO;
-import com.apicompany.e.commerceapplication.dal.models.User;
+import com.apicompany.e.commerceapplication.dal.entities.User;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ public class UsersController {
     }
 
     public ArrayList<User> getAllUsers() {
-        allUsers = userDAO.getAllUsers();
+        allUsers = (ArrayList<User>) userDAO.getAllUsers();
         return allUsers;
     }
 

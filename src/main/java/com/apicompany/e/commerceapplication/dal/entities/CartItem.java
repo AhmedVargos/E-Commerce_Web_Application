@@ -1,4 +1,6 @@
-package com.apicompany.e.commerceapplication.dal.models;
+package com.apicompany.e.commerceapplication.dal.entities;
+
+import com.apicompany.e.commerceapplication.dal.entities.Product;
 
 public class CartItem {
     private int quantity;
