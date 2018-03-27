@@ -55,7 +55,7 @@ public class CartController {
         boolean isFound = false;
         //check product is exist in old cart if yes increase quantity
         for (int i = 0; i < cartList.size(); i++) {
-            if (cartList.get(i).getProduct().getProductId() == id) {
+            if (cartList.get(i).getProduct().getProductPK().getProductId() == id) {
                 int oldQuantity = cartList.get(i).getQuantity();
                 resQ += oldQuantity;
                 cartList.get(i).setQuantity(resQ);
@@ -99,7 +99,7 @@ public class CartController {
     public void addProductsToCart(Cart cart) {
         ArrayList<CartItem> cartItems = cart.getCartItems();
 
-        cartDAO.addExistingCartItems(cart.getCartId(), cartItems);
+        cartDAO.addExistingCartItems(cart.getCartPK().getCartId(), cartItems);
     }
 
     public Cart getCurrentCart(int userId) {

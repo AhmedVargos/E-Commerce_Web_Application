@@ -39,6 +39,14 @@ public class Cart implements Serializable {
     @ManyToOne(optional = false)
     private User user;
 
+    public ArrayList<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(ArrayList<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
+
     @Transient
     private ArrayList<CartItem> cartItems;
 
